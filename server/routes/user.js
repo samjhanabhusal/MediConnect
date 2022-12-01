@@ -84,6 +84,19 @@ userRouter.post("/api/save-user-contactno", auth, async (req, res) => {
     res.status(500).json({ error: e.message });
   }
 });
+
+
+userRouter.post("/api/save-user-age", auth, async (req, res) => {
+  try {
+    const { age } = req.body;
+    let user = await User.findById(req.user);
+    user.age = age;
+    user = await user.save();
+    res.json(user);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
 // order product
 userRouter.post("/api/order", auth, async (req, res) => {
   try {

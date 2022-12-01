@@ -34,6 +34,10 @@ const userSchema = mongoose.Schema({
     type: String,
     default: "",
   },
+  age:{
+    type: String,
+    default:"",
+  },
   type: {
     type: String,
     default: "user",

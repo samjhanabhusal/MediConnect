@@ -7,6 +7,7 @@ class User {
   final String password;
   final String address;
   final String contactno;
+  final String age;
   final String type;
   final String token;
   final List<dynamic> cart;
@@ -24,6 +25,7 @@ class User {
     required this.token,
     required this.cart,
     required this.contactno,
+    required this.age,
     required this.prescription,
     required this.profiles
 
@@ -37,6 +39,7 @@ class User {
       'password': password,
       'address': address,
       'contactno': contactno,
+      'age': age,
       'type': type,
       'token': token,
       'cart': cart,
@@ -54,6 +57,7 @@ class User {
       password: map['password'] ?? '',
       address: map['address'] ?? '',
       contactno: map['contactno'] ?? '',
+      age: map['age'] ?? '',
       type: map['type'] ?? '',
       token: map['token'] ?? '',
       cart: List<Map<String, dynamic>>.from(
@@ -85,6 +89,7 @@ class User {
     String? password,
     String? address,
     String? contactno,
+    String? age,
     String? type,
     String? token,
     List<dynamic>? cart,
@@ -99,6 +104,7 @@ class User {
       password: password ?? this.password,
       address: address ?? this.address,
       contactno: contactno ?? this.contactno,
+      age: age ?? this.age,
       type: type ?? this.type,
       token: token ?? this.token,
       cart: cart ?? this.cart,

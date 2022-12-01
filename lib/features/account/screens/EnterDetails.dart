@@ -106,6 +106,9 @@ class _EnterDetailsState extends State<EnterDetails> {
 
   @override
   Widget build(BuildContext context) {
+    // final user=Provider.of(UserProvider<>())
+        final user = Provider.of<UserProvider>(context).user;
+
     return Scaffold(
     // @override
   //   Widget enterdetal(){
@@ -274,12 +277,27 @@ class _EnterDetailsState extends State<EnterDetails> {
                   setState(() {
                     if (Provider.of<UserProvider>(context, listen: false)
                         .user
-                        .address
-                        .isEmpty) {
+                        .contactno
+                        .isEmpty ){
                       accountServices.saveUserContactNo(
                           // context: context, contactno: addressToBeUsed);
                           context: context, contactno: _phonenoController.text);
-             } }),
+
+             } 
+             if (Provider.of<UserProvider>(context, listen: false)
+                        .user
+                        .age
+                        .isEmpty ){
+                      accountServices.saveUserAge(
+                          // context: context, contactno: addressToBeUsed);
+                          context: context, age: _ageController.text);
+                          
+             } 
+             }
+             
+            
+             
+             ),
                   
                 //   // Navigator.pop(context);
                 },}

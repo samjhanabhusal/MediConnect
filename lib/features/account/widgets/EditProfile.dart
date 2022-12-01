@@ -21,6 +21,8 @@ class _EditProfileState extends State<EditProfile> {
   final TextEditingController _phonenoController = TextEditingController();
   final TextEditingController _addressController = TextEditingController();
 
+  
+  // final TextEditingController _emailController = TextEditingController();
 @override
   void dispose() {
     super.dispose();
@@ -30,6 +32,7 @@ class _EditProfileState extends State<EditProfile> {
     _ageController.dispose();
     _phonenoController.dispose();
     _genderController.dispose();
+   
   }
   
 
@@ -42,6 +45,7 @@ class _EditProfileState extends State<EditProfile> {
           lastname: _lastnameController.text,
           gender: _genderController.text,
           address: _addressController.text,
+         
           // age: double.parse(_ageController.text),
           // phoneno: double.parse(_phonenoController.text),
           age: double.tryParse(_ageController.text)??0,
@@ -88,7 +92,7 @@ class _EditProfileState extends State<EditProfile> {
               controller: _firstnameController,
               obscureText: false,
               decoration: InputDecoration(
-                  border: OutlineInputBorder(), labelText: 'Username'),
+                  border: OutlineInputBorder(), labelText: 'FirstName'),
             ),
           ),
           const SizedBox(height: 15),
@@ -102,7 +106,7 @@ class _EditProfileState extends State<EditProfile> {
                 obscureText: false,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  labelText: 'Email',
+                  labelText: 'Last Name',
                 ),
               ),
             ),

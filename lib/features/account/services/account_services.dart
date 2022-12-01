@@ -520,6 +520,45 @@ void saveUserContactNo({
   }
 
 
+
+
+
+// save user contact no
+void saveUserAge({
+    required BuildContext context,
+    required String age
+  }) async {
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+
+    try {
+      http.Response res = await http.post(
+        Uri.parse('$uri/api/save-user-age'),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'x-auth-token': userProvider.user.token,
+        },
+        body: jsonEncode({
+          'age': age,
+        }),
+      );
+
+      httpErrorHandle(
+        response: res,
+        context: context,
+        onSuccess: () {
+          User user = userProvider.user.copyWith(
+            age: jsonDecode(res.body)['age'],
+          );
+
+          userProvider.setUserFromModel(user);
+        },
+      );
+    } catch (e) {
+      showSnackBar(context, e.toString());
+    }
+  }
+
+
   void logOut(BuildContext context) async {
     try {
       SharedPreferences sharedPreferences =
