@@ -34,6 +34,7 @@ class _PrescriptionViewState extends State<PrescriptionView> {
   //     );
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<UserProvider>(context).user;
     // var contactno = context.watch<UserProvider>().user.phoneno;
     return Scaffold(
         appBar: PreferredSize(
@@ -149,7 +150,8 @@ class _PrescriptionViewState extends State<PrescriptionView> {
                           color: Colors.black,
                           fontSize: 18),
                     ),
-                    Spacer(),
+                    // Spacer(),
+                    Spacer(flex: 4),
                     Text(
                       // "Female",
                       widget.prescription.name,
@@ -176,9 +178,10 @@ class _PrescriptionViewState extends State<PrescriptionView> {
                           color: Colors.black,
                           fontSize: 18),
                     ),
-                    Spacer(),
+                    // Spacer.width(),
+                    Spacer(flex: 4),
                     Text(
-                      "9845122266",
+                       user.contactno,
                       style: TextStyle(
                           fontWeight: FontWeight.w400,
                           color: Colors.black,

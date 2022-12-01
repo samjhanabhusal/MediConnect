@@ -151,16 +151,13 @@ class _PickImageState extends State<PickImage> {
                   controller: priceController,
                   hintText: 'Patients age',
                 ),
-                 const SizedBox(height: 10),
-                CustomTextField(
-                  controller: priceController,
-                  hintText: 'Contact',
-                ),
-                 const SizedBox(height: 10),
-                CustomTextField(
-                  controller: priceController,
-                  hintText: 'Gender',
-                ),
+               
+               
+                //  const SizedBox(height: 10),
+                // CustomTextField(
+                //   controller: Controller,
+                //   hintText: 'Gender',
+                // ),
                 const SizedBox(height: 10),
 
                 // SizedBox(

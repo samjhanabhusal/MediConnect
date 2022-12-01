@@ -174,11 +174,10 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                   
                     
                     Text('User ID:       ${widget.order.userId}'),
-                    Text('User Name:        Rs ${widget.order.userId}'),
-                    Text('Contact:       Rs ${widget.order.address}'),
-                    Text('Age:         Rs ${widget.order.address}'),
-                    Text('Gender:        Rs ${widget.order.address}'),
-                    Text('Address:          Rs ${widget.order.address}'),
+                    Text('User Name:     ${user.name}'),
+                    Text('Contact:       ${user.contactno}'),
+                   
+                    Text('Address:        ${user.address}'),
 
                   ],
                 ),

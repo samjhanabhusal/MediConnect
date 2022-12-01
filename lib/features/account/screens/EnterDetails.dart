@@ -243,10 +243,10 @@ class _EnterDetailsState extends State<EnterDetails> {
       floatingActionButton: FloatingActionButton(
           // onTap: EnterDetail,
             // onPressed: () => AccountServices().logOut(context),
-            onPressed: () => { enterdetail(),
-          // onPressed: () {
-          //   if (_enderDetailFormKey.currentState!.validate()) {
-          //     enterdetail();
+            // onPressed: () => { enterdetail(),
+          onPressed: ()=> {
+            if (_enderDetailFormKey.currentState!.validate()) {
+              enterdetail(),
           //   }
           //   },
             // Navigator.push(
@@ -271,18 +271,18 @@ class _EnterDetailsState extends State<EnterDetails> {
           // child: SimpleDialogOption(
           //       child: const Text('OK'),
           //       onPressed: () {
-                //   setState(() {
-                //     if (Provider.of<UserProvider>(context, listen: false)
-                //         .user
-                //         .address
-                //         .isEmpty) {
-                //       accountServices.saveUserContactNo(
-                //           // context: context, contactno: addressToBeUsed);
-                //           context: context, contactno: _phonenoController.text);
-                //     }),
+                  setState(() {
+                    if (Provider.of<UserProvider>(context, listen: false)
+                        .user
+                        .address
+                        .isEmpty) {
+                      accountServices.saveUserContactNo(
+                          // context: context, contactno: addressToBeUsed);
+                          context: context, contactno: _phonenoController.text);
+             } }),
                   
                 //   // Navigator.pop(context);
-                },
+                },}
               ),
          
           // ),
