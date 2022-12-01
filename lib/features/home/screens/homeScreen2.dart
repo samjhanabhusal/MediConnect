@@ -1,3 +1,4 @@
+import 'package:carousel_pro/carousel_pro.dart';
 import 'package:luveen/features/home/widgets/Products.dart';
 import 'package:luveen/features/home/widgets/carousel_image.dart';
 import 'package:luveen/features/home/widgets/top_categories.dart';
@@ -23,26 +24,26 @@ class _Dashboard0State extends State<Dashboard0> {
 
   @override
   Widget build(BuildContext context) {
-    // Widget image_carousel = new Container(
-    //   height: 180,
-    //   child: new CarouselImage(
-    //   boxFit: BoxFit.cover,
-    //   images: [
-    //     AssetImage('assets/sale1.png'),
-    //     AssetImage('assets/sale2.jpeg'),
-    //     AssetImage('assets/sale1.png'),
-    //     AssetImage('assets/sale2.jpeg'),
-    //     AssetImage('assets/sale1.png'),
-    //   ],
-    //   autoplay: true,
-    //   animationCurve: Curves.fastOutSlowIn,
-    //  animationDuration: Duration(milliseconds: 1000),
-    //   dotSize: 3.0,
-    //   dotColor: Colors.white,
-    //   indicatorBgPadding: 4.0,
-    // ),
+    Widget image_carousel = new Container(
+      height: 180,
+      child: Carousel(
+      boxFit: BoxFit.cover,
+      images: [
+         AssetImage('assets/images/banner.jpg'),
+        AssetImage('assets/images/banner.jpg'),
+        AssetImage('assets/images/banner.jpg'),
+        AssetImage('assets/images/banner.jpg'),
+        AssetImage('assets/images/banner.jpg'),
+      ],
+      autoplay: true,
+      animationCurve: Curves.fastOutSlowIn,
+     animationDuration: Duration(milliseconds: 1000),
+      dotSize: 3.0,
+      dotColor: Colors.white,
+      indicatorBgPadding: 4.0,
+    ),
 
-    // );
+    );
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -132,7 +133,7 @@ class _Dashboard0State extends State<Dashboard0> {
 
               //Horizontal list view begins here
               TopCategories(),
-              CarouselImage(),
+              image_carousel,
 
               new Padding(
                 padding: const EdgeInsets.all(10.0),

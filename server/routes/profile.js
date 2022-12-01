@@ -109,7 +109,7 @@ profileRouter.get("/getProfileData", auth, async (req, res) => {
 });
 // router.route("/update").patch(middleware.checkToken, async (req, res) => {
 profileRouter.put("/api/update/profile",auth, async (req, res) => {
-  // let profile = {};
+  let profile = {};
   // await Profile.findOne({ userId: req.user }, (err, result) => {
   //   if (err) {
   //     profile = {};

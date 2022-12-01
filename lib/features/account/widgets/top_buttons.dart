@@ -105,14 +105,12 @@ class _TopButtonsState extends State<TopButtons> {
   
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
+    return Row(
           children: [
-            AccountButton(
-              text: 'Your Orders',
-              onTap: () {},
-            ),
+            // AccountButton(
+            //   text: 'Your Orders',
+            //   onTap: () {},
+            // ),
             AccountButton(
               text: 'Your Profile',
               onTap: () {
@@ -131,22 +129,21 @@ class _TopButtonsState extends State<TopButtons> {
                 
               },
             ),
-          ],
-        ),
-        const SizedBox(height: 10),
-        Row(
-          children: [
             AccountButton(
               text: 'Log Out',
               onTap: () => AccountServices().logOut(context),
-            ),
-            AccountButton(
-              text: 'Your Wish List',
-              onTap: () {},
-            ),
-          ],
-        ),
-      ],
-    );
+           ),
+         const SizedBox(height: 10)
+       ],
+        // const SizedBox(height: 10),
+        
+            // AccountButton(
+            //   text: 'Your Wish List',
+            //   onTap: () {},
+            // ),
+          // ],
+        );
+      // ];
+    // )
   }
 }

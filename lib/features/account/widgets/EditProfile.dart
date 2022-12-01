@@ -42,8 +42,10 @@ class _EditProfileState extends State<EditProfile> {
           lastname: _lastnameController.text,
           gender: _genderController.text,
           address: _addressController.text,
-          age: double.parse(_ageController.text),
-          phoneno: double.parse(_phonenoController.text),
+          // age: double.parse(_ageController.text),
+          // phoneno: double.parse(_phonenoController.text),
+          age: double.tryParse(_ageController.text)??0,
+          phoneno: double.tryParse(_phonenoController.text)??0,
           onSuccess:(){
             setState(() {
               

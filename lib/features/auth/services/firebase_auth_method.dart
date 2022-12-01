@@ -1,10 +1,10 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:amazon_clone_tutorialils/showOTPDialog.dart';
-// import 'package:amazon_clone_tutorialils/showSnackbar.dart';
+// import 'package:luveenils/showOTPDialog.dart';
+// import 'package:luveenils/showSnackbar.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-// import 'package:amazon_clone_tutorial/flutter_facebook_auth.dart';
+// import 'package:luveen/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../../constants/showOTP.dart';
