@@ -153,6 +153,31 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                 ),
               ),
               const SizedBox(height: 10),
+               const Text(
+                'User details',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Colors.black12,
+                  ),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                  
+                    Text('User ID:          ${widget.order.userId}'),
+                    Text('Address:      Rs ${widget.order.address}'),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 10),
               const Text(
                 'Purchase Details',
                 style: TextStyle(
