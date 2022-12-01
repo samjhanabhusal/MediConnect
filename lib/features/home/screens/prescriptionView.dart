@@ -53,7 +53,7 @@ class _PrescriptionViewState extends State<PrescriptionView> {
           ),
         ),
         body: Padding(
-          padding: EdgeInsets.all(15.0),
+          padding: EdgeInsets.fromLTRB(12, 12, 25, 12),
           child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -195,14 +195,7 @@ class _PrescriptionViewState extends State<PrescriptionView> {
                   height: 5,
                 ),
 
-                Text(
-                  "Description:",
-                  style: TextStyle(
-                      fontWeight: FontWeight.w400,
-                      color: Colors.black,
-                      fontSize: 18),
-                ),
-
+                
                 Container(
                   height: MediaQuery.of(context).size.height * 0.15,
                   width: MediaQuery.of(context).size.height * 0.99,
