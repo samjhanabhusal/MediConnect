@@ -6,6 +6,7 @@ import 'package:luveen/constants/utils.dart';
 import 'package:luveen/features/admin/models/sales.dart';
 import 'package:luveen/models/order.dart';
 import 'package:luveen/models/product.dart';
+import 'package:luveen/models/user.dart';
 import 'package:luveen/providers/user_provider.dart';
 import 'package:cloudinary_public/cloudinary_public.dart';
 import 'package:flutter/material.dart';
@@ -160,6 +161,38 @@ class AdminServices {
       showSnackBar(context, e.toString());
     }
     return orderList;
+  }
+
+
+Future<List<User>> fetchAllUsers(BuildContext context) async {
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    List<User> userList = [];
+    try {
+      http.Response res =
+          await http.get(Uri.parse('$uri/admin/get-users'), headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+        'x-auth-token': userProvider.user.token,
+      });
+
+      httpErrorHandle(
+        response: res,
+        context: context,
+        onSuccess: () {
+          for (int i = 0; i < jsonDecode(res.body).length; i++) {
+            userList.add(
+              User.fromJson(
+                jsonEncode(
+                  jsonDecode(res.body)[i],
+                ),
+              ),
+            );
+          }
+        },
+      );
+    } catch (e) {
+      showSnackBar(context, e.toString());
+    }
+    return userList;
   }
 
 

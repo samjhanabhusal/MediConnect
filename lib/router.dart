@@ -3,6 +3,7 @@ import 'dart:ffi';
 import 'package:luveen/common/widgets/bottom_bar.dart';
 import 'package:luveen/features/address/screens/address_screen.dart';
 import 'package:luveen/features/admin/screens/add_product_screen.dart';
+import 'package:luveen/features/admin/screens/orders_screen.dart';
 import 'package:luveen/features/auth/screens/auth_screen.dart';
 import 'package:luveen/features/cart/screens/cart_screen.dart';
 import 'package:luveen/features/home/screens/category_deals_screen.dart';
@@ -20,6 +21,8 @@ import 'package:flutter/material.dart';
 import 'features/home/screens/prescriptionscreen.dart';
 import 'features/home/screens/productdetailscreen.dart';
 import 'features/home/widgets/pickImage.dart';
+import 'features/order_details/screens/admin_order_detail.dart';
+import 'models/user.dart';
 
 Route<dynamic> generateRoute(RouteSettings routeSettings) {
   switch (routeSettings.name) {
@@ -119,6 +122,33 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
           order: order,
         ),
       );
+// case  OrdersScreen.routeName:
+//       // var order = routeSettings.arguments as Order;
+//       return MaterialPageRoute(
+//         settings: routeSettings,
+//         builder: (_) => OrderDetailScreen( ),
+//       );
+ case OrdersScreen.routeName:
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (_) => const OrdersScreen(),
+      );
+
+     case AOrderDetailScreen.routeName:
+        //  final args = arguments as AOrderDetailScreen;
+
+       final args = routeSettings.arguments as AOrderDetailScreen;
+      //  var user = routeSettings.arguments as AOrderDetailScreen;
+      // var user = routeSettings.arguments as User;
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (_) => AOrderDetailScreen(
+          order: args.order,
+          user: args.user,
+          // order: args.order,
+        ),
+      );
+
        case PrescriptionView.routeName:
       var prescription = routeSettings.arguments as Pres;
       return MaterialPageRoute(
@@ -138,3 +168,5 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
       );
   }
 }
+
+

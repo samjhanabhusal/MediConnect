@@ -3,6 +3,7 @@ const adminRouter = express.Router();
 const admin = require("../middlewares/admin");
 const { Product } = require("../models/product");
 const Order = require("../models/order");
+const User = require("../models/user");
 const { PromiseProvider } = require("mongoose");
 
 // Add product
@@ -77,7 +78,20 @@ adminRouter.post("/api/delete-order", admin, async (req, res) => {
   }
 });
 
+// adminRouter.get("/", admin, async (req, res) => {
+//   const user = await User.find({email});
+//   // res.json({ ...user._doc, token: req.token });
+//   res.json(user);
+// });
 
+adminRouter.get("/admin/get-users", admin, async (req, res) => {
+  try {
+    const users = await User.find({});
+    res.json(users);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
 
 adminRouter.get("/admin/analytics", admin, async (req, res) => {
   try {
