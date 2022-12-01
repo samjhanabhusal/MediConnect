@@ -33,6 +33,16 @@ class _OrdersScreenState extends State<OrdersScreen> {
     orders = await adminServices.fetchAllOrders(context);
     setState(() {});
   }
+  void deleteOrder(Order order, int index) {
+    adminServices.deleteOrder(
+      context: context,
+      order: order,
+      onSuccess: () {
+      orders!.removeAt(index);
+        setState(() {});
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -181,7 +191,8 @@ class _OrdersScreenState extends State<OrdersScreen> {
                                           color: Colors.green,
                                           fontStyle: FontStyle.italic,
                                           fontSize: 14),
-                                    )
+                                    ),
+                                    
                                     // ],
                                     // ),
                                   ],
@@ -194,6 +205,26 @@ class _OrdersScreenState extends State<OrdersScreen> {
                               width: MediaQuery.of(context).size.height * 0.12,
                               child: SingleProduct(
                                 image: orderData.products[0].images[0],
+                              ),
+                            ),
+                             SizedBox(
+                              width: 15,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(right: 20.0),
+                              child: Container(
+                                color: Colors.grey.shade300,
+                                child: IconButton(
+                                  onPressed: () =>deleteOrder(
+                                     orderData,index
+
+                                  ),
+                                  // onPressed: () => deletePrescription(
+                                  //     prescriptionData, index),
+                                  icon: const Icon(
+                                    Icons.delete_outline,
+                                  ),
+                                ),
                               ),
                             ),
                           ],

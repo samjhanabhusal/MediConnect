@@ -66,6 +66,19 @@ adminRouter.post("/admin/change-order-status", admin, async (req, res) => {
   }
 });
 
+
+adminRouter.post("/api/delete-order", admin, async (req, res) => {
+  try {
+    const { id } = req.body;
+    let order = await Order.findByIdAndDelete(id);
+    res.json(order);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+
+
 adminRouter.get("/admin/analytics", admin, async (req, res) => {
   try {
     const orders = await Order.find({});

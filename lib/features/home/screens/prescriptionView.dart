@@ -61,20 +61,24 @@ class _PrescriptionViewState extends State<PrescriptionView> {
                   child: GestureDetector(
                     onTap: () {
                       showImageViewer(
-                          context, Image.asset("assets/images/beb.png").image,
+                          context, Image.network(widget.prescription.presimages[0]).image,
                           swipeDismissible: false);
                     },
+                    
                     child: Container(
                         alignment: Alignment.center,
                         height: MediaQuery.of(context).size.height * 0.40,
                         width: MediaQuery.of(context).size.height * 0.40,
-                        decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image: AssetImage('assets/images/beb.png'),
-                              fit: BoxFit.fill,
+                        
+                        // decoration: BoxDecoration(
+                        //     image: DecorationImage(
+                        //       image: AssetImage('assets/images/beb.png'),
+                        //       fit: BoxFit.fill,
+                        //     ),
+                        //     color: Colors.green,
+                        //     borderRadius: BorderRadius.circular(10.0))
+                        child: Image.network(widget.prescription.presimages[0]),
                             ),
-                            color: Colors.green,
-                            borderRadius: BorderRadius.circular(10.0))),
                   ),
                 ),
                 SizedBox(

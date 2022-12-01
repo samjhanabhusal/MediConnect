@@ -2,11 +2,16 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const adminRouter = require("./routes/admin");
+const dotenv=require("dotenv");
 // IMPORTS FROM OTHER FILES
 const authRouter = require("./routes/auth");
 const productRouter = require("./routes/product");
 const userRouter = require("./routes/user");
 const profileRouter = require("./routes/profile");
+
+dotenv.config({
+  path: './.env'
+})
 
 // INIT
 const PORT = process.env.PORT || 3000;
@@ -31,6 +36,7 @@ mongoose
     console.log(e);
   });
 
-app.listen(PORT, "0.0.0.0", () => {
+// app.listen(PORT, "0.0.0.0", () => {
+app.listen(PORT || 5000, "0.0.0.0", () => {
   console.log(`connected at port ${PORT}`);
 });

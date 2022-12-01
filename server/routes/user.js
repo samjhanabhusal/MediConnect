@@ -193,6 +193,17 @@ userRouter.post("/api/delete-prescription", auth, async (req, res) => {
 });
 
 
+userRouter.post("/api/delete-order", auth, async (req, res) => {
+  try {
+    const { id } = req.body;
+    let order = await Order.findByIdAndDelete(id);
+    res.json(order);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+
 
 
 

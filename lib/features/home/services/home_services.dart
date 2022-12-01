@@ -312,6 +312,7 @@ class HomeServices {
     return prescriptionList;
   }
 
+
 // To remove Prescription which should be in view page
   void removeFromPrescription({
     required BuildContext context,

@@ -451,6 +451,37 @@ void editdetail({
   }
 
 
+// delete Orders
+void deleteOrder({
+    required BuildContext context,
+    required Order order,
+    required VoidCallback onSuccess,
+  }) async {
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+
+    try {
+      http.Response res = await http.post(
+        Uri.parse('$uri/api/delete-order'),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'x-auth-token': userProvider.user.token,
+        },
+        body: jsonEncode({
+          'id': order.id,
+        }),
+      );
+
+      httpErrorHandle(
+        response: res,
+        context: context,
+        onSuccess: () {
+          onSuccess();
+        },
+      );
+    } catch (e) {
+      showSnackBar(context, e.toString());
+    }
+  }
 
 
 // save user contact no
@@ -503,4 +534,36 @@ void saveUserContactNo({
       showSnackBar(context, e.toString());
     }
   }
+
+
+
+  //delete my order
+  // void removeFromPrescription({
+  //   required BuildContext context,
+  //   required Order order
+  // }) async {
+  //   final userProvider = Provider.of<UserProvider>(context, listen: false);
+
+  //   try {
+  //     http.Response res = await http.delete(
+  //       Uri.parse('$uri/api/remove-from-order/${order.id}'),
+  //       headers: {
+  //         'Content-Type': 'application/json; charset=UTF-8',
+  //         'x-auth-token': userProvider.user.token,
+  //       },
+  //     );
+
+  //     httpErrorHandle(
+  //       response: res,
+  //       context: context,
+  //       onSuccess: () {
+  //         User user = userProvider.user
+  //             .copyWith(prescription: jsonDecode(res.body)['cart']);
+  //         userProvider.setUserFromModel(user);
+  //       },
+  //     );
+  //   } catch (e) {
+  //     showSnackBar(context, e.toString());
+  //   }
+  // }
 }

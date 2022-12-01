@@ -123,7 +123,7 @@ class _PostsScreenState extends State<PostsScreen> {
                                   title: Text(
                                     // "\Rs.$prod_price",
                                     "Rs.${productData.price}",
-                                    
+
                                     style: TextStyle(
                                         color: Colors.green,
                                         fontSize: 16,

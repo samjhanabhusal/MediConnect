@@ -38,6 +38,10 @@ const userSchema = mongoose.Schema({
     type: String,
     default: "user",
   },
+  is_verified:{
+    type:Number,
+    default: 0,
+  },
   cart: [
     {
       product: productSchema,
