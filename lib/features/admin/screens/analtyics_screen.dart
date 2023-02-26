@@ -37,7 +37,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
         : Column(
             children: [
               Text(
-                '\$$totalSales',
+                'Rs.$totalSales',
                 style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -49,6 +49,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
                   charts.Series(
                     id: 'Sales',
                     data: earnings!,
+                    colorFn: (_, __) => charts.MaterialPalette.green.shadeDefault,
                     domainFn: (Sales sales, _) => sales.label,
                     measureFn: (Sales sales, _) => sales.earning,
                   ),

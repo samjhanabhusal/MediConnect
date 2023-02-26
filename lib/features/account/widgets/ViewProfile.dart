@@ -67,7 +67,7 @@ class _ViewProfileState extends State<ViewProfile> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  FlatButton.icon(
+                  TextButton.icon(
                       onPressed: () {
                         Navigator.push(
                           context,
@@ -92,7 +92,7 @@ class _ViewProfileState extends State<ViewProfile> {
                     height: 150.0,
                     decoration: BoxDecoration(
                         image: DecorationImage(
-                          image: AssetImage('assets/KU logo.png'),
+                          image: AssetImage('assets/images/Logo.png'),
                           fit: BoxFit.fill,
                         ),
                         color: Colors.white,
@@ -114,7 +114,7 @@ class _ViewProfileState extends State<ViewProfile> {
                         Text(
                           // profilee[0].firstname,
                           // profilee![0].firstname,
-                                  "Username:  ",
+                                  "Username :  ",
 
                           style: TextStyle(
                               fontWeight: FontWeight.w400,
@@ -152,7 +152,7 @@ class _ViewProfileState extends State<ViewProfile> {
                         // Row(
                         //   children: <Widget>[
                         Text(
-                          "Email:  ",
+                          "Email :  ",
                           style: TextStyle(
                               fontWeight: FontWeight.w400,
                               color: Colors.black,
@@ -187,7 +187,7 @@ class _ViewProfileState extends State<ViewProfile> {
                         // Row(
                         //   children: <Widget>[
                         Text(
-                          "Age  ",
+                          "Age : ",
                           style: TextStyle(
                               fontWeight: FontWeight.w400,
                               color: Colors.black,
@@ -197,7 +197,8 @@ class _ViewProfileState extends State<ViewProfile> {
                         Text(
                           // "21",
                           // profileinfo![0].age,
-                          profileinfo.age.toString(),
+                          // profileinfo.age.toString(),
+                          user.age,
                           style: TextStyle(
                               fontWeight: FontWeight.w400,
                               color: Colors.black,
@@ -222,7 +223,7 @@ class _ViewProfileState extends State<ViewProfile> {
                         // Row(
                         //   children: <Widget>[
                         Text(
-                          "Address:  ",
+                          "Address :  ",
                           style: TextStyle(
                               fontWeight: FontWeight.w400,
                               color: Colors.black,
@@ -256,7 +257,7 @@ class _ViewProfileState extends State<ViewProfile> {
                         // Row(
                         //   children: <Widget>[
                         Text(
-                          "Contact No.:  ",
+                          "Contact No :  ",
                           style: TextStyle(
                               fontWeight: FontWeight.w400,
                               color: Colors.black,
@@ -266,7 +267,8 @@ class _ViewProfileState extends State<ViewProfile> {
                         Text(
                           // "9801357010",
                           // profileinfo![0].phoneno,
-                          profileinfo.phoneno.toString(),
+                          // profileinfo.phoneno.toString(),
+                          user.contactno,
 
                           style: TextStyle(
                               fontWeight: FontWeight.w400,
@@ -292,7 +294,7 @@ class _ViewProfileState extends State<ViewProfile> {
                         // Row(
                         //   children: <Widget>[
                         Text(
-                          "Gender:  ",
+                          "Gender :  ",
                           style: TextStyle(
                               fontWeight: FontWeight.w400,
                               color: Colors.black,

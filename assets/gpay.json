@@ -1,5 +1,5 @@
 {
-    "provider": "google_pay",
+    "provider": "khalti_pay",
     "data": {
       "environment": "TEST",
       "apiVersion": 2,

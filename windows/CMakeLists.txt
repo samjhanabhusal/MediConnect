@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
-project(amazon_clone_tutorial LANGUAGES CXX)
+project(luveen LANGUAGES CXX)
 
-set(BINARY_NAME "amazon_clone_tutorial")
+set(BINARY_NAME "luveen")
 
 cmake_policy(SET CMP0063 NEW)
 

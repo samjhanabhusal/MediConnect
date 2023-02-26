@@ -84,6 +84,19 @@ userRouter.post("/api/save-user-contactno", auth, async (req, res) => {
     res.status(500).json({ error: e.message });
   }
 });
+
+
+userRouter.post("/api/save-user-age", auth, async (req, res) => {
+  try {
+    const { age } = req.body;
+    let user = await User.findById(req.user);
+    user.age = age;
+    user = await user.save();
+    res.json(user);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
 // order product
 userRouter.post("/api/order", auth, async (req, res) => {
   try {
@@ -187,6 +200,17 @@ userRouter.post("/api/delete-prescription", auth, async (req, res) => {
     const { id } = req.body;
     let prescription = await Prescription.findByIdAndDelete(id);
     res.json(prescription);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+
+userRouter.post("/api/delete-order", auth, async (req, res) => {
+  try {
+    const { id } = req.body;
+    let order = await Order.findByIdAndDelete(id);
+    res.json(order);
   } catch (e) {
     res.status(500).json({ error: e.message });
   }

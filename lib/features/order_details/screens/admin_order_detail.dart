@@ -3,25 +3,30 @@ import 'package:luveen/constants/global_variables.dart';
 import 'package:luveen/features/admin/services/admin_services.dart';
 import 'package:luveen/features/search/screens/search_screen.dart';
 import 'package:luveen/models/order.dart';
+import 'package:luveen/models/user.dart';
 import 'package:luveen/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-class OrderDetailScreen extends StatefulWidget {
-  static const String routeName = '/order-details';
+class AOrderDetailScreen extends StatefulWidget {
+  static const String routeName = '/aorder-details';
   final Order order;
-  const OrderDetailScreen({
+  final User user;
+  const AOrderDetailScreen({
     Key? key,
     required this.order,
+    required this.user
   }) : super(key: key);
 
   @override
-  State<OrderDetailScreen> createState() => _OrderDetailScreenState();
+  State<AOrderDetailScreen> createState() => _AOrderDetailScreenState();
 }
 
-class _OrderDetailScreenState extends State<OrderDetailScreen> {
+class _AOrderDetailScreenState extends State<AOrderDetailScreen> {
   int currentStep = 0;
+    // List<User>? users;
+
   final AdminServices adminServices = AdminServices();
 
   void navigateToSearchScreen(String query) {
@@ -31,9 +36,13 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
   @override
   void initState() {
     super.initState();
+    // fetchUsers();
     currentStep = widget.order.status;
   }
-
+//  void fetchUsers() async {
+//     users = await adminServices.fetchAllUsers(context);
+//     setState(() {});
+//   }
   // !!! ONLY FOR ADMIN!!!
   void changeOrderStatus(int status) {
     adminServices.changeOrderStatus(
@@ -173,12 +182,19 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                   children: [
                   
                     
-                    Text('User ID :       ${widget.order.userId}'),
-                    Text('User Name :     ${user.name}'),
-                    Text('Contact :       ${user.contactno}'),
-                    Text('Age :       ${user.age}'),
+                    // Text('User ID :       ${widget.order.userId}'),
+                    // Text('User Name :     ${user.name}'),
+                    // Text('Contact :       ${user.contactno}'),
+                    // Text('Age :       ${user.age}'),
                    
-                    Text('Address :        ${user.address}'),
+                    // Text('Address :        ${user.address}'),
+
+                    Text('User ID :      ${widget.user.id}'),
+                    Text('User Name :     ${widget.user.name}'),
+                    Text('Contact :       ${widget.user.contactno}'),
+                    Text('Age :           ${widget.user.age}'),
+                   
+                    Text('Address :        ${widget.user.address}'),
 
                   ],
                 ),

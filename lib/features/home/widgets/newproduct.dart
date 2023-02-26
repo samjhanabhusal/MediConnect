@@ -1,9 +1,9 @@
-// import 'package:amazon_clone_tutorial/common/widgets/loader.dart';
-// // import 'package:amazon_clone_tutorial/features/home/services/home_services.dart';
-// import 'package:amazon_clone_tutorial/features/home/services/homeservicessecond.dart';
-// import 'package:amazon_clone_tutorial/features/home/widgets/ProductDetails.dart';
-// // import 'package:amazon_clone_tutorial/features/product_details/screens/product_details_screen.dart';
-// import 'package:amazon_clone_tutorial/models/product.dart';
+// import 'package:luveen/common/widgets/loader.dart';
+// // import 'package:luveen/features/home/services/home_services.dart';
+// import 'package:luveen/features/home/services/homeservicessecond.dart';
+// import 'package:luveen/features/home/widgets/ProductDetails.dart';
+// // import 'package:luveen/features/product_details/screens/product_details_screen.dart';
+// import 'package:luveen/models/product.dart';
 // import 'package:flutter/material.dart';
 
 

@@ -4,7 +4,7 @@
 
 // // import '../../product_details/screens/product_details_screen.dart';
 // import 'ProductDetails.dart';
-// import 'package:amazon_clone_tutorial/models/product.dart';
+// import 'package:luveen/models/product.dart';
 
 // class SingleP extends StatelessWidget {
 //    final String prod_name;

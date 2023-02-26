@@ -1,12 +1,12 @@
-// import 'package:amazon_clone_tutorial/constants/global_variables.dart';
-// import 'package:amazon_clone_tutorial/features/home/widgets/newproduct.dart';
-// import 'package:amazon_clone_tutorial/features/home/widgets/Products.dart';
-// import 'package:amazon_clone_tutorial/features/home/widgets/productcheck.dart';
-// import 'package:amazon_clone_tutorial/features/home/widgets/address_box.dart';
-// import 'package:amazon_clone_tutorial/features/home/widgets/carousel_image.dart';
-// import 'package:amazon_clone_tutorial/features/home/widgets/deal_of_day.dart';
-// import 'package:amazon_clone_tutorial/features/home/widgets/top_categories.dart';
-// import 'package:amazon_clone_tutorial/features/search/screens/search_screen.dart';
+// import 'package:luveen/constants/global_variables.dart';
+// import 'package:luveen/features/home/widgets/newproduct.dart';
+// import 'package:luveen/features/home/widgets/Products.dart';
+// import 'package:luveen/features/home/widgets/productcheck.dart';
+// import 'package:luveen/features/home/widgets/address_box.dart';
+// import 'package:luveen/features/home/widgets/carousel_image.dart';
+// import 'package:luveen/features/home/widgets/deal_of_day.dart';
+// import 'package:luveen/features/home/widgets/top_categories.dart';
+// import 'package:luveen/features/search/screens/search_screen.dart';
 // import 'package:flutter/material.dart';
 
 // class HomeScreen extends StatefulWidget {

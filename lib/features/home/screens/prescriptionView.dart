@@ -34,6 +34,7 @@ class _PrescriptionViewState extends State<PrescriptionView> {
   //     );
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<UserProvider>(context).user;
     // var contactno = context.watch<UserProvider>().user.phoneno;
     return Scaffold(
         appBar: PreferredSize(
@@ -52,7 +53,7 @@ class _PrescriptionViewState extends State<PrescriptionView> {
           ),
         ),
         body: Padding(
-          padding: EdgeInsets.all(15.0),
+          padding: EdgeInsets.fromLTRB(12, 12, 25, 12),
           child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -61,20 +62,24 @@ class _PrescriptionViewState extends State<PrescriptionView> {
                   child: GestureDetector(
                     onTap: () {
                       showImageViewer(
-                          context, Image.asset("assets/images/beb.png").image,
+                          context, Image.network(widget.prescription.presimages[0]).image,
                           swipeDismissible: false);
                     },
+                    
                     child: Container(
                         alignment: Alignment.center,
                         height: MediaQuery.of(context).size.height * 0.40,
                         width: MediaQuery.of(context).size.height * 0.40,
-                        decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image: AssetImage('assets/images/beb.png'),
-                              fit: BoxFit.fill,
+                        
+                        // decoration: BoxDecoration(
+                        //     image: DecorationImage(
+                        //       image: AssetImage('assets/images/beb.png'),
+                        //       fit: BoxFit.fill,
+                        //     ),
+                        //     color: Colors.green,
+                        //     borderRadius: BorderRadius.circular(10.0))
+                        child: Image.network(widget.prescription.presimages[0]),
                             ),
-                            color: Colors.green,
-                            borderRadius: BorderRadius.circular(10.0))),
                   ),
                 ),
                 SizedBox(
@@ -145,7 +150,8 @@ class _PrescriptionViewState extends State<PrescriptionView> {
                           color: Colors.black,
                           fontSize: 18),
                     ),
-                    Spacer(),
+                    // Spacer(),
+                    Spacer(flex: 4),
                     Text(
                       // "Female",
                       widget.prescription.name,
@@ -172,9 +178,10 @@ class _PrescriptionViewState extends State<PrescriptionView> {
                           color: Colors.black,
                           fontSize: 18),
                     ),
-                    Spacer(),
+                    // Spacer.width(),
+                    Spacer(flex: 4),
                     Text(
-                      "9845122266",
+                       user.contactno,
                       style: TextStyle(
                           fontWeight: FontWeight.w400,
                           color: Colors.black,
@@ -188,14 +195,7 @@ class _PrescriptionViewState extends State<PrescriptionView> {
                   height: 5,
                 ),
 
-                Text(
-                  "Description:",
-                  style: TextStyle(
-                      fontWeight: FontWeight.w400,
-                      color: Colors.black,
-                      fontSize: 18),
-                ),
-
+                
                 Container(
                   height: MediaQuery.of(context).size.height * 0.15,
                   width: MediaQuery.of(context).size.height * 0.99,

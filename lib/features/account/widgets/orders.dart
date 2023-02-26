@@ -7,6 +7,8 @@ import 'package:luveen/models/order.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:intl/intl.dart';
+import 'package:luveen/providers/product_provider.dart';
+import 'package:provider/provider.dart';
 
 class Orders extends StatefulWidget {
   const Orders({Key? key}) : super(key: key);
@@ -30,16 +32,16 @@ class _OrdersState extends State<Orders> {
     setState(() {});
   }
 
-  //   void deletePrescription(Pres prescription, int index) {
-  //   homeServices.deletePrescription(
-  //     context: context,
-  //     prescription: prescription,
-  //     onSuccess: () {
-  //       prescriptions!.removeAt(index);
-  //       setState(() {});
-  //     },
-  //   );
-  // }
+    void deleteOrder(Order order, int index) {
+    accountServices.deleteOrder(
+      context: context,
+      order: order,
+      onSuccess: () {
+      orders!.removeAt(index);
+        setState(() {});
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -225,6 +227,26 @@ class _OrdersState extends State<Orders> {
                                     image: orders![index].products[0].images[0],
                                   ),
                                 ),
+                                SizedBox(
+                              width: 15,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(right: 20.0),
+                              child: Container(
+                                color: Colors.grey.shade300,
+                                child: IconButton(
+                                  onPressed: () =>deleteOrder(
+                                     orderData,index
+
+                                  ),
+                                  // onPressed: () => deletePrescription(
+                                  //     prescriptionData, index),
+                                  icon: const Icon(
+                                    Icons.delete_outline,
+                                  ),
+                                ),
+                              ),
+                            ),
                               ],
                             ),
                           ),

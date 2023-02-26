@@ -3,6 +3,7 @@ const adminRouter = express.Router();
 const admin = require("../middlewares/admin");
 const { Product } = require("../models/product");
 const Order = require("../models/order");
+const User = require("../models/user");
 const { PromiseProvider } = require("mongoose");
 
 // Add product
@@ -66,6 +67,32 @@ adminRouter.post("/admin/change-order-status", admin, async (req, res) => {
   }
 });
 
+
+adminRouter.post("/api/delete-order", admin, async (req, res) => {
+  try {
+    const { id } = req.body;
+    let order = await Order.findByIdAndDelete(id);
+    res.json(order);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+// adminRouter.get("/", admin, async (req, res) => {
+//   const user = await User.find({email});
+//   // res.json({ ...user._doc, token: req.token });
+//   res.json(user);
+// });
+
+adminRouter.get("/admin/get-users", admin, async (req, res) => {
+  try {
+    const users = await User.find({});
+    res.json(users);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
 adminRouter.get("/admin/analytics", admin, async (req, res) => {
   try {
     const orders = await Order.find({});
@@ -78,19 +105,19 @@ adminRouter.get("/admin/analytics", admin, async (req, res) => {
       }
     }
     // CATEGORY WISE ORDER FETCHING
-    let mobileEarnings = await fetchCategoryWiseProduct("Mobiles");
-    let essentialEarnings = await fetchCategoryWiseProduct("Essentials");
-    let applianceEarnings = await fetchCategoryWiseProduct("Appliances");
-    let booksEarnings = await fetchCategoryWiseProduct("Books");
-    let fashionEarnings = await fetchCategoryWiseProduct("Fashion");
+    let medicinesEarnings = await fetchCategoryWiseProduct("Medicines");
+    let babiesEarnings = await fetchCategoryWiseProduct("Babies");
+    let womenEarnings = await fetchCategoryWiseProduct("Women");
+    let menEarnings = await fetchCategoryWiseProduct("Men");
+    let oldEarnings = await fetchCategoryWiseProduct("Old");
 
     let earnings = {
       totalEarnings,
-      mobileEarnings,
-      essentialEarnings,
-      applianceEarnings,
-      booksEarnings,
-      fashionEarnings,
+      medicinesEarnings,
+      babiesEarnings,
+      womenEarnings,
+      menEarnings,
+      oldEarnings,
     };
 
     res.json(earnings);

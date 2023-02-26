@@ -103,10 +103,10 @@ authRouter.put("/api/updatePassword", async (req, res) => {
       const hashedPassword = await bcryptjs.hash(newpassword, 8);
       const user = await User.findOne({ email });
   // console.log(user);
-  const id = user.id;
+       const id = user.id;
       const token = req.token;
       console.log(token);
-      console.log("Mathillio tokne");
+      console.log("Mathillio token");
       
        User.findOneAndUpdate(
         {

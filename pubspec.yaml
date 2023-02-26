@@ -57,6 +57,7 @@ dependencies:
   full_screen_image: ^1.0.2
   image_viewer: ^1.5.0
   easy_image_viewer: ^1.2.0
+  carousel_pro: ^1.0.0
 
 
 dev_dependencies:

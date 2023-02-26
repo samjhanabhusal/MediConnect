@@ -41,7 +41,6 @@ class _PostsScreenState extends State<PostsScreen> {
   void navigateToAddProduct() {
     Navigator.pushNamed(context, AddProductScreen.routeName);
   }
-
   @override
   Widget build(BuildContext context) {
     return products == null
@@ -113,22 +112,44 @@ class _PostsScreenState extends State<PostsScreen> {
                                 color: Colors.white,
                                 child: ListTile(
                                   leading: Text(
-                                    productData.name,
+                                    productData.name ,
+
                                     style: TextStyle(
                                       fontSize: 15,
                                       fontWeight: FontWeight.bold,
                                       color: Colors.black,
                                     ),
                                   ),
-                                  title: Text(
-                                    // "\Rs.$prod_price",
-                                    "\Rs.${productData.price}",
+                                  title: Row(
+                                    children: [
+                                      Text(
+                                        // "\Rs.$prod_price",
+                                        "Rs.${productData.price}",
 
-                                    style: TextStyle(
-                                        color: Colors.green,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500),
+                                        style: TextStyle(
+                                            color: Colors.green,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                      Spacer(),
+                                      Container(
+                                color: Colors.grey.shade300,
+                                child: IconButton(
+                                  onPressed: () =>deleteProduct(
+                                     productData,index
+
                                   ),
+                                  // onPressed: () => deletePrescription(
+                                  //     prescriptionData, index),
+                                  icon: const Icon(
+                                    Icons.delete_outline,
+                                  ),
+                                ),
+                              ),
+                                    ],
+                                  ),
+                                  
+                                  
                                 ),
                               ),
                               child: Image.network(
