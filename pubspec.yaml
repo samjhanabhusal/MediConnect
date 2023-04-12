@@ -57,6 +57,14 @@ dependencies:
   full_screen_image: ^1.0.2
   image_viewer: ^1.5.0
   easy_image_viewer: ^1.2.0
+  # flutter_svg: ^2.0.4
+  emoji_picker_flutter: ^1.5.2
+  # emoji_picker: ^0.1.0
+  camera: ^0.10.3+2
+  path_provider: ^2.0.14
+  path:
+  video_player: ^2.6.1
+  socket_io_client: ^2.0.1
 
 
 dev_dependencies:
@@ -109,6 +117,13 @@ flutter:
   #       - asset: fonts/TrajanPro.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
-  #
+    #  fonts:
+    # - family: OpenSans
+    #   fonts:
+    #     - asset: fonts/OpenSans-Bold.ttf
+    #     - asset: fonts/OpenSans-Regular.ttf
+    #     - asset: fonts/OpenSans-SemiBold.ttf
+    #     - asset: fonts/OpenSans-Italic.ttf
+    #       style: italic
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

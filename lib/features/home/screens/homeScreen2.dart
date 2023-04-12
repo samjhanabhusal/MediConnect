@@ -1,3 +1,4 @@
+import 'package:luveen/chat/Screens/LoginScreen.dart';
 import 'package:luveen/features/home/widgets/Products.dart';
 import 'package:luveen/features/home/widgets/carousel_image.dart';
 import 'package:luveen/features/home/widgets/top_categories.dart';
@@ -44,6 +45,33 @@ class _Dashboard0State extends State<Dashboard0> {
 
     // );
     return Scaffold(
+      appBar: new AppBar(
+        //  decoration: const BoxDecoration(
+                // gradient: GlobalVariables.appBarGradient,
+        backgroundColor:
+      Color.fromARGB(255, 19, 133, 4),
+      // Color.fromARGB(255, 74, 241, 68),
+      
+        title: Text("Luveen"),
+        actions: <Widget>[
+          new IconButton(
+            icon: Icon(Icons.message),
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => new LoginScreen()));
+            },
+          ),
+          new IconButton(
+              icon: Icon(
+                Icons.shopping_cart,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                // Navigator.push(context,
+                //     MaterialPageRoute(builder: (context) => new Cart()));
+              }),
+        ],
+      ),
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
@@ -58,7 +86,8 @@ class _Dashboard0State extends State<Dashboard0> {
                 Expanded(
                   child: Container(
                     height: 42,
-                    margin: const EdgeInsets.only(left: 15),
+                    width: 5,
+                    margin: const EdgeInsets.only(left: 4),
                     child: Material(
                       borderRadius: BorderRadius.circular(7),
                       elevation: 1,
