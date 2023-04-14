@@ -159,40 +159,40 @@ class _IndividualPageState extends State<IndividualPage> {
               actions: [
                 IconButton(icon: Icon(Icons.videocam), onPressed: () {}),
                 IconButton(icon: Icon(Icons.call), onPressed: () {}),
-                PopupMenuButton<String>(
-                  padding: EdgeInsets.all(0),
-                  onSelected: (value) {
-                    print(value);
-                  },
-                  itemBuilder: (BuildContext contesxt) {
-                    return [
-                      PopupMenuItem(
-                        child: Text("View Contact"),
-                        value: "View Contact",
-                      ),
-                      PopupMenuItem(
-                        child: Text("Media, links, and docs"),
-                        value: "Media, links, and docs",
-                      ),
-                      PopupMenuItem(
-                        child: Text("Whatsapp Web"),
-                        value: "Whatsapp Web",
-                      ),
-                      PopupMenuItem(
-                        child: Text("Search"),
-                        value: "Search",
-                      ),
-                      PopupMenuItem(
-                        child: Text("Mute Notification"),
-                        value: "Mute Notification",
-                      ),
-                      PopupMenuItem(
-                        child: Text("Wallpaper"),
-                        value: "Wallpaper",
-                      ),
-                    ];
-                  },
-                ),
+                // PopupMenuButton<String>(
+                //   padding: EdgeInsets.all(0),
+                //   onSelected: (value) {
+                //     print(value);
+                //   },
+          //         itemBuilder: (BuildContext contesxt) {
+          //           return [
+          //             PopupMenuItem(
+          //               child: Text("View Contact"),
+          //               value: "View Contact",
+          //             ),
+          //             PopupMenuItem(
+          //               child: Text("Media, links, and docs"),
+          //               value: "Media, links, and docs",
+          //             ),
+          //             PopupMenuItem(
+          //               child: Text("Whatsapp Web"),
+          //               value: "Whatsapp Web",
+          //             ),
+          //             PopupMenuItem(
+          //               child: Text("Search"),
+          //               value: "Search",
+          //             ),
+          //             PopupMenuItem(
+          //               child: Text("Mute Notification"),
+          //               value: "Mute Notification",
+          //             ),
+          //             PopupMenuItem(
+          //               child: Text("Wallpaper"),
+          //               value: "Wallpaper",
+          //             ),
+          //           ];
+          //         },
+          //       ),
               ],
             ),
           ),
@@ -389,11 +389,11 @@ class _IndividualPageState extends State<IndividualPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  iconCreation(
-                      Icons.insert_drive_file, Colors.indigo, "Document"),
-                  SizedBox(
-                    width: 40,
-                  ),
+                  // iconCreation(
+                  //     Icons.insert_drive_file, Colors.indigo, "Document"),
+                  // SizedBox(
+                  //   width: 40,
+                  // ),
                   iconCreation(Icons.camera_alt, Colors.pink, "Camera"),
                   SizedBox(
                     width: 40,
@@ -415,7 +415,7 @@ class _IndividualPageState extends State<IndividualPage> {
                   SizedBox(
                     width: 40,
                   ),
-                  iconCreation(Icons.person, Colors.blue, "Contact"),
+                  // iconCreation(Icons.person, Colors.blue, "Contact"),
                 ],
               ),
             ],

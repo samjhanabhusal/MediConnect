@@ -15,7 +15,8 @@ class _LoginScreenState extends State<LoginScreen> {
   late ChatModel sourceChat;
   List<ChatModel> chatmodels = [
     ChatModel(
-      name: "Dev Stack",
+    
+      name:"Doctor",
       isGroup: false,
       currentMessage: "Hi Everyone",
       time: "4:00",
@@ -23,39 +24,15 @@ class _LoginScreenState extends State<LoginScreen> {
       id: 1, status: '',
     ),
     ChatModel(
-      name: "Kishor",
+      name: "Doctor ",
       isGroup: false,
-      currentMessage: "Hi Kishor",
+      currentMessage: "Hi sam",
       time: "13:00",
       icon: "person.svg",
       id: 2, status: '',
     ),
 
-    ChatModel(
-      name: "Collins",
-      isGroup: false,
-      currentMessage: "Hi Dev Stack",
-      time: "8:00",
-      icon: "person.svg",
-      id: 3, status: '',
-    ),
-
-    ChatModel(
-      name: "Balram Rathore",
-      isGroup: false,
-      currentMessage: "Hi Dev Stack",
-      time: "2:00",
-      icon: "person.svg",
-      id: 4, status: '',
-    ),
-
-    // ChatModel(
-    //   name: "NodeJs Group",
-    //   isGroup: true,
-    //   currentMessage: "New NodejS Post",
-    //   time: "2:00",
-    //   icon: "group.svg",
-    // ),
+   
   ];
   @override
   Widget build(BuildContext context) {

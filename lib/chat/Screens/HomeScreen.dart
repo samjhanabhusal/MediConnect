@@ -1,3 +1,4 @@
+import 'package:luveen/constants/global_variables.dart';
 import 'package:luveen/models/ChatModel.dart';
 import 'package:luveen/chat/Pages/CameraPage.dart';
 import 'package:luveen/chat/Pages/ChatPage.dart';
@@ -19,65 +20,70 @@ class _HomescreenState extends State<Homescreen>
   @override
   void initState() {
     super.initState();
-    _controller = TabController(length: 4, vsync: this, initialIndex: 1);
+    _controller = TabController(length: 2, vsync: this, initialIndex: 1);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Whatsapp Clone"),
-        actions: [
-          IconButton(icon: Icon(Icons.search), onPressed: () {}),
-          PopupMenuButton<String>(
-            onSelected: (value) {
-              print(value);
-            },
-            itemBuilder: (BuildContext contesxt) {
-              return [
-                PopupMenuItem(
-                  child: Text("New group"),
-                  value: "New group",
-                ),
-                PopupMenuItem(
-                  child: Text("New broadcast"),
-                  value: "New broadcast",
-                ),
-                PopupMenuItem(
-                  child: Text("Whatsapp Web"),
-                  value: "Whatsapp Web",
-                ),
-                PopupMenuItem(
-                  child: Text("Starred messages"),
-                  value: "Starred messages",
-                ),
-                PopupMenuItem(
-                  child: Text("Settings"),
-                  value: "Settings",
-                ),
-              ];
-            },
-          )
-        ],
-        bottom: TabBar(
-          controller: _controller,
-          indicatorColor: Colors.white,
-          tabs: [
-            Tab(
-              icon: Icon(Icons.camera_alt),
-            ),
-            Tab(
-              text: "CHATS",
-            ),
-            Tab(
-              text: "STATUS",
-            ),
-            Tab(
-              text: "CALLS",
-            )
-          ],
+      appBar: new AppBar(
+        //  decoration: const BoxDecoration(
+                // gradient: GlobalVariables.appBarGradient,
+        backgroundColor:
+      Color.fromARGB(255, 19, 133, 4),
+      // Color.fromARGB(255, 74, 241, 68),
+      
+        title: Text("Chat with doctor"),     // actions: [
+        //   IconButton(icon: Icon(Icons.search), onPressed: () {}),
+        //   PopupMenuButton<String>(
+        //     onSelected: (value) {
+        //       print(value);
+        //     },
+        //     itemBuilder: (BuildContext contesxt) {
+        //       return [
+        //         PopupMenuItem(
+        //           child: Text("New group"),
+        //           value: "New group",
+        //         ),
+        //         PopupMenuItem(
+        //           child: Text("New broadcast"),
+        //           value: "New broadcast",
+        //         ),
+        //         PopupMenuItem(
+        //           child: Text("Chat Web"),
+        //           value: "Chat Web",
+        //         ),
+        //         PopupMenuItem(
+        //           child: Text("Starred messages"),
+        //           value: "Starred messages",
+        //         ),
+        //         PopupMenuItem(
+        //           child: Text("Settings"),
+        //           value: "Settings",
+        //         ),
+        //       ];
+        //     },
+        //   )
+        // ],
+        // bottom: TabBar(
+        //   controller: _controller,
+        //   indicatorColor: Colors.white,
+        //   tabs: [
+        //     Tab(
+        //       icon: Icon(Icons.camera_alt),
+        //     ),
+        //     Tab(
+        //       text: "CHATS",
+        //     ),
+        //     Tab(
+        //       text: "STATUS",
+        //     ),
+        //     Tab(
+        //       text: "CALLS",
+        //     )
+        //   ],
         ),
-      ),
+      // ),
       body: TabBarView(
         controller: _controller,
         children: [
@@ -86,8 +92,8 @@ class _HomescreenState extends State<Homescreen>
             chatmodels: widget.chatmodels,
             sourchat: widget.sourchat,
           ),
-          Text("STATUS"),
-          Text("Calls"),
+          // Text("STATUS"),
+          // Text("Calls"),
         ],
       ),
     );

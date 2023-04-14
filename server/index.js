@@ -59,7 +59,7 @@ mongoose
       if (clients[targetId]) clients[targetId].emit("message", msg);
     });
   });
-app.listen(PORT, "0.0.0.0", () => {
+app.listen(3000, "0.0.0.0", () => {
   console.log(`connected at port ${PORT}`);
 });
 server.listen(5000, "0.0.0.0", () => {

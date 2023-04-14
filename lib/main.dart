@@ -1,4 +1,6 @@
 import 'package:khalti_flutter/khalti_flutter.dart';
+import 'package:luveen/chat/Screens/HomeScreen.dart';
+import 'package:luveen/chat/Screens/LoginScreen.dart';
 import 'package:luveen/common/widgets/bottom_bar.dart';
 import 'package:luveen/constants/global_variables.dart';
 import 'package:luveen/features/admin/screens/admin_screen.dart';
@@ -63,19 +65,21 @@ class _MyAppState extends State<MyApp> {
               useMaterial3: true, // can remove this line
             ),
             onGenerateRoute: (settings) => generateRoute(settings),
-            home: SplashScreen(
-                seconds: 2,
-                navigateAfterSeconds:
-                    Provider.of<UserProvider>(context).user.token.isNotEmpty
-                        ? Provider.of<UserProvider>(context).user.type == 'user'
-                            ? const BottomBar()
-                            : const AdminScreen()
-                        : const AuthScreen(),
-                image: new Image.asset('assets/images/SplashScreenLogo.png'),
-                photoSize: 150.0,
-                backgroundColor: Colors.white,
-                styleTextUnderTheLoader: new TextStyle(),
-                loaderColor: Colors.green),
+            // home: SplashScreen(
+            //     seconds: 2,
+            //     navigateAfterSeconds:
+            //         Provider.of<UserProvider>(context).user.token.isNotEmpty
+            //             ? Provider.of<UserProvider>(context).user.type == 'user'
+            //                 ? const BottomBar()
+            //                 : const AdminScreen()
+            //             : const AuthScreen(),
+            //     image: new Image.asset('assets/images/SplashScreenLogo.png'),
+            //     photoSize: 150.0,
+            //     backgroundColor: Colors.white,
+            //     styleTextUnderTheLoader: new TextStyle(),
+            //     loaderColor: Colors.green),
+            home: LoginScreen(),
+            // home: Homescreen(chatmodels: chatmodels, sourchat: sourchat),
           );
         });
   }
