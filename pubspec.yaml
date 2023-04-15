@@ -67,6 +67,21 @@ dependencies:
   socket_io_client: ^2.0.1
 
 
+  avoid_keyboard: ^0.3.0
+  # http: ^0.13.5
+  flutter_redux: ^0.10.0
+  axios: ^1.0.1+1
+  localstorage: ^4.0.1+2
+  # intl: ^0.18.0
+  uuid: ^3.0.7
+  convert: ^3.1.1
+  
+
+
+
+  redux_thunk: ^0.4.0
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

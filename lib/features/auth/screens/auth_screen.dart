@@ -1,10 +1,13 @@
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:localstorage/localstorage.dart';
 import 'package:luveen/common/widgets/custom_button.dart';
 import 'package:luveen/common/widgets/custom_textfield.dart';
 import 'package:luveen/constants/global_variables.dart';
 import 'package:luveen/features/auth/screens/forgetpassword.dart';
 import 'package:luveen/features/auth/services/auth_service.dart';
 import 'package:flutter/material.dart';
+import 'package:luveen/store/actions/authActions.dart';
+import 'package:redux/redux.dart';
 
 enum Auth {
   signin,
@@ -28,6 +31,17 @@ class _AuthScreenState extends State<AuthScreen> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
 
+  final LocalStorage storage = new LocalStorage('localstorage_app');
+  
+  get store => null;
+  @override
+  void initState(){
+    super.initState();
+    new Future.delayed(Duration(seconds: 1),(){
+      store
+      .dispatch(loadUser(store: store, context: context));
+    });
+  }
   @override
   void dispose() {
     super.dispose();

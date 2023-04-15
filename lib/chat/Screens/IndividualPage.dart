@@ -49,13 +49,21 @@ class _IndividualPageState extends State<IndividualPage> {
 
   void connect() {
     // MessageModel messageModel = MessageModel(sourceId: widget.sourceChat.id.toString(),targetId: );
+    // Configue Socket transports
     IO.Socket socket = IO.io("http://192.168.0.106:5000", <String, dynamic>{
       "transports": ["websocket"],
       "autoConnect": false,
     });
+    // Connect to websocket
     socket.connect(); 
+    
     // tried to connect with backend manually
     // once connected to backend then OnConnect method will be run and client ..like frontend ma connect
+
+
+
+    // Handle socket events---Thelle Codes
+    socket.on('connect', (_) =>print("connect: ${socket.id}"));
     socket.emit("signin", widget.sourchat.id);
     socket.onConnect((data) {
       print("Connected into frontend");

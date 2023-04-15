@@ -16,7 +16,7 @@ class _LoginScreenState extends State<LoginScreen> {
   List<ChatModel> chatmodels = [
     ChatModel(
     
-      name:"Doctor",
+      name:"Admin",
       isGroup: false,
       currentMessage: "Hi Everyone",
       time: "4:00",

@@ -6,7 +6,7 @@ import 'package:luveen/features/home/screens/homeScreen2.dart';
 import 'package:luveen/features/home/screens/home_screen.dart';
 // import 'package:amazon_clone_tutorial/features/prescription/screens/prescriptionScreen.dart';
 import 'package:luveen/providers/user_provider.dart';
-import 'package:badges/badges.dart';
+import 'package:badges/badges.dart ' as Badge;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -107,7 +107,7 @@ class _BottomBarState extends State<BottomBar> {
                   ),
                 ),
               ),
-              child: Badge(
+              child: Badge.Badge(
                 elevation: 0,
                 badgeContent: Text(userCartLen.toString()),
                 badgeColor: Colors.white,

@@ -9,7 +9,8 @@ const authRouter = require("./routes/auth");
 const productRouter = require("./routes/product");
 const userRouter = require("./routes/user");
 const profileRouter = require("./routes/profile");
-
+// const authRoutes = require("./routes/auth");
+const messageRoutes = require("./routes/messages");
 // INIT
 // INIT
 const dotenv = require("dotenv");
@@ -35,6 +36,9 @@ app.use(adminRouter);
 app.use(productRouter);
 app.use(userRouter);
 app.use(profileRouter);
+// app.use("/api/auth", authRoutes);
+app.use("/api/messages", messageRoutes);
+
 
 // Connections
 mongoose
