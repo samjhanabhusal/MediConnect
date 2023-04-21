@@ -22,6 +22,7 @@ dotenv.config({
 const PORT = process.env.PORT || 3000;
 const app = express();
 var server = http.createServer(app);
+// importing socket.io--passing server
 var io = require("socket.io")(server);
 // const DB = "mongodb+srv://luveen:luveenpassword@cluster0.vop3wa1.mongodb.net/?retryWrites=true&w=majority";
 var username = encodeURIComponent("Samjhana");
@@ -49,6 +50,10 @@ mongoose
   .catch((e) => {
     console.log(e);
   });
+
+  // listen and emit event------tes paxi callbackf
+
+  // ---listen on connection event
   io.on("connection", (socket) => {
     console.log("connetetd");
     console.log(socket.id, "has joined");

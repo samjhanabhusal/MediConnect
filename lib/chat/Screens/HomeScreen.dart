@@ -5,10 +5,14 @@ import 'package:luveen/chat/Pages/ChatPage.dart';
 // import 'package:chatapp/Pages/ChatPage.dart';
 import 'package:flutter/material.dart';
 
+import '../../models/user.dart';
+
 class Homescreen extends StatefulWidget {
-  Homescreen({Key? key, required this.chatmodels, required this.sourchat}) : super(key: key);
+  // Homescreen({Key? key, required this.chatmodels, required this.sourchat}) : super(key: key);
+  const Homescreen({Key? key, required this.chatmodels}) : super(key: key);
   final List<ChatModel> chatmodels;
-  final ChatModel sourchat;
+  // final ChatModel sourchat;
+  // final String sourceChat;
 
   @override
   _HomescreenState createState() => _HomescreenState();
@@ -90,7 +94,8 @@ class _HomescreenState extends State<Homescreen>
           CameraPage(),
           ChatPage(
             chatmodels: widget.chatmodels,
-            sourchat: widget.sourchat,
+            // sourchat: widget.sourchat,
+            // arguments: user.id,
           ),
           // Text("STATUS"),
           // Text("Calls"),

@@ -3,7 +3,7 @@
 import 'package:khalti_flutter/khalti_flutter.dart';
 import 'package:luveen/Services/chatStateServices.dart';
 import 'package:luveen/chat/Screens/HomeScreen.dart';
-import 'package:luveen/chat/Screens/LoginScreen.dart';
+import 'package:luveen/chat/Screens/Chatlist.dart';
 import 'package:luveen/common/widgets/bottom_bar.dart';
 import 'package:luveen/constants/global_variables.dart';
 import 'package:luveen/features/admin/screens/admin_screen.dart';
@@ -12,7 +12,7 @@ import 'package:luveen/features/auth/services/auth_service.dart';
 import 'package:luveen/providers/user_provider.dart';
 import 'package:luveen/router.dart';
 import 'package:flutter/material.dart';
-import 'package:luveen/store/reducer.dart';
+// import 'package:luveen/store/reducer.dart';
 import 'package:provider/provider.dart';
 import 'package:redux_thunk/redux_thunk.dart';
 import 'package:splashscreen/splashscreen.dart';
@@ -35,21 +35,21 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final AuthService authService = AuthService();
-  final ChatStateServices chatStateServices = ChatStateServices();
-  final store = new Store(
-    reducers,
-    initialState: ChatState(
-      errMsg: "",
-      allUsers: [],
-      isAuthenticated: false,
-      activeUser: "",
-      activeRoom: "",
-      messages: [],
-      logLoading: null,
-      regLoading: null,
-    ),
-    middleware: [thunkMiddleware],
-  );
+  // final ChatStateServices chatStateServices = ChatStateServices();
+  // final store = new Store(
+  //   reducers,
+  //   initialState: ChatState(
+  //     errMsg: "",
+  //     allUsers: [],
+  //     isAuthenticated: false,
+  //     activeUser: "",
+  //     activeRoom: "",
+  //     messages: [],
+  //     logLoading: null,
+  //     regLoading: null,
+  //   ),
+  //   middleware: [thunkMiddleware],
+  // );
 
   @override
   void initState() {
@@ -89,6 +89,7 @@ class _MyAppState extends State<MyApp> {
             home: SplashScreen(
                 seconds: 2,
                 navigateAfterSeconds:
+                // case
                     Provider.of<UserProvider>(context).user.token.isNotEmpty
                         ? Provider.of<UserProvider>(context).user.type == 'user'
                             ? const BottomBar()

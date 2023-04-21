@@ -1,4 +1,5 @@
-import 'package:luveen/chat/Screens/LoginScreen.dart';
+import 'package:luveen/chat/Screens/Chatlist.dart';
+import 'package:luveen/chat/Screens/chatlist2.dart';
 import 'package:luveen/features/home/widgets/Products.dart';
 import 'package:luveen/features/home/widgets/carousel_image.dart';
 import 'package:luveen/features/home/widgets/top_categories.dart';
@@ -58,7 +59,8 @@ class _Dashboard0State extends State<Dashboard0> {
             icon: Icon(Icons.message),
             onPressed: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => new LoginScreen()));
+                  // MaterialPageRoute(builder: (context) => new LoginScreen()));
+                  MaterialPageRoute(builder: (context) => new ChatList()));
             },
           ),
           new IconButton(

@@ -3,6 +3,8 @@ import 'package:luveen/chat/CustomUi/ButtonCard.dart';
 import 'package:luveen/models/ChatModel.dart';
 import 'package:luveen/chat/Screens/Homescreen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:luveen/providers/user_provider.dart';
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({Key? key}) : super(key: key);
@@ -12,7 +14,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  late ChatModel sourceChat;
+  // late ChatModel sourceChat;
+  late String sourceChat;
   List<ChatModel> chatmodels = [
     ChatModel(
     
@@ -36,18 +39,22 @@ class _LoginScreenState extends State<LoginScreen> {
   ];
   @override
   Widget build(BuildContext context) {
+      final user = context.watch<UserProvider>().user;
+
     return Scaffold(
       body: ListView.builder(
           itemCount: chatmodels.length,
           itemBuilder: (contex, index) => InkWell(
                 onTap: () {
-                  sourceChat = chatmodels.removeAt(index);
+                  // sourceChat = chatmodels.removeAt(index);
+                  // sourceChat = user.id;
                   Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
                           builder: (builder) => Homescreen(
                                 chatmodels: chatmodels,
-                                sourchat: sourceChat,
+                                // sourchat: sourceChat,
+                                // sourchat:user.id,
                               )));
                 },
                 child: ButtonCard(

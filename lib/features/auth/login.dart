@@ -13,6 +13,37 @@ import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+class Login extends StatelessWidget {
+  const Login({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(child:LoginMain());
+  }
+}
+
+ class LoginMain extends StatefulWidget {
+  const LoginMain({Key? key}) : super(key: key);
+
+  @override
+  State<LoginMain> createState() => _LoginMainState();
+}
+
+class _LoginMainState extends State<LoginMain> {
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
+  }
+}
+
+
+
+
+
+
+
+
+
 class AuthService {
   // sign up user
   void signUpUser({
@@ -62,59 +93,6 @@ class AuthService {
       showSnackBar(context, e.toString());
     }
   }
-
-
-// Register as a doctor
-
- void signUpDoctor({
-    required BuildContext context,
-    required String email,
-    required String password,
-    required String name,
-  }) async {
-    try {
-      User user = User(
-        id: '',
-        name: name,
-        password: password,
-        email: email,
-        address: '',
-        contactno: '',
-        type: '',
-        token: '',
-        cart: [],
-        prescription: [],
-        profiles: [],
-      );
-
-      http.Response res = await http.post(
-        Uri.parse('$uri/api/signup'),
-        body: user.toJson(),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-        },
-      );
-
-      httpErrorHandle(
-        response: res,
-        context: context,
-        onSuccess: () {
-          showSnackBar(
-            context,
-            'Account created! Login with the same credentials!',
-          );
-          // Navigator.push(
-          //   context,
-          //   MaterialPageRoute(builder: (context) => EnterDetails()),
-          // );
-        },
-      );
-    } catch (e) {
-      showSnackBar(context, e.toString());
-    }
-  }
-
-
 
   // sign in user
   void signInUser({

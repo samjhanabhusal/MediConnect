@@ -3,6 +3,7 @@
 // import 'package:chatapp/CustomUI/OwnMessgaeCrad.dart';
 import 'package:luveen/chat/CustomUi/OwnMessageCard.dart';
 import 'package:luveen/chat/CustomUi/ReplyCard.dart';
+import 'package:luveen/constants/global_variables.dart';
 import 'package:luveen/models/ChatModel.dart';
 import 'package:luveen/models/MessageModel.dart';
 // import 'package:emoji_picker/emoji_picker.dart';
@@ -11,11 +12,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
+import '../../models/user.dart';
+
 class IndividualPage extends StatefulWidget {
   // IndividualPage({Key key, this.chatModel, this.sourchat}) : super(key: key);
-  IndividualPage({Key ? key, required this.chatModel, required this.sourchat}) : super(key: key);
+  // IndividualPage({Key ? key, required this.chatModel, required this.sourchat}) : super(key: key);
+  IndividualPage({Key ? key, required this.chatModel,}) : super(key: key);
   final ChatModel chatModel;
-  final ChatModel sourchat;
+  // final ChatModel sourchat;
+  // final User user;
 
   @override
   _IndividualPageState createState() => _IndividualPageState();
@@ -33,6 +38,7 @@ class _IndividualPageState extends State<IndividualPage> {
   // IO.Socket socket = IO.io('http://localhost:3000');
   @override
   //when page is mounted initState will run...... 
+  // Initializing socket in init--connect()
   void initState() {
     super.initState();
     connect();
@@ -64,7 +70,8 @@ class _IndividualPageState extends State<IndividualPage> {
 
     // Handle socket events---Thelle Codes
     socket.on('connect', (_) =>print("connect: ${socket.id}"));
-    socket.emit("signin", widget.sourchat.id);
+    // socket.emit("signin", widget.sourchat.id);
+    socket.emit("signin", sourceChat);
     socket.onConnect((data) {
       print("Connected into frontend");
       socket.on("message", (msg) {
@@ -77,7 +84,8 @@ class _IndividualPageState extends State<IndividualPage> {
     print(socket.connected);
   }
 
-  void sendMessage(String message, int? sourceId, int? targetId) {
+  // void sendMessage(String message, int? sourceId, int? targetId) {
+  void sendMessage(String message, String ? sourceId, int? targetId) {
     setMessage("source", message);
     // socket.emit("message",
     socket?.emit("message",
@@ -346,7 +354,9 @@ class _IndividualPageState extends State<IndividualPage> {
                                             curve: Curves.easeOut);
                                         sendMessage(
                                             _controller.text,
-                                            widget.sourchat.id,
+                                            // widget.sourchat.id,
+                                            // widget.user.id,
+                                            sourceChat,
                                             widget.chatModel.id);
                                         _controller.clear();
                                         setState(() {

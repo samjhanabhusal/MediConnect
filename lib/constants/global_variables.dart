@@ -1,9 +1,18 @@
+// import 'dart:js';
+
 import 'package:flutter/material.dart';
+// import 'package:provider/provider.dart';
+import '../providers/user_provider.dart';
 
 // String uri = 'http://192.168.32.74:3000';
 // String uri = 'http://172.17.1.136:3000';
-String uri = 'http://192.168.32.74:3000';
+String uri = 'http://192.168.1.120:3000';
+// 192.168.1.120----Shalini
+// String uri = 'http://192.168.32.74:3000';
 // 192.168.32.74----------hostel
+final user =UserProvider().user;
+
+String sourceChat = user.id;
 
 class GlobalVariables {
   // COLORS
