@@ -2,6 +2,8 @@ const mongoose = require("mongoose");
 const { productSchema } = require("./product");
 const  {prescriptionSchema}  = require("./prescription");
 const { profileSchema } = require("./profile");
+// const { profileSchema } = require("./profile");
+const { doctorSchema } = require("./doctor");
 
 const userSchema = mongoose.Schema({
   name: {
@@ -34,8 +36,9 @@ const userSchema = mongoose.Schema({
     type: String,
     default: "",
   },
-  type: {
+  role: {
     type: String,
+    enum:["user", "doctor", "hospital", "admin"],
     default: "user",
   },
   cart: [
@@ -66,6 +69,12 @@ const userSchema = mongoose.Schema({
     //   },
     },
   ],
+  doctors:[
+    {
+      doctor: doctorSchema
+    },
+  ],
+
   profiles:[
     {
       profile: profileSchema

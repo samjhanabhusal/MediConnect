@@ -1,5 +1,6 @@
 // import 'dart:html';
 
+import 'package:provider/provider.dart';
 import 'package:khalti_flutter/khalti_flutter.dart';
 import 'package:luveen/Services/chatStateServices.dart';
 import 'package:luveen/chat/Screens/HomeScreen.dart';
@@ -13,7 +14,6 @@ import 'package:luveen/providers/user_provider.dart';
 import 'package:luveen/router.dart';
 import 'package:flutter/material.dart';
 // import 'package:luveen/store/reducer.dart';
-import 'package:provider/provider.dart';
 import 'package:redux_thunk/redux_thunk.dart';
 import 'package:splashscreen/splashscreen.dart';
 import 'package:redux/redux.dart';
@@ -51,11 +51,11 @@ class _MyAppState extends State<MyApp> {
   //   middleware: [thunkMiddleware],
   // );
 
-  @override
-  void initState() {
-    super.initState();
-    authService.getUserData(context);
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   authService.getUserData(context);
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -86,15 +86,47 @@ class _MyAppState extends State<MyApp> {
               useMaterial3: true, // can remove this line
             ),
             onGenerateRoute: (settings) => generateRoute(settings),
-            home: SplashScreen(
-                seconds: 2,
-                navigateAfterSeconds:
-                // case
-                    Provider.of<UserProvider>(context).user.token.isNotEmpty
-                        ? Provider.of<UserProvider>(context).user.type == 'user'
-                            ? const BottomBar()
-                            : const AdminScreen()
-                        : const AuthScreen(),
+//             home: SplashScreen(
+//   seconds: 2,
+//   navigateAfterSeconds: Consumer<AuthProvider>(
+//     builder: (_, authProvider, __) {
+//       if (authProvider.isLoggedIn) {
+//         switch (authProvider.userType) {
+//           case 'user':
+//             return BottomBar();
+//           case 'doctor':
+//           case 'hospital':
+//           case 'admin':
+//             return AdminScreen();
+//           default:
+//             return AuthScreen();
+//         }
+//       } else {
+//         return AuthScreen();
+//       }
+//     },
+//   ),
+//   image: new Image.asset('assets/images/SplashScreenLogo.png'),
+//   photoSize: 150.0,
+//   backgroundColor: Colors.white,
+//   styleTextUnderTheLoader: new TextStyle(),
+//   loaderColor: Colors.green
+// ),
+
+
+
+
+
+
+
+
+
+home: SplashScreen(
+  seconds: 2,
+ navigateAfterSeconds: () => getNextScreen(context),
+// ),
+
+
                 image: new Image.asset('assets/images/SplashScreenLogo.png'),
                 photoSize: 150.0,
                 backgroundColor: Colors.white,
@@ -105,4 +137,23 @@ class _MyAppState extends State<MyApp> {
           );
         });
   }
+  
+  
+  Widget getNextScreen(BuildContext context) {
+  final user = context.watch<UserProvider>().user;
+  if (user.token.isNotEmpty) {
+    switch (user.role) {
+      case 'user':
+        return const BottomBar();
+      case 'doctor': return const AdminScreen();
+      case 'hospital': return const AdminScreen();
+      case 'admin':
+        return const AdminScreen();
+      default:
+        return const AuthScreen();
+    }
+  } else {
+    return const AuthScreen();
+  }
+}
 }

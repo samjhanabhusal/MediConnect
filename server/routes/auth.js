@@ -1,11 +1,18 @@
+// import Cheerio  from "cheerio";
+const axios = require ("axios");
+const Cheerio =  require("cheerio");
 const express = require("express");
+
 const User = require("../models/user");
+// const Doctor = require('../models/doctor');
+
 const bcryptjs = require("bcryptjs");
 const authRouter = express.Router();
 const jwt = require("jsonwebtoken");
 const auth = require("../middlewares/auth");
 const admin = require("../middlewares/admin");
 const { Product } = require("../models/product");
+const {Doctor} = require('../models/doctor');
 
 // SIGN UP
 authRouter.post("/api/signup", async (req, res) => {
@@ -33,6 +40,8 @@ authRouter.post("/api/signup", async (req, res) => {
   }
 });
 
+
+
 // Sign In Route
 // Exercise
 authRouter.post("/api/signin", async (req, res) => {
@@ -45,6 +54,31 @@ authRouter.post("/api/signin", async (req, res) => {
         .status(400)
         .json({ msg: "User with this email does not exist!" });
     }
+    // if (user.type === 'doctor' && !user.npc_no) {
+    //   // return res.status(400).json({ msg: "Doctor credentials not found." });
+    //   const doctorName = user.name;
+    //   const url = 'https://www.nmc.org.np/deregistration';
+    //   const response = await axios.get(url);
+    //   const html = response.data;
+    //   const $ = cheerio.load(html);
+    //   const json = $('script[type="application/json"]').html();
+    //   const data = JSON.parse(json);
+    //   const deregisteredDoctors = data.deregisteredDoctors;
+    //   let nmc_no = '';
+    //   for (let i = 0; i < deregisteredDoctors.length; i++) {
+    //     const doctor = deregisteredDoctors[i];
+    //     if (doctor.name === doctorName) {
+    //       nmc_no = doctor.nmc_no;
+    //       break;
+    //     }
+    //   }
+    //   if (!nmc_no) {
+    //     return res.status(400).json({ msg: "Doctor credentials not found." });
+    //   }
+      // user.nmc_no = nmc_no;
+      // await user.save();
+    // }
+    // }
 
     const isMatch = await bcryptjs.compare(password, user.password);
     if (!isMatch) {

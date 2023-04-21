@@ -9,7 +9,8 @@ const authRouter = require("./routes/auth");
 const productRouter = require("./routes/product");
 const userRouter = require("./routes/user");
 const profileRouter = require("./routes/profile");
-// const authRoutes = require("./routes/auth");
+const doctorRouter = require("./routes/doctor");
+// const doctorRoutes = require("./routes/doctor");
 const messageRoutes = require("./routes/messages");
 // INIT
 // INIT
@@ -37,6 +38,7 @@ app.use(adminRouter);
 app.use(productRouter);
 app.use(userRouter);
 app.use(profileRouter);
+app.use(doctorRouter);
 // app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
 

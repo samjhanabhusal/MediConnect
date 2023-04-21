@@ -3,6 +3,7 @@ import 'package:localstorage/localstorage.dart';
 import 'package:luveen/common/widgets/custom_button.dart';
 import 'package:luveen/common/widgets/custom_textfield.dart';
 import 'package:luveen/constants/global_variables.dart';
+import 'package:luveen/features/auth/screens/Doctorregister.dart';
 import 'package:luveen/features/auth/screens/forgetpassword.dart';
 import 'package:luveen/features/auth/services/auth_service.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,8 @@ enum Auth {
   signin,
   signup,
 }
+
+enum Register { doctor, hospital }
 
 class AuthScreen extends StatefulWidget {
   static const String routeName = '/auth-screen';
@@ -46,13 +49,44 @@ class _AuthScreenState extends State<AuthScreen> {
   //   });
   // }
 
+  Register _register = Register.doctor;
+  final _registeDoctorFormKey = GlobalKey<FormState>();
+  final _registerHospitalFormKey = GlobalKey<FormState>();
+  // final AuthService authService = AuthService();
+  final TextEditingController _contactnoController = TextEditingController();
+  final TextEditingController _addressController = TextEditingController();
+  final TextEditingController _qualificationController =
+      TextEditingController();
+  final TextEditingController _specilizationController =
+      TextEditingController();
+  final TextEditingController _experienceController = TextEditingController();
+  final TextEditingController _nmc_noController = TextEditingController();
+
+  // final LocalStorage storage = new LocalStorage('localstorage_app');
+
+  // get store => null;
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   new Future.delayed(Duration(seconds: 1), () {
+  //     store.dispatch(loadUser(store: store, context: context));
+  //   });
+  // }
+
   @override
   void dispose() {
     super.dispose();
     _emailController.dispose();
     _passwordController.dispose();
     _nameController.dispose();
+    _addressController.dispose();
+    _qualificationController.dispose();
+    _specilizationController.dispose();
+    _experienceController.dispose();
+    _nmc_noController.dispose();
   }
+
+  
 
   void signUpUser() {
     authService.signUpUser(
@@ -133,6 +167,7 @@ class _AuthScreenState extends State<AuthScreen> {
                   },
                 ),
               ),
+              
               if (_auth == Auth.signup)
                 Container(
                   padding: const EdgeInsets.all(8),
@@ -163,11 +198,48 @@ class _AuthScreenState extends State<AuthScreen> {
                               signUpUser();
                             }
                           },
-                        )
+                        ),TextButton(
+                          style: TextButton.styleFrom(
+                            textStyle: const TextStyle(
+                              fontSize: 14,
+                              color: Colors.green,
+                              decoration: TextDecoration.underline,
+                            ),
+                          ),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Doctorregister()),
+                            );
+                          },
+                          child: const Text('Register as a Doctor'),
+                        ),
                       ],
                     ),
                   ),
                 ),
+              //   Container(
+              //   child: Center(
+              //     child: TextButton(
+              //        style: TextButton.styleFrom(
+              //         textStyle: const TextStyle(
+              //           fontSize: 14,
+              //           color: Colors.green,
+              //           decoration: TextDecoration.underline,
+              //         ),
+              //       ),
+              //       onPressed: () {
+              //         Navigator.push(
+              //           context,
+              //           MaterialPageRoute(
+              //               builder: (context) => Doctorregister()),
+              //         );
+              //       },
+              //       child: const Text('Register as Doctor?'),
+              //     ),
+              //   ),
+              // ),
               ListTile(
                 tileColor: _auth == Auth.signin
                     ? GlobalVariables.backgroundColor
@@ -189,6 +261,7 @@ class _AuthScreenState extends State<AuthScreen> {
                   },
                 ),
               ),
+              
               if (_auth == Auth.signin)
                 Container(
                   padding: const EdgeInsets.all(8),

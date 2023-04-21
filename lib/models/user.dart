@@ -8,11 +8,12 @@ class User {
   final String password;
   final String address;
   final String contactno;
-  final String type;
+  final String role;
   final String token;
   final List<dynamic> cart;
   final List<dynamic> prescription;
   final List<dynamic> profiles;
+  final List<dynamic> doctors;
 
 
   User({
@@ -21,12 +22,13 @@ class User {
     required this.email,
     required this.password,
     required this.address,
-    required this.type,
+    required this.role,
     required this.token,
     required this.cart,
     required this.contactno,
     required this.prescription,
-    required this.profiles
+    required this.profiles,
+    required this.doctors
 
   });
 
@@ -38,11 +40,12 @@ class User {
       'password': password,
       'address': address,
       'contactno': contactno,
-      'type': type,
+      'role': role,
       'token': token,
       'cart': cart,
       'prescription':prescription,
-            'profiles':profiles,
+      'profiles':profiles,
+      'doctors':doctors,
 
     };
   }
@@ -55,7 +58,7 @@ class User {
       password: map['password'] ?? '',
       address: map['address'] ?? '',
       contactno: map['contactno'] ?? '',
-      type: map['type'] ?? '',
+      role: map['role'] ?? '',
       token: map['token'] ?? '',
       cart: List<Map<String, dynamic>>.from(
         map['cart']?.map(
@@ -64,6 +67,11 @@ class User {
       ),
       prescription: List<Map<String, dynamic>>.from(
         map['prescription']?.map(
+          (x) => Map<String, dynamic>.from(x),
+        ),
+      ),
+      doctors: List<Map<String, dynamic>>.from(
+        map['doctors']?.map(
           (x) => Map<String, dynamic>.from(x),
         ),
       ),
@@ -86,11 +94,12 @@ class User {
     String? password,
     String? address,
     String? contactno,
-    String? type,
+    String? role,
     String? token,
     List<dynamic>? cart,
     List<dynamic>? prescription,
-    List<dynamic>? profiles
+    List<dynamic>? profiles,
+    List<dynamic>? doctors
 
   }) {
     return User(
@@ -100,11 +109,12 @@ class User {
       password: password ?? this.password,
       address: address ?? this.address,
       contactno: contactno ?? this.contactno,
-      type: type ?? this.type,
+      role: role ?? this.role,
       token: token ?? this.token,
       cart: cart ?? this.cart,
       prescription: prescription ?? this.prescription,
       profiles: profiles ?? this.profiles,
+      doctors: doctors ?? this.doctors,
 
     );
   }

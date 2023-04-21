@@ -6,6 +6,7 @@ import 'package:luveen/constants/global_variables.dart';
 import 'package:luveen/constants/utils.dart';
 import 'package:luveen/features/account/screens/EnterDetails.dart';
 import 'package:luveen/features/auth/screens/auth_screen.dart';
+import 'package:luveen/models/doctor.dart';
 import 'package:luveen/models/user.dart';
 import 'package:luveen/providers/user_provider.dart';
 import 'package:flutter/material.dart';
@@ -29,11 +30,12 @@ class AuthService {
         email: email,
         address: '',
         contactno: '',
-        type: '',
+        role: '',
         token: '',
         cart: [],
         prescription: [],
         profiles: [],
+        doctors: [],
       );
 
       http.Response res = await http.post(
@@ -63,33 +65,49 @@ class AuthService {
     }
   }
 
-
 // Register as a doctor
 
- void signUpDoctor({
+  void signUpDoctor({
     required BuildContext context,
     required String email,
     required String password,
     required String name,
+    required String qualification,
+    required String contactno,
+    required String address,
+    required String specialization,
+    required String experience,
+    required String nmc_no,
   }) async {
     try {
-      User user = User(
-        id: '',
-        name: name,
-        password: password,
-        email: email,
-        address: '',
-        contactno: '',
-        type: '',
-        token: '',
-        cart: [],
-        prescription: [],
-        profiles: [],
-      );
+      // User user = User(
+      //   id: '',
+      //   name: name,
+      //   password: password,
+      //   email: email,
+      //   address: '',
+      //   contactno: '',
+      //   role: '',
+      //   token: '',
+      //   cart: [],
+      //   prescription: [],
+      //   profiles: [],
+      //   doctors: [],
+      // );
+      Doctor doctor = Doctor(
+          contactno: contactno,
+          email: email,
+          experience: experience,
+          name: name,
+          address: address,
+          nmc_no: int.parse(nmc_no),
+          password: password,
+          qualification: qualification,
+          specialization: specialization);
 
       http.Response res = await http.post(
-        Uri.parse('$uri/api/signup'),
-        body: user.toJson(),
+        Uri.parse('$uri/doctor/register'),
+        body: doctor.toJson(),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
@@ -103,18 +121,16 @@ class AuthService {
             context,
             'Account created! Login with the same credentials!',
           );
-          // Navigator.push(
-          //   context,
-          //   MaterialPageRoute(builder: (context) => EnterDetails()),
-          // );
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => AuthScreen()),
+          );
         },
       );
     } catch (e) {
       showSnackBar(context, e.toString());
     }
   }
-
-
 
   // sign in user
   void signInUser({
@@ -155,13 +171,12 @@ class AuthService {
   }
 
 // ForgetPassword
-void updatepassword({
+  void updatepassword({
     required BuildContext context,
     // required VoidCallback onSuccess,
     required String email,
     required String newpassword,
     required String confirmpassword,
-   
   }) async {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
 
@@ -169,35 +184,30 @@ void updatepassword({
       // User user = User(
       //   // id: '',
       //   email: email,
-        
+
       //   // status: status,
       // );
 
-        // http.post(
-       http.Response res = await http.put(
-
-        Uri.parse('$uri/api/UpdatePassword'),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-          'x-auth-token': userProvider.user.token,
-        },
-        body: jsonEncode({
-           'email' : email,
-          'newpassword': newpassword,
-           'confirmpassword':confirmpassword
-          // ''
-          }
-         
-        )
-        // body: jsonEncode
-      );
+      // http.post(
+      http.Response res = await http.put(Uri.parse('$uri/api/UpdatePassword'),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            'x-auth-token': userProvider.user.token,
+          },
+          body: jsonEncode({
+            'email': email,
+            'newpassword': newpassword,
+            'confirmpassword': confirmpassword
+            // ''
+          })
+          // body: jsonEncode
+          );
 
       httpErrorHandle(
         response: res,
         context: context,
         onSuccess: () {
-
-         showSnackBar(context, 'Password Updated Successfully!');
+          showSnackBar(context, 'Password Updated Successfully!');
           Navigator.pop(context);
           Navigator.pushNamed(context, AuthScreen.routeName);
         },
@@ -206,13 +216,6 @@ void updatepassword({
       showSnackBar(context, e.toString());
     }
   }
-
-
-
-
-
-
-
 
   // get user data
   void getUserData(

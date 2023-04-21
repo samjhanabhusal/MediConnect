@@ -60,11 +60,13 @@ class AuthService {
         email: email,
         address: '',
         contactno: '',
-        type: '',
+        role: '',
         token: '',
         cart: [],
         prescription: [],
         profiles: [],
+            doctors:[],
+
       );
 
       http.Response res = await http.post(
