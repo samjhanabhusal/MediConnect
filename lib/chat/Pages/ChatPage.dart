@@ -5,9 +5,10 @@ import 'package:luveen/chat/CustomUi/CustomCard.dart';
 import 'package:luveen/models/ChatModel.dart';
 import 'package:luveen/chat/Screens/SelectContact.dart';
 import 'package:flutter/material.dart';
-import 'package:luveen/models/product.dart';
+import 'package:luveen/models/doctor.dart';
 import 'package:luveen/providers/user_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:luveen/chat/services/chatservices.dart';
 
 import '../../features/home/services/home_services.dart';
 import '../../models/user.dart';
@@ -24,22 +25,23 @@ class ChatPage extends StatefulWidget {
 }
 
 class _ChatPageState extends State<ChatPage> {
-    List<User>? users;
-    final HomeServices homeServices = HomeServices();
+    String? x;
+  List<Doctor>? doctors;
+  final ChatServices chatServices = ChatServices();
 
   @override
   void initState() {
     super.initState();
-    fetchAllProducts();
+        // _controller = TabController(length: 2, vsync: this, initialIndex: 1);
+
+    fetchAlldoctor();
   }
 
-  fetchAllProducts() async {
-    // users = await homeServices.fetchAllUsers(context);
-    users = await homeServices.fetchAllUsers(context);
-    
+  fetchAlldoctor() async {
+    doctors = await chatServices.fetchAlldoctor(context);
     setState(() {});
   }
-  @override
+ @override
   Widget build(BuildContext context) {
       final user = context.watch<UserProvider>().user;
 
@@ -62,7 +64,9 @@ class _ChatPageState extends State<ChatPage> {
         itemCount: widget.chatmodels.length,
         itemBuilder: (contex, index) => CustomCard(
 
-          chatModel: widget.chatmodels[index],
+          // chatModel: widget.chatmodels[index],
+          doctors: doctors![index],
+
           // sourchat: widget.user.id,
           // user: user.id;
           // sourchat: Provider.of<UserProvider>(context, listen: false).user.id),

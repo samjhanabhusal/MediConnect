@@ -123,7 +123,19 @@ class _MyAppState extends State<MyApp> {
 
 home: SplashScreen(
   seconds: 2,
- navigateAfterSeconds: () => getNextScreen(context),
+//  navigateAfterSeconds: () => getNextScreen(context),
+  // final user = context.watch<UserProvider>().user;
+
+// navigateAfterSeconds: Provider.of<UserProvider>(context).user.token.isNotEmpty
+//                         ? Provider.of<UserProvider>(context).user.role == 'user'
+//                             ? const BottomBar()
+//                             : const AdminScreen()
+//                         : const AuthScreen(),
+navigateAfterSeconds: Provider.of<UserProvider>(context).user.token.isNotEmpty
+                        ? Provider.of<UserProvider>(context).user.role == 'user'
+                            ? const BottomBar()
+                            : const AdminScreen()
+                        : const AuthScreen(),
 // ),
 
 

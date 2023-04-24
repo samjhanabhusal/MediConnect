@@ -6,15 +6,16 @@ import 'package:luveen/chat/Screens/IndividualPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:luveen/constants/global_variables.dart';
-import '../../models/user.dart';
+import '../../models/doctor.dart';
 import '../../providers/user_provider.dart';
 import 'package:provider/provider.dart';
 
 class CustomCard extends StatefulWidget {
   // const CustomCard({Key key, this.chatModel, this.sourchat}) : super(key: key);
   // const CustomCard({Key ?key, required this.chatModel, required this.sourchat}) : super(key: key);
-  const CustomCard({Key ?key, required this.chatModel}) : super(key: key);
-  final ChatModel chatModel;
+  const CustomCard({Key ?key,  required this.doctors}) : super(key: key);
+  // final ChatModel chatModel;
+  final Doctor doctors;
   // final ChatModel sourchat;
   // final User user;
 
@@ -26,6 +27,7 @@ class _CustomCardState extends State<CustomCard> {
   @override
   Widget build(BuildContext context) {
           final user = context.watch<UserProvider>().user;
+          final doctor = context.watch<UserProvider>().doctor;
 
     return InkWell(
       onTap: () {
@@ -33,7 +35,9 @@ class _CustomCardState extends State<CustomCard> {
             context,
             MaterialPageRoute(
                 builder: (contex) => IndividualPage(
-                      chatModel: widget.chatModel,
+                           doctor_id:doctor.id,
+                           doctor_name: doctor.name,
+                      // chatModel: widget.chatModel,
                       // sourchat: widget.user.id,
                       // user:sourceChat,
                     )));
@@ -44,7 +48,8 @@ class _CustomCardState extends State<CustomCard> {
             leading: CircleAvatar(
               radius: 30,
               child: SvgPicture.asset(
-                widget.chatModel.isGroup == true ? "assets/groups.svg" : "assets/person.svg",
+                // widget.chatModel.isGroup == true ? "assets/groups.svg" : "assets/person.svg",
+                 "assets/person.svg",
                 color: Colors.white,
                 height: 36,
                 width: 36,
@@ -52,7 +57,8 @@ class _CustomCardState extends State<CustomCard> {
               backgroundColor: Colors.blueGrey,
             ),
             title: Text(
-              widget.chatModel.name,
+              // widget.chatModel.name,
+              widget.doctors.name,
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
@@ -65,14 +71,16 @@ class _CustomCardState extends State<CustomCard> {
                   width: 3,
                 ),
                 Text(
-                  widget.chatModel.currentMessage,
+                  // widget.chatModel.currentMessage,
+                  widget.doctors.currentMessage,
                   style: TextStyle(
                     fontSize: 13,
                   ),
                 ),
               ],
             ),
-            trailing: Text(widget.chatModel.time),
+            // trailing: Text(widget.chatModel.time),
+            trailing: Text(widget.doctors.time),
           ),
           Padding(
             padding: const EdgeInsets.only(right: 20, left: 80),

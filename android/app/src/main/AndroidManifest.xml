@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.luveen">
+    package="com.example.amazon_clone_tutorial">
    <application
         
-        android:label="luveen"
+        android:label="amazon_clone_tutorial"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         android:usesCleartextTraffic="true">>

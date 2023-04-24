@@ -1,3 +1,4 @@
+import 'package:luveen/models/doctor.dart';
 import 'package:luveen/models/user.dart';
 import 'package:flutter/material.dart';
 
@@ -15,12 +16,16 @@ class UserProvider extends ChangeNotifier {
     prescription: [],
     profiles:[],
     doctors:[],
+    // doctor: Doctor(name: '', email: '', password: '', contactno: '', address: '', qualification: '', specialization: '', experience: '', nmc_no: 0) ,
   );
 
   User get user => _user;
 
+  get doctor => null;
+
   void setUser(String user) {
     _user = User.fromJson(user);
+    // _user = User.fromJson(user as Map<String, dynamic>);
     notifyListeners();
   }
 

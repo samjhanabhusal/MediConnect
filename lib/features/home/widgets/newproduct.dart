@@ -1,9 +1,3 @@
-// import 'package:amazon_clone_tutorial/common/widgets/loader.dart';
-// // import 'package:amazon_clone_tutorial/features/home/services/home_services.dart';
-// import 'package:amazon_clone_tutorial/features/home/services/homeservicessecond.dart';
-// import 'package:amazon_clone_tutorial/features/home/widgets/ProductDetails.dart';
-// // import 'package:amazon_clone_tutorial/features/product_details/screens/product_details_screen.dart';
-// import 'package:amazon_clone_tutorial/models/product.dart';
 // import 'package:flutter/material.dart';
 
 

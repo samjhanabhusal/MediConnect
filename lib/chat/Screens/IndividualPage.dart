@@ -1,24 +1,40 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 // import 'package:camera/camera.dart';
 // import 'package:chatapp/CustomUI/CameraUI.dart';
 // import 'package:chatapp/CustomUI/OwnMessgaeCrad.dart';
-import 'package:luveen/chat/CustomUi/OwnMessageCard.dart';
-import 'package:luveen/chat/CustomUi/ReplyCard.dart';
-import 'package:luveen/constants/global_variables.dart';
-import 'package:luveen/models/ChatModel.dart';
-import 'package:luveen/models/MessageModel.dart';
 // import 'package:emoji_picker/emoji_picker.dart';
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
+
+import 'package:luveen/chat/CustomUi/OwnMessageCard.dart';
+import 'package:luveen/chat/CustomUi/ReplyCard.dart';
+import 'package:luveen/chat/services/chatservices.dart';
+import 'package:luveen/constants/global_variables.dart';
+import 'package:luveen/models/ChatModel.dart';
+import 'package:luveen/models/Doctor.dart';
+import 'package:luveen/models/MessageModel.dart';
+import 'package:luveen/providers/user_provider.dart';
 
 import '../../models/user.dart';
 
 class IndividualPage extends StatefulWidget {
   // IndividualPage({Key key, this.chatModel, this.sourchat}) : super(key: key);
   // IndividualPage({Key ? key, required this.chatModel, required this.sourchat}) : super(key: key);
-  IndividualPage({Key ? key, required this.chatModel,}) : super(key: key);
-  final ChatModel chatModel;
+  // const IndividualPage({Key ? key, required this.chatModel,}) : super(key: key);
+  // final ChatModel chatModel;
+  static const String routeName = '/individualPage';
+  // final Doctor doctor;
+  final String doctor_id; final String doctor_name;
+  //  IndividualPage({Key ? key, required this.doctor, required doctor_id,}) : super(key: key);
+  
+  const IndividualPage({
+    Key? key,
+    required this.doctor_id,
+    required this.doctor_name,
+  }) : super(key: key);
   // final ChatModel sourchat;
   // final User user;
 
@@ -27,6 +43,7 @@ class IndividualPage extends StatefulWidget {
 }
 
 class _IndividualPageState extends State<IndividualPage> {
+  final ChatServices chatServices = ChatServices();
   bool show = false;
   FocusNode focusNode = FocusNode();
   bool sendButton = false;
@@ -83,9 +100,14 @@ class _IndividualPageState extends State<IndividualPage> {
     });
     print(socket.connected);
   }
-
+// void EntertoChat() {
+//     chatServices.EntertoChat(
+//       context: context,
+//       doctor:doctor,
+//     );
+//   }
   // void sendMessage(String message, int? sourceId, int? targetId) {
-  void sendMessage(String message, String ? sourceId, int? targetId) {
+  void sendMessage(String message, String ? sourceId, String? targetId) {
     setMessage("source", message);
     // socket.emit("message",
     socket?.emit("message",
@@ -106,6 +128,10 @@ class _IndividualPageState extends State<IndividualPage> {
 
   @override
   Widget build(BuildContext context) {
+          final user = context.watch<UserProvider>().user;
+           user.doctors
+                          .toList();
+
     return Stack(
       children: [
         Image.asset(
@@ -134,9 +160,10 @@ class _IndividualPageState extends State<IndividualPage> {
                     ),
                     CircleAvatar(
                       child: SvgPicture.asset(
-                        widget.chatModel.isGroup == true
-                            ? "assets/groups.svg"
-                            : "assets/person.svg",
+                        // widget.chatModel.isGroup == true
+                        //     ? "assets/groups.svg"
+                            // : 
+                            "assets/person.svg",
                         color: Colors.white,
                         height: 36,
                         width: 36,
@@ -156,7 +183,8 @@ class _IndividualPageState extends State<IndividualPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        widget.chatModel.name,
+                        // widget.doctor.name,
+                        widget.doctor_name,
                         style: TextStyle(
                           fontSize: 18.5,
                           fontWeight: FontWeight.bold,
@@ -357,7 +385,15 @@ class _IndividualPageState extends State<IndividualPage> {
                                             // widget.sourchat.id,
                                             // widget.user.id,
                                             sourceChat,
-                                            widget.chatModel.id);
+                                            // user.id,
+                                            // user.doctors.id,
+                                              // user.doctors[index].id;
+                                              // doctor.id!
+
+                                            // widget.chatModel.id
+                                            // widget.doctor.id
+                                            widget.doctor_id
+                                            );
                                         _controller.clear();
                                         setState(() {
                                           sendButton = false;

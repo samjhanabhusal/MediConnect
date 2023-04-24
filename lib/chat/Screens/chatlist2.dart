@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:luveen/chat/CustomUi/ButtonCard.dart';
 import 'package:luveen/chat/CustomUi/CustomCard.dart';
 import 'package:luveen/chat/Pages/CameraPage.dart';
-import 'package:luveen/chat/Pages/ChatPage.dart';
 import 'package:luveen/chat/Screens/IndividualPage.dart';
 import 'package:luveen/chat/services/chatservices.dart';
 import 'package:luveen/common/widgets/loader.dart';
@@ -15,7 +14,7 @@ import 'package:provider/provider.dart';
 class ChatList extends StatefulWidget {
   const ChatList({Key? key}) : super(key: key);
   
-  get chatmodels => null;
+  // get chatmodels => null;
 
   @override
   State<ChatList> createState() => _ChatListState();
@@ -44,7 +43,7 @@ with SingleTickerProviderStateMixin{
 
  late String sourceChat;
   late TabController _controller;
-late List<ChatModel> chatmodels; // Declare the list without initializing it
+// late List<ChatModel> chatmodels; // Declare the list without initializing it
 
   // @override
   // void initState() {
@@ -101,7 +100,8 @@ late List<ChatModel> chatmodels; // Declare the list without initializing it
           itemBuilder: (contex, index) => CustomCard(
               //  final doctordata = doctors![intex]
                 // chatModel: chatmodels[index],
-                chatModel: chatmodels[index],
+                // chatModel: chatmodels[index],
+                doctors: doctors![index],
                  
                
  
