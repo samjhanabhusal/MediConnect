@@ -27,14 +27,15 @@ class IndividualPage extends StatefulWidget {
   // final ChatModel chatModel;
   static const String routeName = '/individualPage';
   // final Doctor doctor;
-  final String doctor_id; final String doctor_name;
+  
   //  IndividualPage({Key ? key, required this.doctor, required doctor_id,}) : super(key: key);
   
   const IndividualPage({
     Key? key,
-    required this.doctor_id,
-    required this.doctor_name,
+    required this.doctors,
   }) : super(key: key);
+
+  final Doctor doctors;
   // final ChatModel sourchat;
   // final User user;
 
@@ -184,7 +185,7 @@ class _IndividualPageState extends State<IndividualPage> {
                     children: [
                       Text(
                         // widget.doctor.name,
-                        widget.doctor_name,
+                        widget.doctors.name,
                         style: TextStyle(
                           fontSize: 18.5,
                           fontWeight: FontWeight.bold,
@@ -392,7 +393,7 @@ class _IndividualPageState extends State<IndividualPage> {
 
                                             // widget.chatModel.id
                                             // widget.doctor.id
-                                            widget.doctor_id
+                                            widget.doctors.id
                                             );
                                         _controller.clear();
                                         setState(() {

@@ -6,7 +6,7 @@ import 'package:luveen/constants/global_variables.dart';
 import 'package:luveen/constants/utils.dart';
 import 'package:luveen/features/account/screens/EnterDetails.dart';
 import 'package:luveen/features/auth/screens/auth_screen.dart';
-import 'package:luveen/models/doctor.dart';
+import 'package:luveen/models/Doctor.dart';
 import 'package:luveen/models/user.dart';
 import 'package:luveen/providers/user_provider.dart';
 import 'package:flutter/material.dart';
@@ -95,6 +95,7 @@ class AuthService {
       //   doctors: [],
       // );
       Doctor doctor = Doctor(
+        id:'',
           contactno: contactno,
           email: email,
           experience: experience,

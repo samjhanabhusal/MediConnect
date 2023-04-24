@@ -5,7 +5,7 @@ import 'package:luveen/chat/CustomUi/CustomCard.dart';
 import 'package:luveen/models/ChatModel.dart';
 import 'package:luveen/chat/Screens/SelectContact.dart';
 import 'package:flutter/material.dart';
-import 'package:luveen/models/doctor.dart';
+import 'package:luveen/models/Doctor.dart';
 import 'package:luveen/providers/user_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:luveen/chat/services/chatservices.dart';

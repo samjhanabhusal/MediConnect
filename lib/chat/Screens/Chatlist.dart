@@ -3,6 +3,7 @@ import 'package:luveen/chat/CustomUi/ButtonCard.dart';
 import 'package:luveen/models/ChatModel.dart';
 import 'package:luveen/chat/Screens/Homescreen.dart';
 import 'package:flutter/material.dart';
+import 'package:luveen/models/Doctor.dart';
 import 'package:provider/provider.dart';
 import 'package:luveen/providers/user_provider.dart';
 
@@ -15,7 +16,8 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   // late ChatModel sourceChat;
-  late String sourceChat;
+  // instance of DoctorModel
+  late Doctor sourceChat;
   List<ChatModel> chatmodels = [
     ChatModel(
     

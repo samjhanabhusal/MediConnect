@@ -15,7 +15,7 @@ class Doctor {
   final String experience;
   // final int ?  nmc_no;
   final int ?  nmc_no;
-  final String? id;
+  final String id;
   // final String nmc;
   Doctor({
     required this.name,
@@ -27,7 +27,7 @@ class Doctor {
     required this.specialization,
     required this.experience,
     required this.nmc_no,
-     this.id,
+     required this.id,
     //  this.nmc,
   });
 
@@ -53,16 +53,16 @@ class Doctor {
 
   factory Doctor.fromMap(Map<String, dynamic> map) {
     return Doctor(
-      name: map['name'] as String,
-      email: map['email'] as String,
-      password: map['password'] as String,
-      contactno: map['contactno'] as String,
-      address: map['address'] as String,
-      qualification: map['qualification'] as String,
-      specialization: map['specialization'] as String,
-      experience: map['experience'] as String,
+      name: map['name'] ?? '',
+      email: map['email'] ?? '',
+      password: map['password'] ?? '',
+      contactno: map['contactno'] ?? '',
+      address: map['address'] ?? '',
+      qualification: map['qualification'] ?? '',
+      specialization: map['specialization'] ?? '',
+      experience: map['experience'] ?? '',
       nmc_no: map['nmc_no'] ?.toInt() ?? 0,
-      id: map['_id'],
+      id: map['_id'] ?? '',
     );
   }
 
@@ -71,6 +71,7 @@ class Doctor {
   factory Doctor.fromJson(String source) => Doctor.fromMap(json.decode(source) as Map<String, dynamic>);
 
   Doctor copyWith({
+    String?id,
     String? name,
     String? email,
     String? password,
@@ -81,6 +82,7 @@ class Doctor {
     int? nmc_no,
   }) {
     return Doctor(
+      id:id??this.id,
       name: name ?? this.name,
       email: email ?? this.email,
       password: password ?? this.password,

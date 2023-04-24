@@ -1,3 +1,6 @@
+import 'package:flutter/src/foundation/key.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter/material.dart';
 import 'package:luveen/chat/CustomUi/ButtonCard.dart';
 import 'package:luveen/chat/CustomUi/CustomCard.dart';
@@ -9,19 +12,15 @@ import 'package:luveen/models/ChatModel.dart';
 import 'package:luveen/models/Doctor.dart';
 import 'package:luveen/providers/user_provider.dart';
 import 'package:provider/provider.dart';
-
-
-class ChatList extends StatefulWidget {
-  const ChatList({Key? key}) : super(key: key);
-  
-  // get chatmodels => null;
+class ChatList2 extends StatefulWidget {
+  const ChatList2({Key? key}) : super(key: key);
 
   @override
-  State<ChatList> createState() => _ChatListState();
+  State<ChatList2> createState() => _ChatList2State();
 }
 
-class _ChatListState extends State<ChatList> 
-with SingleTickerProviderStateMixin{
+class _ChatList2State extends State<ChatList2> 
+ with SingleTickerProviderStateMixin{
   // object of doctormodel
   late Doctor targetchat;
   late final String targetid;
@@ -84,6 +83,8 @@ with SingleTickerProviderStateMixin{
   @override
   Widget build(BuildContext context) {
                     final doctorData = doctors;
+                              final doctor = context.watch<UserProvider>().doctor;
+
 
      return doctors == null ? const Loader():Scaffold(
       appBar: new AppBar(
@@ -100,26 +101,25 @@ with SingleTickerProviderStateMixin{
        body:ListView.builder(
         
           itemCount: doctors!.length,
-          itemBuilder: (contex, index) => CustomCard(
-              //  final doctordata = doctors![intex]
-                // chatModel: chatmodels[index],
-                // chatModel: chatmodels[index],
-                doctors: doctors![index],
-                 
-               
- 
-              ),
-              
-          ),
-        
-        //  children: 
-        //           [ButtonCard(
-        //             name: doctorData[index].name,
-        //             icon: Icons.person,
-        //           ),
-        //         ],     
-      
+          itemBuilder: (contex, index)  
+  => InkWell(
+      onTap: () {
+        // Navigator.pushReplacement(
+        Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (builder) => IndividualPage(
+                                // chatmodels: chatmodels,
+                                doctors: doctors![index],
+                                // sourchat: sourceChat,
+                                // sourchat:user.id,
+                              )));
+                },
+                child: ButtonCard(
+                  name: doctor.name,
+                  icon: Icons.person,
+                ),
+              )),
     );
-    
   }
 }

@@ -1,4 +1,4 @@
-import 'package:luveen/models/doctor.dart';
+import 'package:luveen/models/Doctor.dart';
 import 'package:luveen/models/user.dart';
 import 'package:flutter/material.dart';
 

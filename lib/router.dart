@@ -1,5 +1,6 @@
 // import 'dart:ffi';
 
+import 'package:luveen/chat/Screens/IndividualPage.dart';
 import 'package:luveen/common/widgets/bottom_bar.dart';
 import 'package:luveen/features/address/screens/address_screen.dart';
 import 'package:luveen/features/admin/screens/add_product_screen.dart';
@@ -13,6 +14,7 @@ import 'package:luveen/features/order_details/screens/order_details.dart';
 import 'package:luveen/features/product_details/screens/product_details_screen.dart';
 import 'package:luveen/features/search/screens/search_screen.dart';
 import 'package:luveen/models/Pres.dart';
+import 'package:luveen/models/Doctor.dart';
 import 'package:luveen/models/order.dart';
 import 'package:luveen/models/product.dart';
 import 'package:flutter/material.dart';
@@ -92,6 +94,14 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
           product: product,
         ),
       );
+    // case IndividualPage.routeName:
+    //   var doctors = routeSettings.arguments as Doctor;
+    //   return MaterialPageRoute(
+    //     settings: routeSettings,
+    //     builder: (_) => IndividualPage(
+    //       doctors: doctors,
+    //     ),
+    //   );
     case PrescriptionScreen.routeName:
       return MaterialPageRoute(
         settings: routeSettings,

@@ -7,7 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:luveen/constants/error_handling.dart';
 import 'package:luveen/constants/global_variables.dart';
 import 'package:luveen/constants/utils.dart';
-import 'package:luveen/models/doctor.dart';
+import 'package:luveen/models/Doctor.dart';
 import 'package:luveen/models/user.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
