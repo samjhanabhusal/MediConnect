@@ -3,7 +3,7 @@
 // // const doctorSchema = mongoose.Schema ({
 // //     name: {
 // //         required: true,
-// //         type: String,
+// //         type: String,s
 // //         trim: true,
 // //       },
 // //       email: {

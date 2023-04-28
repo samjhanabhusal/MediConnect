@@ -19,6 +19,7 @@ import 'package:luveen/models/order.dart';
 import 'package:luveen/models/product.dart';
 import 'package:flutter/material.dart';
 
+import 'features/doctor/Screens/screens.dart';
 import 'features/home/screens/prescriptionscreen.dart';
 import 'features/home/screens/productdetailscreen.dart';
 import 'features/home/widgets/pickImage.dart';
@@ -30,7 +31,11 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
         settings: routeSettings,
         builder: (_) => const AuthScreen(),
       );
-
+    case DoctorScreen.routeName:
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (_) => const DoctorScreen(),
+      );
     case Dashboard0.routeName:
       return MaterialPageRoute(
         settings: routeSettings,

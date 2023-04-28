@@ -106,35 +106,35 @@ doctorRouter.post("/api/check-npc", async (req, res) => {
   }
 });
 
-const axios = require('axios');
-const cheerio = require('cheerio');
+// const axios = require('axios');
+// const cheerio = require('cheerio');
 
-const checkNMC = async (name) => {
-  try {
-    const url = `https://www.nmc.org.np/deregistration`;
-    const response = await axios.get(url);
-    const html = response.data;
-    const $ = cheerio.load(html);
-    const json = $('script[type="application/json"]').html();
-    const data = JSON.parse(json);
-    const deregisteredDoctors = data.deregisteredDoctors;
-    for (let i = 0; i < deregisteredDoctors.length; i++) {
-      const doctor = deregisteredDoctors[i];
-      if (doctor.name === name) {
-        return doctor.nmc_no;
-      }
-    }
-    return 'Doctor not found';
-  } catch (error) {
-    console.error(error);
-    return 'Error occurred';
-  }
-};
+// const checkNMC = async (name) => {
+//   try {
+//     const url = `https://www.nmc.org.np/deregistration`;
+//     const response = await axios.get(url);
+//     const html = response.data;
+//     const $ = cheerio.load(html);
+//     const json = $('script[type="application/json"]').html();
+//     const data = JSON.parse(json);
+//     const deregisteredDoctors = data.deregisteredDoctors;
+//     for (let i = 0; i < deregisteredDoctors.length; i++) {
+//       const doctor = deregisteredDoctors[i];
+//       if (doctor.name === name) {
+//         return doctor.nmc_no;
+//       }
+//     }
+//     return 'Doctor not found';
+//   } catch (error) {
+//     console.error(error);
+//     return 'Error occurred';
+//   }
+// };
 
-// Usage
-checkNMC('Doctor Name')
-  .then(nmc_no => console.log(nmc_no))
-  .catch(error => console.log(error));
+// // Usage
+// checkNMC('Doctor Name')
+//   .then(nmc_no => console.log(nmc_no))
+//   .catch(error => console.log(error));
 
 module.exports = doctor;
 
@@ -146,21 +146,21 @@ module.exports = doctorRouter;
 
 
 
-// const user = await User.findOne({ email });
+// // const user = await User.findOne({ email });
 
-// if (!user) {
-//     return res.status(400).json({ msg: "User with this email does not exist!" });
-//   }
+// // if (!user) {
+// //     return res.status(400).json({ msg: "User with this email does not exist!" });
+// //   }
   
-//   if (user.type === 'doctor' && !user.npc_no) {
-//     return res.status(400).json({ msg: "Doctor credentials not found." });
-//   }
+// //   if (user.type === 'doctor' && !user.npc_no) {
+// //     return res.status(400).json({ msg: "Doctor credentials not found." });
+// //   }
   
-//   const isMatch = await bcryptjs.compare(password, user.password);
+// //   const isMatch = await bcryptjs.compare(password, user.password);
   
-//   if (!isMatch) {
-//     return res.status(400).json({ msg: "Incorrect password." });
-//   }
+// //   if (!isMatch) {
+// //     return res.status(400).json({ msg: "Incorrect password." });
+// //   }
 
 
   
