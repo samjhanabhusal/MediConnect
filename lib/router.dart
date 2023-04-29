@@ -1,7 +1,9 @@
 // import 'dart:ffi';
 
+import 'package:luveen/FindBeds/firstscreen.dart';
 import 'package:luveen/chat/Screens/IndividualPage.dart';
 import 'package:luveen/common/widgets/bottom_bar.dart';
+import 'package:luveen/features/Hospital/Admin/Screens/HospitalScreen.dart';
 import 'package:luveen/features/address/screens/address_screen.dart';
 import 'package:luveen/features/admin/screens/add_product_screen.dart';
 import 'package:luveen/features/auth/screens/auth_screen.dart';
@@ -36,6 +38,11 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
         settings: routeSettings,
         builder: (_) => const DoctorScreen(),
       );
+    case HospitalScreen.routeName:
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (_) => const HospitalScreen(),
+      );
     case Dashboard0.routeName:
       return MaterialPageRoute(
         settings: routeSettings,
@@ -51,6 +58,12 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
       return MaterialPageRoute(
         settings: routeSettings,
         builder: (_) => const BottomBar(),
+      );
+    case FirstScreen.routeName:
+      // var updatePage = routeSettings.arguments as int;
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (_) => const FirstScreen(),
       );
     //   case BottomBar.routeName:
     // var updatePage = routeSettings.arguments as Array;

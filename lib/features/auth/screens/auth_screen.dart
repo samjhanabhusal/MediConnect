@@ -4,6 +4,7 @@ import 'package:luveen/common/widgets/custom_button.dart';
 import 'package:luveen/common/widgets/custom_textfield.dart';
 import 'package:luveen/constants/global_variables.dart';
 import 'package:luveen/features/auth/screens/Doctorregister.dart';
+import 'package:luveen/features/auth/screens/Hospitalregister.dart';
 import 'package:luveen/features/auth/screens/forgetpassword.dart';
 import 'package:luveen/features/auth/services/auth_service.dart';
 import 'package:flutter/material.dart';
@@ -198,7 +199,26 @@ class _AuthScreenState extends State<AuthScreen> {
                               signUpUser();
                             }
                           },
-                        ),TextButton(
+                        ),Column(
+                          children: [
+                            TextButton(
+                              style: TextButton.styleFrom(
+                                textStyle: const TextStyle(
+                                  fontSize: 14,
+                                  color: Colors.green,
+                                  decoration: TextDecoration.underline,
+                                ),
+                              ),
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Doctorregister()),
+                                );
+                              },
+                              child: const Text('Register as a Doctor'),
+                            ),
+                            TextButton(
                           style: TextButton.styleFrom(
                             textStyle: const TextStyle(
                               fontSize: 14,
@@ -210,10 +230,12 @@ class _AuthScreenState extends State<AuthScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => Doctorregister()),
+                                  builder: (context) => HospitalRegister()),
                             );
                           },
-                          child: const Text('Register as a Doctor'),
+                          child: const Text('Register as a Hospital'),
+                        ),
+                          ],
                         ),
                       ],
                     ),

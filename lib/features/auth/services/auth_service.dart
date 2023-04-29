@@ -8,6 +8,7 @@ import 'package:luveen/features/account/screens/EnterDetails.dart';
 import 'package:luveen/features/auth/screens/auth_screen.dart';
 import 'package:luveen/models/Doctor.dart';
 import 'package:luveen/models/user.dart';
+import 'package:luveen/models/Hospital.dart';
 import 'package:luveen/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -109,6 +110,64 @@ class AuthService {
       http.Response res = await http.post(
         Uri.parse('$uri/doctor/register'),
         body: doctor.toJson(),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+      );
+
+      httpErrorHandle(
+        response: res,
+        context: context,
+        onSuccess: () {
+          showSnackBar(
+            context,
+            'Account created! Login with the same credentials!',
+          );
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => AuthScreen()),
+          );
+        },
+      );
+    } catch (e) {
+      showSnackBar(context, e.toString());
+    }
+  }
+
+
+  void signUpHospital({
+    required BuildContext context,
+    required String email,
+    required String password,
+    required String name,
+    
+  }) async {
+    try {
+      // User user = User(
+      //   id: '',
+      //   name: name,
+      //   password: password,
+      //   email: email,
+      //   address: '',
+      //   contactno: '',
+      //   role: '',
+      //   token: '',
+      //   cart: [],
+      //   prescription: [],
+      //   profiles: [],
+      //   doctors: [],
+      // );
+      Hospital hospital = Hospital(
+        id:'',
+        email: email,
+        name: name,
+        password: password,
+        bed:[]
+      );
+
+      http.Response res = await http.post(
+        Uri.parse('$uri/hospital/register'),
+        body: hospital.toJson(),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },

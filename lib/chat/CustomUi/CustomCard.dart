@@ -7,7 +7,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:luveen/constants/global_variables.dart';
 import '../../providers/user_provider.dart';
 import 'package:provider/provider.dart';
-import 'package:luveen/chat/Screens/IndividualPage.dart';
+import 'package:luveen/chat/Screens/IndividualPage2.dart';
 
 class CustomCard extends StatelessWidget {
   const CustomCard({Key? key, required this.doctors}) : super(key: key);

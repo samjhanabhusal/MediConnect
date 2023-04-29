@@ -10,11 +10,12 @@ const productRouter = require("./routes/product");
 const userRouter = require("./routes/user");
 const profileRouter = require("./routes/profile");
 const doctorRouter = require("./routes/doctor");
-// const doctorRoutes = require("./routes/doctor");
+const hospitalRoutes = require("./routes/hospital");
 const messageRoutes = require("./routes/messages");
 // INIT
 // INIT
 const dotenv = require("dotenv");
+const hospitalRouter = require("./routes/hospital");
 // const cors = require("cors");
 
 dotenv.config({
@@ -22,7 +23,8 @@ dotenv.config({
 })
 const PORT = process.env.PORT || 3000;
 const app = express();
-var server = http.createServer(app);
+// var server = http.createServer(app);
+const server = http.createServer(app);
 // importing socket.io--passing server
 var io = require("socket.io")(server);
 // const DB = "mongodb+srv://luveen:luveenpassword@cluster0.vop3wa1.mongodb.net/?retryWrites=true&w=majority";
@@ -39,6 +41,7 @@ app.use(productRouter);
 app.use(userRouter);
 app.use(profileRouter);
 app.use(doctorRouter);
+app.use(hospitalRouter);
 // app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
 
@@ -57,19 +60,19 @@ mongoose
 
   // ---listen on connection event
   io.on("connection", (socket) => {
-    console.log("connetetd");
+    console.log("connecetd");
     console.log(socket.id, "has joined");
-    socket.on("signin", (id) => {
-      console.log(id);
-      clients[id] = socket;
-      console.log(clients);
+    // socket.on("signin", (id) => {
+    //   console.log(id);
+    //   clients[id] = socket;
+    //   console.log(clients);
     });
-    socket.on("message", (msg) => {
-      console.log(msg);
-      let targetId = msg.targetId;
-      if (clients[targetId]) clients[targetId].emit("message", msg);
-    });
-  });
+    // socket.on("message", (msg) => {
+    //   console.log(msg);
+    //   let targetId = msg.targetId;
+    //   if (clients[targetId]) clients[targetId].emit("message", msg);
+    // });
+  // });
 app.listen(3000, "0.0.0.0", () => {
   console.log(`connected at port ${PORT}`);
 });

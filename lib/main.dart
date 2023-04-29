@@ -185,6 +185,10 @@
 
 
 
+import 'package:luveen/FindBeds/firstscreen.dart';
+import 'package:luveen/features/home/screens/homeScreen2.dart';
+
+import 'features/Hospital/Admin/Screens/HospitalScreen.dart';
 import 'features/doctor/Screens/screens.dart';
 
 import 'package:khalti_flutter/khalti_flutter.dart';
@@ -254,6 +258,7 @@ class _MyAppState extends State<MyApp> {
             ),
             onGenerateRoute: (settings) => generateRoute(settings),
             home: MySplashScreen(),
+            // home: BottomBar(),
     );
   }
     );
@@ -273,7 +278,7 @@ class MySplashScreen extends StatelessWidget {
         case 'doctor':
           return DoctorScreen();
         case 'hospital':
-             return AdminScreen();
+             return HospitalScreen();
         case 'admin':
           return AdminScreen();
       }
