@@ -42,7 +42,7 @@ const doctor = require("../middlewares/auth");
           nmc_no
         });
         doctor = await doctor.save();
-        // User.type = doctor;
+        // user.role = doctor;
         // await User.save();
         res.json(doctor);
         let user = new User({
@@ -105,7 +105,23 @@ doctorRouter.post("/api/check-npc", async (req, res) => {
     res.status(500).json({ error: e.message });
   }
 });
+// get doctor data
+doctorRouter.get("/doctor/findbyId", auth, async (req, res) => {
+  const doctor = await Doctor.findById(req.doctor);
+  if (doctor) {
+    res.json({ ...doctor._doc, token: req.token });
+  } else {
+    res.status(404).json({ message: "Doctor not found" });
+  }});
 
+  // This will give token 
+  doctorRouter.get("/doctor", auth, async (req, res) => {
+    const doctor = await Doctor.find(req.doctor);
+    if (doctor) {
+      res.json({ ...doctor._doc, token: req.token });
+    } else {
+      res.status(404).json({ message: "Doctor not found" });
+    }});
 // const axios = require('axios');
 // const cheerio = require('cheerio');
 
@@ -152,7 +168,7 @@ module.exports = doctorRouter;
 // //     return res.status(400).json({ msg: "User with this email does not exist!" });
 // //   }
   
-// //   if (user.type === 'doctor' && !user.npc_no) {
+// //   if (user.role === 'doctor' && !user.npc_no) {
 // //     return res.status(400).json({ msg: "Doctor credentials not found." });
 // //   }
   

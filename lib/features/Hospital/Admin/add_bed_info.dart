@@ -221,15 +221,15 @@ void AddBed() {
                 
                 const SizedBox(height: 10),
                 CustomTextField(
-                  controller: general_ward_totalController,
-                  hintText: 'Total no of General Ward',
+                  controller: ICU_totalController,
+                  hintText: 'Total no of ICU',
                 ),
                 
                 
                 const SizedBox(height: 10),
                 CustomTextField(
-                  controller: general_ward_totalController,
-                  hintText: 'Total no of General Ward',
+                  controller: ICU_availableController,
+                  hintText: 'Available no of ICU ',
                 ),
                 
                 

@@ -54,7 +54,7 @@ authRouter.post("/api/signin", async (req, res) => {
         .status(400)
         .json({ msg: "User with this email does not exist!" });
     }
-    // if (user.type === 'doctor' && !user.npc_no) {
+    // if (user.role === 'doctor' && !user.npc_no) {
     //   // return res.status(400).json({ msg: "Doctor credentials not found." });
     //   const doctorName = user.name;
     //   const url = 'https://www.nmc.org.np/deregistration';

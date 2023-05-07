@@ -106,7 +106,8 @@ class User {
     List<dynamic>? cart,
     List<dynamic>? prescription,
     List<dynamic>? profiles,
-    List<dynamic>? doctors
+    List<dynamic>? doctors,
+    
 
   }) {
     return User(

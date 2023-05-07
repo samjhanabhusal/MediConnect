@@ -1,36 +1,15 @@
-import 'package:flutter/material.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:flutter/material.dart';
+import 'package:luveen/models/bed.dart';
 class HospitalDetails extends StatefulWidget {
-  final hospital_name;
-  final hospital_picture;
-  final beds_available;
-  final hospital_location;
-  final location1;
-  final general_ward_total;
-  final    general_ward_available;
-    final  VIP_ward_total;
-     final VIP_ward_available;
-    final  ICU_total;
-    final  ICU_available;
-     final ventilators_total;
-     final ventilators_available;
-
+ final String hospital_name;
+ final Bed bed;
   HospitalDetails({
-    this.hospital_name,
-    this.hospital_picture,
-    this.beds_available,
-    this.hospital_location,
-    this.location1,
-     this.general_ward_total,
-  this.general_ward_available,
-   this.VIP_ward_total,
-    this.VIP_ward_available,
-   this.ICU_total,
-    this.ICU_available,
-    this.ventilators_total,
-   this.ventilators_available,
-  });
-  // const HospitalDetails({super.key});
+    Key? key,
+    required this.hospital_name,
+    required this.bed,
+  }) : super(key: key);
 
   @override
   State<HospitalDetails> createState() => _HospitalDetailsState();
@@ -76,7 +55,7 @@ class _HospitalDetailsState extends State<HospitalDetails> {
             child: GridTile(
               child: Container(
                 color: Colors.white,
-                child: Image.asset(widget.hospital_picture),
+                child: Image.asset(widget.bed.VIP_ward_total),
               ),
               
              
@@ -138,7 +117,8 @@ class _HospitalDetailsState extends State<HospitalDetails> {
                         Text(
                           // "9801357010",
                           // profileinfo![0].phoneno,
-                         widget.location1,
+                        //  widget.location1,
+                         widget.bed.location,
 
                           style: TextStyle(
                               fontWeight: FontWeight.w400,
@@ -184,7 +164,7 @@ class _HospitalDetailsState extends State<HospitalDetails> {
                         Text(
                           // "9801357010",
                           // profileinfo![0].phoneno,
-                          "${widget.general_ward_available}/${widget.general_ward_total}",
+                          "${widget.bed.general_ward_available}/${widget.bed.general_ward_total}",
 
                           style: TextStyle(
                               fontWeight: FontWeight.w400,
@@ -211,7 +191,7 @@ class _HospitalDetailsState extends State<HospitalDetails> {
                         Text(
                           // "9801357010",
                           // profileinfo![0].phoneno,
-                          "${widget.beds_available}/${widget.VIP_ward_total}",
+                          "${widget.bed.beds_available}/${widget.bed.VIP_ward_total}",
 
                           style: TextStyle(
                               fontWeight: FontWeight.w400,
@@ -238,7 +218,7 @@ class _HospitalDetailsState extends State<HospitalDetails> {
                         Text(
                           // "9801357010",
                           // profileinfo![0].phoneno,
-                          "${widget.ICU_available}/${widget.ICU_total}",
+                          "${widget.bed.ICU_available}/${widget.bed.ICU_total}",
 
                           style: TextStyle(
                               fontWeight: FontWeight.w400,
@@ -265,7 +245,7 @@ class _HospitalDetailsState extends State<HospitalDetails> {
                         Text(
                           // "9801357010",
                           // profileinfo![0].phoneno,
-                        "${widget.ventilators_available}/${widget.ventilators_total}",
+                        "${widget.bed.ventilators_available}/${widget.bed.ventilators_total}",
 
                           style: TextStyle(
                               fontWeight: FontWeight.w400,

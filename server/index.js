@@ -26,7 +26,10 @@ const app = express();
 // var server = http.createServer(app);
 const server = http.createServer(app);
 // importing socket.io--passing server
-var io = require("socket.io")(server);
+// var io = require("socket.io")(server);
+
+const{Server} = require("socket.io");
+const io = new Server(server);
 // const DB = "mongodb+srv://luveen:luveenpassword@cluster0.vop3wa1.mongodb.net/?retryWrites=true&w=majority";
 var username = encodeURIComponent("Samjhana");
 

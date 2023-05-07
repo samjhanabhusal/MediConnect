@@ -19,7 +19,7 @@
     "http": "^0.0.1-security",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.3.2",
-    "socket.io": "^4.6.1"
+    "socket.io": "^2.4.1"
   },
   "devDependencies": {
     "kill-port": "^2.0.1",

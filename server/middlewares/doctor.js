@@ -16,7 +16,7 @@ const doctor = async (req, res, next) => {
         .status(401)
         .json({ msg: "Token verification failed, authorization denied." });
     const user = await User.findById(verified.id);
-    if (user.type == "user" || user.type == "admin" || user.type == "hospital") {
+    if (user.role == "user" || user.role == "admin" || user.role == "hospital") {
       return res.status(401).json({ msg: "You are not an doctor!" });
     }
     req.user = verified.id;

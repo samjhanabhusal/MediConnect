@@ -8,6 +8,7 @@ import 'package:luveen/constants/global_variables.dart';
 import '../../providers/user_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:luveen/chat/Screens/IndividualPage2.dart';
+// import 'package:luveen/chat/Screens/IndividualPage.dart';
 
 class CustomCard extends StatelessWidget {
   const CustomCard({Key? key, required this.doctors}) : super(key: key);
@@ -33,7 +34,7 @@ class CustomCard extends StatelessWidget {
             leading: CircleAvatar(
               radius: 30,
               child: SvgPicture.asset(
-                "assets/person.svg",
+                "assets/images/person.svg",
                 color: Colors.white,
                 height: 36,
                 width: 36,

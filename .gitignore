@@ -1,5 +1,6 @@
 # Miscellaneous
 /server/node_modules
+/socket/node_modules
 /server/chat/nodesever/node_modules
 *.class
 *.log

@@ -6,6 +6,7 @@ import 'package:luveen/constants/global_variables.dart';
 import 'package:luveen/constants/utils.dart';
 import 'package:luveen/features/account/screens/EnterDetails.dart';
 import 'package:luveen/features/auth/screens/auth_screen.dart';
+import 'package:luveen/models/bed.dart';
 import 'package:luveen/models/Doctor.dart';
 import 'package:luveen/models/user.dart';
 import 'package:luveen/models/Hospital.dart';
@@ -162,7 +163,8 @@ class AuthService {
         email: email,
         name: name,
         password: password,
-        bed:[]
+        // bed:[],
+        
       );
 
       http.Response res = await http.post(

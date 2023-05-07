@@ -164,7 +164,7 @@ class _IndividualPageForDoctorState extends State<IndividualPageForDoctor> {
                         // widget.chatModel.isGroup == true
                         //     ? "assets/groups.svg"
                             // : 
-                            "assets/person.svg",
+                            "assets/images/person.svg",
                         color: Colors.white,
                         height: 36,
                         width: 36,

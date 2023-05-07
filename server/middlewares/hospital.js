@@ -16,7 +16,7 @@
 //         .status(401)
 //         .json({ msg: "Token verification failed, authorization denied." });
 //     const user = await User.findById(verified.id);
-//     if (user.type == "user" || user.type == "admin" || user.type == "doctor") {
+//     if (user.role == "user" || user.role == "admin" || user.role == "doctor") {
 //       return res.status(401).json({ msg: "You are not an Hospital Admin!" });
 //     }
 //     req.user = verified.id;
@@ -63,7 +63,7 @@ const hospital = async(req,res,next)=>{
             .json({ msg: "Token verification failed, authorization denied." });
         
         const user = await User.findById(verified.id);
-        if (user.role == "user" || user.role == "admin" || user.type == "doctor") {
+        if (user.role == "user" || user.role == "admin" || user.role== "doctor") {
             return res.status(401).json({ msg: "You are not an Hospital Admin!" });
         }  
         req.user = verified.id;

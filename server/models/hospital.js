@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const {bedSchema} = require("./bed");
+const {Bed, bedSchema} = require("./bed");
 
 
 const hospitalSchema = new mongoose.Schema({
@@ -25,9 +25,15 @@ const hospitalSchema = new mongoose.Schema({
     required: true
   },
 
-  beds: [
+  // location: {
+  //   type: String,
+  //   required: true,
+  // },
+  // bedd: [bedSchema],
+
+  bed: [
   {
-    beds: bedSchema,
+    bed: bedSchema,
    
   //   quantity: {
   //     type: Number,

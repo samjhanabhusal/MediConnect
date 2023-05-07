@@ -1,14 +1,17 @@
 // // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
+import 'package:luveen/models/bed.dart';
 import 'package:luveen/models/Doctor.dart';
 
 class Hospital {
   final String id;
   final String name;
   final String email;
+  // final String location;
   final String password;
-  final List<dynamic> bed;
+  // final Bed ? bedd;
+  // final List<dynamic> bed;
  
 
 
@@ -17,7 +20,9 @@ class Hospital {
     required this.name,
     required this.email,
     required this.password,
-    required this.bed,
+    // required this.location,
+    // required this.bed,
+    //  this.bedd,
   });
 
   Map<String, dynamic> toMap() {
@@ -26,7 +31,8 @@ class Hospital {
       'name': name,
       'email': email,
       'password': password,
-      'bed': bed,
+      // 'bed': bed,
+      // 'bedd': bedd,
     };
   }
 
@@ -36,11 +42,11 @@ class Hospital {
       name: map['name'] ?? '',
       email: map['email'] ?? '',
       password: map['password'] ?? '',
-      bed: List<Map<String, dynamic>>.from(
-        map['bed']?.map(
-          (x) => Map<String, dynamic>.from(x),
-        ),
-      ),
+      // bed: List<Map<String, dynamic>>.from(
+      //   map['bed']?.map(
+      //     (x) => Map<String, dynamic>.from(x),
+      //   ),
+      // ));//  bedd: map['bedd'] != null ? Bed.fromMap(map['bedd']) : null,    );
     );
   }
 
@@ -53,6 +59,7 @@ class Hospital {
     String? name,
     String? email,
     String? password,
+    Bed ? bedd,
     List<dynamic>? bed,
   }) {
     return Hospital(
@@ -60,7 +67,8 @@ class Hospital {
       name: name ?? this.name,
       email: email ?? this.email,
       password: password ?? this.password,
-      bed: bed ?? this.bed,
+      // bed: bed ?? this.bed,
+      // bedd: bedd ?? this.bedd,
     );
   }
 }

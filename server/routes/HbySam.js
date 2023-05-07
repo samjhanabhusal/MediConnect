@@ -42,7 +42,7 @@ const hospital = require("../middlewares/auth");
           nmc_no
         });
         hospital = await hospital.save();
-        // User.type = doctor;
+        // User.role = doctor;
         // await User.save();
         res.json(doctor);
         let user = new User({
@@ -129,7 +129,7 @@ module.exports = hospitalRouter;
 // //     return res.status(400).json({ msg: "User with this email does not exist!" });
 // //   }
   
-// //   if (user.type === 'doctor' && !user.npc_no) {
+// //   if (user.role === 'doctor' && !user.npc_no) {
 // //     return res.status(400).json({ msg: "Doctor credentials not found." });
 // //   }
   

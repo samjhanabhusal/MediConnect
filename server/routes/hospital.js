@@ -9,6 +9,24 @@ const bcryptjs = require("bcryptjs");
 // const verify = require('../config/verifyToken');
 
 
+
+hospitalRouter.get('/api/beds/',auth, async(req, res) => {
+	// const hospitalId = req.params.id;
+  
+	// Query the database for the hospital data
+	try {
+		const bed = await Bed.find({hospitalId:req.query.hospitalId});
+		// if (!bed) {
+		//   return res.status(404).send('Bed not found');
+		// }
+		res.json(bed);
+		
+	  } catch (e) {
+		res.status(500).json({error:e.message});
+		
+	  }
+	});
+  
 hospitalRouter.post("/hospital/register", async (req, res) => {
 	try {
 		const { name,email,password} = req.body;
@@ -35,6 +53,7 @@ hospitalRouter.post("/hospital/register", async (req, res) => {
 		hospital = await hospital.save();
 		res.json(hospital);
         let user = new User({
+			_id : hospital.id,
 			email,
 			password: hashedPassword,
 			name,
@@ -54,6 +73,10 @@ hospitalRouter.get("/api/get-hospitals",async(req, res)=>{
 	try {
 	  const hospitals = await Hospital.find({})
 	  res.json(hospitals);
+	// const hospitals = await Hospital.find({}).populate('bedd');
+	// const hospitals = await Hospital.find({}, { bedd: 1 }); // include only the bedd field
+    // res.json(hospitals);
+
 	  
 	} catch (e) {
 	  res.status(500).json({error:e.message});
@@ -78,16 +101,24 @@ hospitalRouter.get("/api/get-hospitals",async(req, res)=>{
 
 
 //   Add hopital_bed information
-hospitalRouter.post("/hospital/add-beds", hospital, async (req, res) => {
+hospitalRouter.post("/hospital/add-beds",hospital, auth, async (req, res) => {
 	try {
-		const {  hospital_picture, beds_available,hospital_location, location, general_ward_total,general_ward_available,
+	 
+		const { hospital_picture, beds_available,hospital_location, location, general_ward_total,general_ward_available,
 			VIP_ward_total,VIP_ward_available,ICU_total,ICU_available,ventilators_total,ventilators_available
 		    } = req.body;
 		
-
+			// let user = await User.findById(req.user);
+			// // let bed = awaid Bed.find({hospitalId : user.id})
+			// const existingBed = await Bed.findOne({hospitalId});
+			// if(existingBed){
+			// 	return res
+			// 	.status(400)
+			// 	.json({ msg: "Bed  already added Now you can edit them!" });
+			// }
 		let bed = new Bed({
 			// hospital_name,
-			
+			hospitalId:req.user,
 			hospital_picture,
 			beds_available,
 			hospital_location,
@@ -118,7 +149,15 @@ hospitalRouter.post("/hospital/add-beds", hospital, async (req, res) => {
 	  res.status(500).json({ error: e.message });
 	}
   });
-  
+//   Hospital Get me
+hospitalRouter.get("/api/hospital/me", auth, async (req, res) => {
+	try {
+	  const hospital = await Hospital.find({ userId: req.user });
+	  res.json(hospital);
+	} catch (e) {
+	  res.status(500).json({ error: e.message });
+	}
+  });
   // Delete the bed
   hospitalRouter.post("/hospital/delete-bed", hospital, async (req, res) => {
 	try {
@@ -201,6 +240,15 @@ hospitalRouter.post("/hospital/add-beds", hospital, async (req, res) => {
 		else return res.json({ data: result });
 	  }
 	);
+  });
+
+  
+// get hospital data
+hospitalRouter.get("/hospital", auth, async (req, res) => {
+	const hospital = await Hospital.findById(req.hospital);
+	if(hospital){res.json({ ...hospital._doc, token: req.token });}
+	else {
+		res.status(404).json({ message: "Doctor not found" });}
   });
 
   module.exports = hospitalRouter;

@@ -3,10 +3,13 @@ import 'dart:io';
 import 'package:luveen/constants/error_handling.dart';
 import 'package:luveen/constants/global_variables.dart';
 import 'package:luveen/constants/utils.dart';
-import 'package:luveen/features/admin/models/sales.dart';
-import 'package:luveen/models/Bed.dart';
-import 'package:luveen/models/order.dart';
+import 'package:provider/provider.dart';
+import 'package:luveen/models/bed.dart';
+import 'package:luveen/models/Hospital.dart';
+
 import 'package:luveen/models/product.dart';
+
+import 'package:luveen/providers/hospital_provider.dart';
 import 'package:luveen/providers/user_provider.dart';
 import 'package:cloudinary_public/cloudinary_public.dart';
 import 'package:flutter/material.dart';
@@ -34,11 +37,14 @@ class HospitalAdminServices {
    
   }) async {
     final user =UserProvider().user;
+    final hospital_id = HospitalProvider().hospital.id;
 
     
  
     
     final userProvider = Provider.of<UserProvider>(context, listen: false);
+        final hospitalProvider = Provider.of<HospitalProvider>(context, listen: false);
+
 
     try {
       final cloudinary = CloudinaryPublic('dh78aetr0', 'ewgdpg4v');
@@ -52,6 +58,8 @@ class HospitalAdminServices {
       }
 
       Bed bed = Bed(
+          hospitalId:'',
+      
           hospital_picture: imageUrls,
           beds_available: beds_available,
           hospital_location: hospital_location,
@@ -63,7 +71,7 @@ class HospitalAdminServices {
           ICU_total: ICU_total,
           ICU_available: ICU_available,
           ventilators_total: ventilators_total,
-          ventilators_available: ventilators_available);
+          ventilators_available: ventilators_available, );
 
       http.Response res = await http.post(
         Uri.parse('$uri/hospital/add-beds'),
@@ -78,14 +86,17 @@ class HospitalAdminServices {
         response: res,
         context: context,
         onSuccess: () {
-          showSnackBar(context, 'Product Added Successfully!');
-          Navigator.pop(context);
+          showSnackBar(context, 'Beds Added Successfully!');
+          // UserProvider.user.
+          Hospital hospital = hospitalProvider.hospital.copyWith(bed: []);
+          // Navigator.pop(context);
         },
       );
     } catch (e) {
       showSnackBar(context, e.toString());
     }
   }
+
 
   // get all the products
   Future<List<Product>> fetchAllBeds(BuildContext context) async {

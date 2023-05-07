@@ -4,7 +4,7 @@ import 'package:luveen/models/Doctor.dart';
 import 'package:flutter/material.dart';
 
 // class DoctorProvider extends ChangeNotifier {
-class UserProvider extends ChangeNotifier {
+class DoctorProvider extends ChangeNotifier {
   Doctor _doctor = Doctor(
     id: '',
     name: '',
