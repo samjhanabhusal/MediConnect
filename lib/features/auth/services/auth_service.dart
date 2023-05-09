@@ -103,7 +103,8 @@ class AuthService {
           experience: experience,
           name: name,
           address: address,
-          nmc_no: int.parse(nmc_no),
+          // nmc_no: int.parse(nmc_no),
+          nmc_no : nmc_no,
           password: password,
           qualification: qualification,
           specialization: specialization);

@@ -115,7 +115,7 @@ class _DoctorregisterState extends State<Doctorregister> {
                     child: SizedBox(
                       child: TextField(
                         controller: _emailController,
-                        obscureText: true,
+                        obscureText: false,
                         decoration: InputDecoration(
                           labelText: "Enter your Email",
                           border: OutlineInputBorder(),
@@ -129,7 +129,7 @@ class _DoctorregisterState extends State<Doctorregister> {
                     child: SizedBox(
                       child: TextField(
                         controller: _passwordController,
-                        obscureText: true,
+                        obscureText: false,
                         decoration: InputDecoration(
                           labelText: "Enter your Password",
                           border: OutlineInputBorder(),
@@ -143,7 +143,7 @@ class _DoctorregisterState extends State<Doctorregister> {
                     child: SizedBox(
                       child: TextField(
                         controller: _contactnoController,
-                        obscureText: true,
+                        obscureText: false,
                         decoration: InputDecoration(
                           labelText: "Enter your Contact No.",
                           border: OutlineInputBorder(),
@@ -157,7 +157,7 @@ class _DoctorregisterState extends State<Doctorregister> {
                     child: SizedBox(
                       child: TextField(
                         controller: _addressController,
-                        obscureText: true,
+                        obscureText: false,
                         decoration: InputDecoration(
                           labelText: "Enter your Address",
                           border: OutlineInputBorder(),
@@ -171,7 +171,7 @@ class _DoctorregisterState extends State<Doctorregister> {
                     child: SizedBox(
                       child: TextField(
                         controller: _qualificationController,
-                        obscureText: true,
+                        obscureText: false,
                         decoration: InputDecoration(
                           labelText: "Enter your Qualification",
                           border: OutlineInputBorder(),
@@ -185,7 +185,7 @@ class _DoctorregisterState extends State<Doctorregister> {
                     child: SizedBox(
                       child: TextField(
                         controller: _specilizationController,
-                        obscureText: true,
+                        obscureText: false,
                         decoration: InputDecoration(
                           labelText: "Enter your Specialized field",
                           border: OutlineInputBorder(),
@@ -213,7 +213,7 @@ class _DoctorregisterState extends State<Doctorregister> {
                     child: SizedBox(
                       child: TextField(
                         controller: _nmc_noController,
-                        obscureText: true,
+                        obscureText: false,
                         decoration: InputDecoration(
                           labelText: "Enter your NMC No.",
                           border: OutlineInputBorder(),

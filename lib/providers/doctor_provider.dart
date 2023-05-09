@@ -12,7 +12,10 @@ class DoctorProvider extends ChangeNotifier {
     password: '',
     address: '',
     contactno: '',
-    qualification: '', experience: '', nmc_no: 0, specialization: '',
+    qualification: '', experience: '', 
+    // nmc_no: 0, 
+    nmc_no: '',
+    specialization: '',
     
   );
 

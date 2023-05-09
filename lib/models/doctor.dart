@@ -14,7 +14,7 @@ class Doctor {
   final String specialization;
   final String experience;
   // final int ?  nmc_no;
-  final int ?  nmc_no;
+  final String ?  nmc_no;
   final String id;
   // final String nmc;
   Doctor({
@@ -79,7 +79,7 @@ class Doctor {
     String? qualification,
     String? specialization,
     String? experience,
-    int? nmc_no,
+    String? nmc_no,
   }) {
     return Doctor(
       id:id??this.id,
@@ -90,7 +90,9 @@ class Doctor {
       qualification: qualification ?? this.qualification,
       specialization: specialization ?? this.specialization,
       experience: experience ?? this.experience,
-      nmc_no: nmc_no ?? this.nmc_no, address: '',
+      // experience: experience ?? this.experience,
+      nmc_no: nmc_no ?? this.nmc_no, 
+      address: '',
     );
   }
 }

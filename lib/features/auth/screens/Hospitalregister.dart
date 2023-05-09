@@ -100,7 +100,7 @@ class _HospitalRegisterState extends State<HospitalRegister> {
                     child: SizedBox(
                       child: TextField(
                         controller: _emailController,
-                        obscureText: true,
+                        obscureText: false,
                         decoration: InputDecoration(
                           labelText: "Enter your Email",
                           border: OutlineInputBorder(),
