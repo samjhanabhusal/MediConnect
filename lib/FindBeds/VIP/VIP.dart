@@ -22,7 +22,7 @@ class _VIPState extends State<VIP> {
             // pinned: true,
             // snap: false,
             // centerTitle: false,
-            automaticallyImplyLeading: false,
+            automaticallyImplyLeading: true,
           
            
            

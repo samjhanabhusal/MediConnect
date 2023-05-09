@@ -275,7 +275,7 @@ class HomeServices {
     return prescriptionList;
   }
 // fetch all user
-  // get all the products
+ 
   Future<List<User>> fetchAllUsers(BuildContext context) async {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
     List<User> userList = [];

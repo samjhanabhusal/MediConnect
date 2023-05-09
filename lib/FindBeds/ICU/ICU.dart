@@ -21,7 +21,7 @@ class _ICUState extends State<ICU> {
             // pinned: true,
             // snap: false,
             // centerTitle: false,
-            automaticallyImplyLeading: false,
+            automaticallyImplyLeading: true,
           
            
            

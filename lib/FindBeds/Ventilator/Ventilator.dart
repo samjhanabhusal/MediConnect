@@ -21,7 +21,7 @@ class _VentilatorState extends State<Ventilator> {
             // pinned: true,
             // snap: false,
             // centerTitle: false,
-            automaticallyImplyLeading: false,
+            automaticallyImplyLeading: true,
           
            
            

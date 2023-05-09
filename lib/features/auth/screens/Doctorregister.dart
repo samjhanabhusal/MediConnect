@@ -4,6 +4,7 @@ import 'package:luveen/common/widgets/custom_button.dart';
 import 'package:luveen/common/widgets/custom_textfield.dart';
 import 'package:luveen/features/auth/screens/auth_screen.dart';
 import 'package:luveen/features/auth/services/auth_service.dart';
+// import 'package:luveen/Doctorchat/screens/doctorhome.dart';
 
 class Doctorregister extends StatefulWidget {
   const Doctorregister({Key? key}) : super(key: key);
@@ -259,7 +260,7 @@ class _DoctorregisterState extends State<Doctorregister> {
 
                         // Navigator.push(
                         //   context,
-                        //   MaterialPageRoute(builder: (context) => AuthScreen()),
+                        //   MaterialPageRoute(builder: (context) => docotrhome()),
                         // );
                       })
                 ],

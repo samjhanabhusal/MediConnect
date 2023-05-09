@@ -665,7 +665,7 @@ class _IndividualPageState extends State<IndividualPage> {
 
   void connect() {
     // MessageModel messageModel = MessageModel(sourceId: widget.sourceChat.id.toString(),targetId: );
-    socket = IO.io('$uri', <String, dynamic>{
+    socket = IO.io('http://192.168.32.74:5000', <String, dynamic>{
       "setTransports": ["websocket"],
       "autoConnect": false,
     });

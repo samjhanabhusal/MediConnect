@@ -10,23 +10,60 @@ const bcryptjs = require("bcryptjs");
 
 
 
-hospitalRouter.get('/api/beds/',auth, async(req, res) => {
-	// const hospitalId = req.params.id;
+const axios = require('axios');
+const cheerio = require('cheerio');
+
+// async function getHospitals() {
+//   try {
+//     const response = await axios.get('https://nepal.gov.np:8443/NationalPortal/view-page?id=31');
+//     const $ = cheerio.load(response.data);
+//     const hospitals = [];
+
+//     $('.sub_list > ul > li').each((i, element) => {
+//       const hospital = $(element).text().trim();
+//       hospitals.push(hospital);
+//     });
+
+//     return hospitals;
+//   } catch (error) {
+//     console.error(error);
+//   }
+// }
+
+// getHospitals().then((hospitals) => {
+//   console.log(hospitals);
+// });
+
+async function getHospitals(){
+	const url = 'https://nepalipedia.com/hospitals/list-of-hospitals-in-kathmandu-nepal/';
+	const response = await axios.get(url);
+	const $ = cheerio.load(response.data);
+	const hospitals = [];
   
-	// Query the database for the hospital data
-	try {
-		const bed = await Bed.find({hospitalId:req.query.hospitalId});
-		// if (!bed) {
-		//   return res.status(404).send('Bed not found');
-		// }
-		res.json(bed);
-		
-	  } catch (e) {
-		res.status(500).json({error:e.message});
-		
+	$('table tr').each((i, row) => {
+	  const hospital = {};
+	  $(row).find('td').each((j, cell) => {
+		switch(j) {
+		  case 0:
+			hospital.name = $(cell).text().trim();
+			break;
+		  case 1:
+			hospital.address = $(cell).text().trim();
+			break;
+		  case 2:
+			hospital.contact = $(cell).text().trim();
+			break;
+		}
+	  });
+	  if (Object.keys(hospital).length !== 0) {
+		hospitals.push(hospital);
 	  }
 	});
   
+	return hospitals;
+  }
+  
+
 hospitalRouter.post("/hospital/register", async (req, res) => {
 	try {
 		const { name,email,password} = req.body;
@@ -41,6 +78,15 @@ hospitalRouter.post("/hospital/register", async (req, res) => {
             .status(400)
             .json({ msg: "User with same email already exists!" });
         }
+ // Check if the hospital name provided by the user matches any of the scraped hospital names
+ const hospitals = await getHospitals();
+ console.log(hospitals);
+ console.log(hospitals.length);
+ const hospitalExists = hospitals.some((hospital) => name.toLowerCase() === hospital.name.toLowerCase());
+ if (!hospitalExists) {
+   return res.status(400).json({ msg: 'Hospital not found' });
+ }
+
 		const hashedPassword = await bcryptjs.hash(password, 8);
 		let hospital = new Hospital({
 			// hospital_name,
@@ -84,6 +130,24 @@ hospitalRouter.get("/api/get-hospitals",async(req, res)=>{
 	}
   });
 
+
+  hospitalRouter.get('/api/beds/',auth, async(req, res) => {
+	// const hospitalId = req.params.id;
+  
+	// Query the database for the hospital data
+	try {
+		const bed = await Bed.find({hospitalId:req.query.hospitalId});
+		// if (!bed) {
+		//   return res.status(404).send('Bed not found');
+		// }
+		res.json(bed);
+		
+	  } catch (e) {
+		res.status(500).json({error:e.message});
+		
+	  }
+	});
+  
  //find a specific hospital by id
   hospitalRouter.get("/api/hospitals/:id",async(req, res)=>{
 	try {

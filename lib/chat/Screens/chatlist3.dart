@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:luveen/chat/CustomUi/ButtonCard.dart';
 import 'package:luveen/chat/CustomUi/CustomCard.dart';
 import 'package:luveen/chat/Pages/CameraPage.dart';
-import 'package:luveen/chat/Screens/IndividualPage2.dart';
+import 'package:luveen/chat/Screens/IndividualPage.dart';
 // import 'package:luveen/chat/Screens/IndividualPage.dart';
 import 'package:luveen/chat/services/chatservices.dart';
 import 'package:luveen/common/widgets/loader.dart';

@@ -8,13 +8,14 @@ import 'package:luveen/constants/global_variables.dart';
 import 'package:luveen/models/user.dart';
 import '../../providers/user_provider.dart';
 import 'package:provider/provider.dart';
-import 'package:luveen/chat/Screens/IndividualPage.dart';
+import 'package:luveen/chat/Screens/IndividualPage2.dart';
 // import 'package:luveen/chat/Screens/IndividualPage.dart';
 
 class CustomCard extends StatelessWidget {
-  const CustomCard({Key? key, required this.doctors, }) : super(key: key);
+  const CustomCard({Key? key, required this.users}) : super(key: key);
 
-  final Doctor doctors;
+  // final Doctor doctors;
+  final User users;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +25,7 @@ class CustomCard extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) => IndividualPage(
-              doctors: doctors,
+              users: users,
             ),
           ),
         );
@@ -43,7 +44,7 @@ class CustomCard extends StatelessWidget {
               backgroundColor: Colors.blueGrey,
             ),
             title: Text(
-              doctors.name,
+              users.name,
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
@@ -56,14 +57,14 @@ class CustomCard extends StatelessWidget {
                   width: 3,
                 ),
                 Text(
-                  doctors.currentMessage,
+                  users.currentMessage,
                   style: TextStyle(
                     fontSize: 13,
                   ),
                 ),
               ],
             ),
-            trailing: Text(doctors.time),
+            trailing: Text(users.time),
           ),
           Padding(
             padding: const EdgeInsets.only(right: 20, left: 80),

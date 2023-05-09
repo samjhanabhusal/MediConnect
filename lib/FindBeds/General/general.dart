@@ -16,6 +16,12 @@ class _GeneralState extends State<General> {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
+            // leading:IconButton(
+            //   icon: Icon(Icons.arrow_back),
+            //   onPressed: () {
+            //     Navigator.pop(context);
+            //   },
+            // ),
             expandedHeight: 70,
             elevation: 11,
             
@@ -23,7 +29,7 @@ class _GeneralState extends State<General> {
             // pinned: true,
             // snap: false,
             // centerTitle: false,
-            automaticallyImplyLeading: false,
+            automaticallyImplyLeading: true,
           
            
            

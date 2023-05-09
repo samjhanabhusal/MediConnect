@@ -36,6 +36,9 @@ class User {
 
   });
 
+  String get currentMessage => '';
+
+  String get time => '';
   Map<String, dynamic> toMap() {
     return {
       'id': id,
