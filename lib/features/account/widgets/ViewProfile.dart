@@ -67,7 +67,7 @@ class _ViewProfileState extends State<ViewProfile> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  FlatButton.icon(
+                  TextButton.icon(
                       onPressed: () {
                         Navigator.push(
                           context,

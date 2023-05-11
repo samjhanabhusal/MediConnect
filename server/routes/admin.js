@@ -4,6 +4,7 @@ const admin = require("../middlewares/admin");
 const { Product } = require("../models/product");
 const Order = require("../models/order");
 const { PromiseProvider } = require("mongoose");
+const User = require("../models/user");
 
 // Add product
 adminRouter.post("/admin/add-product", admin, async (req, res) => {
@@ -19,6 +20,16 @@ adminRouter.post("/admin/add-product", admin, async (req, res) => {
     });
     product = await product.save();
     res.json(product);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+// Get all your users
+adminRouter.get("/admin/get-users", async (req, res) => {
+  try {
+    const users = await User.find({});
+    res.json(users);
   } catch (e) {
     res.status(500).json({ error: e.message });
   }

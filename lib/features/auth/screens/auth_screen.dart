@@ -1,15 +1,27 @@
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:localstorage/localstorage.dart';
 import 'package:luveen/common/widgets/custom_button.dart';
 import 'package:luveen/common/widgets/custom_textfield.dart';
 import 'package:luveen/constants/global_variables.dart';
+import 'package:luveen/features/auth/screens/Doctorregister.dart';
+import 'package:luveen/features/auth/screens/Hospitalregister.dart';
 import 'package:luveen/features/auth/screens/forgetpassword.dart';
 import 'package:luveen/features/auth/services/auth_service.dart';
+import 'package:luveen/features/Hospital/Admin/Screens/LandingPage.dart';
 import 'package:flutter/material.dart';
+// import 'package:luveen/store/actions/authActions.dart';
+import 'package:redux/redux.dart';
+// import 'package:redux/redux.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+
+// import '../../../store/reducer.dart';
 
 enum Auth {
   signin,
   signup,
 }
+
+enum Register { doctor, hospital }
 
 class AuthScreen extends StatefulWidget {
   static const String routeName = '/auth-screen';
@@ -28,13 +40,55 @@ class _AuthScreenState extends State<AuthScreen> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
 
+  // final LocalStorage storage = new LocalStorage('localstorage_app');
+
+  // get store => null;
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   new Future.delayed(Duration(seconds: 1), () {
+  //     store.dispatch(loadUser(store: store, context: context));
+  //   });
+  // }
+
+  Register _register = Register.doctor;
+  final _registeDoctorFormKey = GlobalKey<FormState>();
+  final _registerHospitalFormKey = GlobalKey<FormState>();
+  // final AuthService authService = AuthService();
+  final TextEditingController _contactnoController = TextEditingController();
+  final TextEditingController _addressController = TextEditingController();
+  final TextEditingController _qualificationController =
+      TextEditingController();
+  final TextEditingController _specilizationController =
+      TextEditingController();
+  final TextEditingController _experienceController = TextEditingController();
+  final TextEditingController _nmc_noController = TextEditingController();
+
+  // final LocalStorage storage = new LocalStorage('localstorage_app');
+
+  // get store => null;
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   new Future.delayed(Duration(seconds: 1), () {
+  //     store.dispatch(loadUser(store: store, context: context));
+  //   });
+  // }
+
   @override
   void dispose() {
     super.dispose();
     _emailController.dispose();
     _passwordController.dispose();
     _nameController.dispose();
+    _addressController.dispose();
+    _qualificationController.dispose();
+    _specilizationController.dispose();
+    _experienceController.dispose();
+    _nmc_noController.dispose();
   }
+
+  
 
   void signUpUser() {
     authService.signUpUser(
@@ -82,6 +136,18 @@ class _AuthScreenState extends State<AuthScreen> {
               const SizedBox(
                 height: 20,
               ),
+//               StoreConnector<ChatState, String>(
+//                   converter: (store) => store.state.errMsg,
+//                   onWillChange: (prev, next) {},
+//                   builder: (_, errMsg) {
+//                     return Container(
+//                       padding: const EdgeInsets.only(top: 10),
+//                       child: Text("$errMsg",
+//                           style: TextStyle(color: Color(0xffff45ee))),
+//                     );
+//                   }),
+// // TextStyle, Text
+
               ListTile(
                 tileColor: _auth == Auth.signup
                     ? GlobalVariables.backgroundColor
@@ -103,6 +169,7 @@ class _AuthScreenState extends State<AuthScreen> {
                   },
                 ),
               ),
+              
               if (_auth == Auth.signup)
                 Container(
                   padding: const EdgeInsets.all(8),
@@ -133,11 +200,69 @@ class _AuthScreenState extends State<AuthScreen> {
                               signUpUser();
                             }
                           },
-                        )
+                        ),Column(
+                          children: [
+                            TextButton(
+                              style: TextButton.styleFrom(
+                                textStyle: const TextStyle(
+                                  fontSize: 14,
+                                  color: Colors.green,
+                                  decoration: TextDecoration.underline,
+                                ),
+                              ),
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Doctorregister()),
+                                );
+                              },
+                              child: const Text('Register as a Doctor'),
+                            ),
+                            TextButton(
+                          style: TextButton.styleFrom(
+                            textStyle: const TextStyle(
+                              fontSize: 14,
+                              color: Colors.green,
+                              decoration: TextDecoration.underline,
+                            ),
+                          ),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => HospitalCheck()),
+                            );
+                          },
+                          child: const Text('Register as a Hospital'),
+                        ),
+                          ],
+                        ),
                       ],
                     ),
                   ),
                 ),
+              //   Container(
+              //   child: Center(
+              //     child: TextButton(
+              //        style: TextButton.styleFrom(
+              //         textStyle: const TextStyle(
+              //           fontSize: 14,
+              //           color: Colors.green,
+              //           decoration: TextDecoration.underline,
+              //         ),
+              //       ),
+              //       onPressed: () {
+              //         Navigator.push(
+              //           context,
+              //           MaterialPageRoute(
+              //               builder: (context) => Doctorregister()),
+              //         );
+              //       },
+              //       child: const Text('Register as Doctor?'),
+              //     ),
+              //   ),
+              // ),
               ListTile(
                 tileColor: _auth == Auth.signin
                     ? GlobalVariables.backgroundColor
@@ -159,6 +284,7 @@ class _AuthScreenState extends State<AuthScreen> {
                   },
                 ),
               ),
+              
               if (_auth == Auth.signin)
                 Container(
                   padding: const EdgeInsets.all(8),

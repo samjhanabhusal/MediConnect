@@ -1,6 +1,9 @@
-import 'dart:ffi';
+// import 'dart:ffi';
 
+import 'package:luveen/FindBeds/firstscreen.dart';
+import 'package:luveen/chat/Screens/IndividualPage.dart';
 import 'package:luveen/common/widgets/bottom_bar.dart';
+import 'package:luveen/features/Hospital/Admin/Screens/HospitalScreen.dart';
 import 'package:luveen/features/address/screens/address_screen.dart';
 import 'package:luveen/features/admin/screens/add_product_screen.dart';
 import 'package:luveen/features/auth/screens/auth_screen.dart';
@@ -13,10 +16,12 @@ import 'package:luveen/features/order_details/screens/order_details.dart';
 import 'package:luveen/features/product_details/screens/product_details_screen.dart';
 import 'package:luveen/features/search/screens/search_screen.dart';
 import 'package:luveen/models/Pres.dart';
+import 'package:luveen/models/Doctor.dart';
 import 'package:luveen/models/order.dart';
 import 'package:luveen/models/product.dart';
 import 'package:flutter/material.dart';
 
+import 'features/doctor/Screens/screens.dart';
 import 'features/home/screens/prescriptionscreen.dart';
 import 'features/home/screens/productdetailscreen.dart';
 import 'features/home/widgets/pickImage.dart';
@@ -28,7 +33,16 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
         settings: routeSettings,
         builder: (_) => const AuthScreen(),
       );
-
+    case DoctorScreen.routeName:
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (_) => const DoctorScreen(),
+      );
+    case HospitalScreen.routeName:
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (_) => const HospitalScreen(),
+      );
     case Dashboard0.routeName:
       return MaterialPageRoute(
         settings: routeSettings,
@@ -44,6 +58,12 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
       return MaterialPageRoute(
         settings: routeSettings,
         builder: (_) => const BottomBar(),
+      );
+    case FirstScreen.routeName:
+      // var updatePage = routeSettings.arguments as int;
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (_) => const FirstScreen(),
       );
     //   case BottomBar.routeName:
     // var updatePage = routeSettings.arguments as Array;
@@ -92,6 +112,14 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
           product: product,
         ),
       );
+    // case IndividualPage.routeName:
+    //   var doctors = routeSettings.arguments as Doctor;
+    //   return MaterialPageRoute(
+    //     settings: routeSettings,
+    //     builder: (_) => IndividualPage(
+    //       doctors: doctors,
+    //     ),
+    //   );
     case PrescriptionScreen.routeName:
       return MaterialPageRoute(
         settings: routeSettings,

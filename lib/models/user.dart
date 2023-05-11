@@ -1,4 +1,7 @@
+// // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
+
+import 'package:luveen/models/Doctor.dart';
 
 class User {
   final String id;
@@ -7,11 +10,13 @@ class User {
   final String password;
   final String address;
   final String contactno;
-  final String type;
+  final String role;
   final String token;
   final List<dynamic> cart;
   final List<dynamic> prescription;
   final List<dynamic> profiles;
+  final List<dynamic> doctors;
+  // final List<Doctor> doctor;
 
 
   User({
@@ -20,15 +25,20 @@ class User {
     required this.email,
     required this.password,
     required this.address,
-    required this.type,
+    required this.role,
     required this.token,
     required this.cart,
     required this.contactno,
     required this.prescription,
-    required this.profiles
+    required this.profiles,
+    required this.doctors,
+    // required this.doctor
 
   });
 
+  String get currentMessage => '';
+
+  String get time => '';
   Map<String, dynamic> toMap() {
     return {
       'id': id,
@@ -37,11 +47,13 @@ class User {
       'password': password,
       'address': address,
       'contactno': contactno,
-      'type': type,
+      'role': role,
       'token': token,
       'cart': cart,
       'prescription':prescription,
-            'profiles':profiles,
+      'profiles':profiles,
+      'doctors':doctors,
+      // 'doctor'kjhkjh:doctor,
 
     };
   }
@@ -54,7 +66,7 @@ class User {
       password: map['password'] ?? '',
       address: map['address'] ?? '',
       contactno: map['contactno'] ?? '',
-      type: map['type'] ?? '',
+      role: map['role'] ?? '',
       token: map['token'] ?? '',
       cart: List<Map<String, dynamic>>.from(
         map['cart']?.map(
@@ -66,6 +78,13 @@ class User {
           (x) => Map<String, dynamic>.from(x),
         ),
       ),
+      doctors: List<Map<String, dynamic>>.from(
+        map['doctors']?.map(
+          (x) => Map<String, dynamic>.from(x),
+        ),
+      ),
+      // doctor: map['doctor'] != null ? Doctor.fromMap(map['doctor']) : null,
+  // );
        profiles: List<Map<String, dynamic>>.from(
         map['profiles']?.map(
           (x) => Map<String, dynamic>.from(x),
@@ -85,11 +104,13 @@ class User {
     String? password,
     String? address,
     String? contactno,
-    String? type,
+    String? role,
     String? token,
     List<dynamic>? cart,
     List<dynamic>? prescription,
-    List<dynamic>? profiles
+    List<dynamic>? profiles,
+    List<dynamic>? doctors,
+    
 
   }) {
     return User(
@@ -99,12 +120,96 @@ class User {
       password: password ?? this.password,
       address: address ?? this.address,
       contactno: contactno ?? this.contactno,
-      type: type ?? this.type,
+      role: role ?? this.role,
       token: token ?? this.token,
       cart: cart ?? this.cart,
       prescription: prescription ?? this.prescription,
       profiles: profiles ?? this.profiles,
+      doctors: doctors ?? this.doctors,
 
     );
   }
+}
+
+
+class UserData {
+  final String? id;
+  final String name;
+  final String email;
+  UserData({
+    this.id,
+    required this.name,
+    required this.email,
+  });
+
+// }
+// class User {
+//   final String id;
+//   final String name;
+//   final String email;
+//   final String password;
+//   final String address;
+//   final String contactno;
+//   final String role;
+//   final String token;
+//   final List<String> cart;
+//   final List<String> prescription;
+//   final List<String> profiles;
+//   final List<String> doctors;
+//   final Doctor doctor;
+
+//   User({
+//     required this.id,
+//     required this.name,
+//     required this.email,
+//     required this.password,
+//     required this.address,
+//     required this.role,
+//     required this.token,
+//     required this.cart,
+//     required this.contactno,
+//     required this.prescription,
+//     required this.profiles,
+//     required this.doctors,
+//     required this.doctor,
+//   });
+
+//   // Factory methods for serialization/deserialization
+//   factory User.fromJson(Map<String, dynamic> json) {
+//     return User(
+//       id: json['id'],
+//       name: json['name'],
+//       email: json['email'],
+//       password: json['password'],
+//       address: json['address'],
+//       contactno: json['contactno'],
+//       role: json['role'],
+//       token: json['token'],
+//       cart: List<String>.from(json['cart']),
+//       prescription: List<String>.from(json['prescription']),
+//       profiles: List<String>.from(json['profiles']),
+//       doctors: List<String>.from(json['doctors']),
+//       doctor: Doctor.fromJson(json['doctor']),
+//     );
+//   }
+
+//   Map<String, dynamic> toJson() {
+//     return {
+//       'id': id,
+//       'name': name,
+//       'email': email,
+//       'password': password,
+//       'address': address,
+//       'contactno': contactno,
+//       'role': role,
+//       'token': token,
+//       'cart': cart,
+//       'prescription': prescription,
+//       'profiles': profiles,
+//       'doctors': doctors,
+//       'doctor': doctor.toJson(),
+//     };
+//   }
+
+//   User copyWith({required cart}) {}
 }

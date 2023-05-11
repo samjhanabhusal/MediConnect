@@ -4,7 +4,6 @@ import 'package:luveen/features/home/screens/productdetailscreen.dart';
 import 'package:luveen/features/home/services/home_services.dart';
 import 'package:luveen/features/home/widgets/Products.dart';
 import 'package:luveen/features/product_details/screens/product_details_screen.dart';
-// import 'package:amazon_clone_tutorial/features/product_details/screens/product_details_screen.dart';
 import 'package:luveen/models/product.dart';
 import 'package:flutter/material.dart';
 // import '../../product_details/screens/product_details_screen.dart';

@@ -1,12 +1,12 @@
+import 'package:luveen/FindBeds/firstscreen.dart';
 import 'package:luveen/constants/global_variables.dart';
 import 'package:luveen/features/account/screens/acc_screen.dart';
 import 'package:luveen/features/account/screens/account_screen.dart';
 import 'package:luveen/features/cart/screens/cart_screen.dart';
 import 'package:luveen/features/home/screens/homeScreen2.dart';
 import 'package:luveen/features/home/screens/home_screen.dart';
-// import 'package:amazon_clone_tutorial/features/prescription/screens/prescriptionScreen.dart';
 import 'package:luveen/providers/user_provider.dart';
-import 'package:badges/badges.dart';
+import 'package:badges/badges.dart ' as Badge;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -29,8 +29,10 @@ class _BottomBarState extends State<BottomBar> {
     // const HomeScreen(),
     const Dashboard0(),
     const AccountScreen(),
+    const FirstScreen(),
     const CartScreen(),
     const PrescriptionScreen(),
+    
   ];
 
   void updatePage(int page) {
@@ -93,7 +95,7 @@ class _BottomBarState extends State<BottomBar> {
             ),
             label: '',
           ),
-          // CART
+          // BEds
           BottomNavigationBarItem(
             icon: Container(
               width: bottomBarWidth,
@@ -107,7 +109,29 @@ class _BottomBarState extends State<BottomBar> {
                   ),
                 ),
               ),
-              child: Badge(
+           
+                child: const Icon(
+                  Icons.search,
+                ),
+              
+            ),
+            label: '',
+          ),
+          // CART
+          BottomNavigationBarItem(
+            icon: Container(
+              width: bottomBarWidth,
+              decoration: BoxDecoration(
+                border: Border(
+                  top: BorderSide(
+                    color: _page == 3
+                        ? GlobalVariables.selectedNavBarColor
+                        : GlobalVariables.backgroundColor,
+                    width: bottomBarBorderWidth,
+                  ),
+                ),
+              ),
+              child: Badge.Badge(
                 elevation: 0,
                 badgeContent: Text(userCartLen.toString()),
                 badgeColor: Colors.white,
@@ -124,7 +148,7 @@ class _BottomBarState extends State<BottomBar> {
               decoration: BoxDecoration(
                 border: Border(
                   top: BorderSide(
-                    color: _page == 3
+                    color: _page == 4
                         ? GlobalVariables.selectedNavBarColor
                         : GlobalVariables.backgroundColor,
                     width: bottomBarBorderWidth,
@@ -141,6 +165,8 @@ class _BottomBarState extends State<BottomBar> {
             ),
             label: '',
           ),
+          // For Hospital
+          
         ],
       ),
     );

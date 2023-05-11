@@ -38,7 +38,7 @@ class _profileState extends State<profile> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  FlatButton.icon(
+                  TextButton.icon(
                       onPressed: () {
                         Navigator.push(
                           context,

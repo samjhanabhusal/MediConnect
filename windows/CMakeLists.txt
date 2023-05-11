@@ -46,6 +46,28 @@ add_subdirectory(${FLUTTER_MANAGED_DIR})
 # Application build
 add_subdirectory("runner")
 
+
+
+
+
+
+
+# Define your library target
+# add_library(my_library STATIC
+#   my_library_source_file_1.cpp
+#   my_library_source_file_2.cpp
+# )
+
+# # Define your executable target
+# add_executable(my_executable main.cpp)
+
+# # Link the target to a library
+# target_link_libraries(my_executable my_library)
+
+
+
+
+
 # Generated plugin build rules, which manage building the plugins and adding
 # them to the application.
 include(flutter/generated_plugins.cmake)
@@ -56,6 +78,7 @@ include(flutter/generated_plugins.cmake)
 # run in place. This is done instead of making a separate bundle (as on Linux)
 # so that building and running from within Visual Studio will work.
 set(BUILD_BUNDLE_DIR "$<TARGET_FILE_DIR:${BINARY_NAME}>")
+# set(BUILD_BUNDLE_DIR "$<TARGET_FILE_DIR:amazon_clone_tutorial}>")
 # Make the "install" step default, as it's required to run.
 set(CMAKE_VS_INCLUDE_INSTALL_TO_DEFAULT_BUILD 1)
 if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
