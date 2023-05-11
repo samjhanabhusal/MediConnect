@@ -55,8 +55,11 @@ class _HospitalDetailsState extends State<HospitalDetails> {
             child: GridTile(
               child: Container(
                 color: Colors.white,
-                child: Image.asset(widget.bed.VIP_ward_total),
-              ),
+             child: Image.network(
+                    // bed.images[0],
+                  widget.bed.hospital_picture[0],
+                    fit: BoxFit.cover,
+                  )              ),
               
              
             ),

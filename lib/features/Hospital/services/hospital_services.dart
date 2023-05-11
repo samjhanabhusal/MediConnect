@@ -171,6 +171,44 @@ Future <Bed> fetchOnlyaBedsByHospitalId({
     // return bed;
   }
 
+  
+
+// Future<List<Hospital>> verifyHospitalName({required BuildContext context,}) async {
+//   //  final userProvider = Provider.of<UserProvider>(context, listen: false);
+//   // final apiUrl = 'https://your-api-url/api/verify-hospitals';
+//   final response = await http.get(Uri.parse('$uri/api/verify-hospitals'));
+
+//   if (response.statusCode == 200) {
+//     final jsonResponse = json.decode(response.body);
+//     return jsonResponse['exists'] ?? false;
+//   } else {
+//     throw Exception('Failed to verify hospital name: ${response.statusCode}');
+//   }
+// }
+
+
+Future<List<Hospital>>verifyHospitalName(String hospitalName) async {
+  // final apiUrl = 'https://your-api-url/api/verify-hospitals';
+
+  try {
+    final response = await http.get(Uri.parse('$uri/api/verify-hospitals'));
+
+    if (response.statusCode == 200) {
+      final hospitals = json.decode(response.body);
+      final hospitalExists = hospitals.any((hospital) =>
+          hospitalName.toLowerCase() == hospital['name'].toLowerCase());
+      return hospitalExists;
+    } else if (response.statusCode == 400) {
+      throw Exception('Hospital not found');
+    } else {
+      throw Exception('Failed to verify hospital name: ${response.statusCode}');
+    }
+  } catch (e) {
+    throw Exception('Failed to verify hospital name: $e');
+  }
+}
+
+
   Future<List<Hospital>> fetchMyHospital({
     required BuildContext context,
   }) async {
@@ -203,6 +241,8 @@ Future <Bed> fetchOnlyaBedsByHospitalId({
     }
     return hospitalList;
   }
+
+
 
 // To remove Prescription which should be in view page
   void removeFromPrescription({
@@ -284,6 +324,9 @@ Future <Bed> fetchOnlyaBedsByHospitalId({
       showSnackBar(context, e.toString());
     }
   }
+
+
+
 
   // get user data
   void getHospitalData(

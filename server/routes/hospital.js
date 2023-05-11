@@ -64,6 +64,22 @@ async function getHospitals(){
   }
   
 
+  hospitalRouter.get("/api/verify-hospitals", async (req, res) => {
+	try {
+		const hospitals = await getHospitals();
+		console.log(hospitals);
+		console.log(hospitals.length);
+		const hospitalExists = hospitals.some((hospital) => name.toLowerCase() === hospital.name.toLowerCase());
+		if (!hospitalExists) {
+			return res.status(400).json({ msg: 'Hospital not found' });
+		}
+	}
+	catch (e) {
+		es.status(500).json({ error: e.message });
+	}
+}
+)  
+
 hospitalRouter.post("/hospital/register", async (req, res) => {
 	try {
 		const { name,email,password} = req.body;

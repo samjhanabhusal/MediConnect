@@ -9,7 +9,7 @@ import '../providers/user_provider.dart';
 // 192.168.1.116-------------> nibika
 // String uri = 'http://192.168.1.120:3000';
 // 192.168.1.120----Shalini
-String uri = 'http://192.168.32.74:3000';
+String uri = 'http://192.168.1.126:3000';
 // 192.168.32.74----------hostel
 final user =UserProvider().user;
 

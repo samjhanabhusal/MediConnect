@@ -5,8 +5,8 @@ import 'package:luveen/models/Hospital.dart';
 import 'package:luveen/models/rating.dart';
 
 class Bed {
-    final String hospitalId;
-  final String ? id;
+  final String hospitalId;
+  final String? id;
   final List<String> hospital_picture;
   final String beds_available;
   final String hospital_location;
@@ -21,7 +21,6 @@ class Bed {
 
   final String ventilators_available;
 
- 
   Bed({
     this.id,
     required this.hospitalId,
@@ -41,7 +40,7 @@ class Bed {
 
   // Map<String, dynamic> toMap() {
   Map<String, dynamic> toMap() {
-    return{
+    return {
       'hospital_id': hospitalId,
       'id': id,
       'hospital_picture': hospital_picture,
@@ -64,7 +63,8 @@ class Bed {
       hospitalId: map['hospital_id'],
       id: map['_id'],
       // hospital_picture:List<String>.from( map['hospital_picture'] ),
-      hospital_picture: List<String>.from((map['hospital_picture'] as List<dynamic>).map((e) => e.toString())),
+      hospital_picture: List<String>.from(
+          (map['hospital_picture'] as List<dynamic>).map((e) => e.toString())),
 
       beds_available: map['beds_available'] ?? '',
       hospital_location: map['hospital_location'] ?? '',
@@ -82,10 +82,8 @@ class Bed {
 
   String toJson() => json.encode(toMap());
 
-
   // factory Bed.fromJson(String source) => Bed.fromMap(json.decode(source) as Map<String, dynamic>);
- factory Bed.fromJson(String source) =>
-      Bed.fromMap(json.decode(source));
+  factory Bed.fromJson(String source) => Bed.fromMap(json.decode(source));
   // Hospital copyWith({required hospital}) {}
 }
 

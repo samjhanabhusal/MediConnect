@@ -1,10 +1,12 @@
 import 'dart:convert';
 
+import 'package:get/state_manager.dart';
 import 'package:luveen/common/widgets/bottom_bar.dart';
 import 'package:luveen/constants/error_handling.dart';
 import 'package:luveen/constants/global_variables.dart';
 import 'package:luveen/constants/utils.dart';
 import 'package:luveen/features/account/screens/EnterDetails.dart';
+import 'package:luveen/features/auth/screens/Hospitalregister.dart';
 import 'package:luveen/features/auth/screens/auth_screen.dart';
 import 'package:luveen/models/bed.dart';
 import 'package:luveen/models/Doctor.dart';
@@ -194,6 +196,92 @@ class AuthService {
       showSnackBar(context, e.toString());
     }
   }
+
+
+
+void checkHospital({
+    required BuildContext context,
+    // required String email,
+    // required String password,
+    required bool check,
+    required String name,
+    required VoidCallback onSuccess,
+    
+  }) async {
+    try {
+      // User user = User(
+      //   id: '',
+      //   name: name,
+      //   password: password,
+      //   email: email,
+      //   address: '',
+      //   contactno: '',
+      //   role: '',
+      //   token: '',
+      //   cart: [],
+      //   prescription: [],
+      //   profiles: [],
+      //   doctors: [],
+      // );
+      Hospital hospital = Hospital(
+        id:'',
+        email: '',
+        name: name,
+        password: '',
+        // bed:[],
+        
+      );
+
+      http.Response res = await http.post(
+        Uri.parse('$uri/api/verify-hospitals'),
+        body: hospital.toJson(),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+      );
+
+        httpErrorHandle(
+        response: res,
+        context: context,
+        onSuccess: () {
+
+      //      showDialog(
+      //           context: context,
+      //           builder: (ctx) => AlertDialog(
+      //             title: const Text("Verified!"),
+      //             content: const Text(" To move forward with the registration"),
+      //             actions: <Widget>[
+      //               TextButton(
+      //    onPressed: () => Navigator.of(context)
+      //       .push(MaterialPageRoute(builder: (context) => const HospitalRegister(), )),
+      //   child: const Text('Click Here', style: TextStyle( decoration: TextDecoration. underline,),textAlign: TextAlign.center),
+      // ),
+      //             ],
+      //           ),
+              // );
+
+
+
+          check = true;
+          onSuccess();
+          //  setState(() {
+              
+          //   });
+          
+          // Navigator.push(
+          //   context,
+          //   MaterialPageRoute(builder: (context) => AuthScreen()),
+          // );
+        },
+
+      );
+    } catch (e) {
+      showSnackBar(context, e.toString());
+    }
+  }
+
+
+
 
   // sign in user
   void signInUser({
