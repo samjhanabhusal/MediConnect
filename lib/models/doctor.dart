@@ -61,7 +61,8 @@ class Doctor {
       qualification: map['qualification'] ?? '',
       specialization: map['specialization'] ?? '',
       experience: map['experience'] ?? '',
-      nmc_no: map['nmc_no'] ?.toInt() ?? 0,
+      // nmc_no: map['nmc_no'] ?.toInt() ?? 0,
+      nmc_no: map['nmc_no'] ?? '',
       id: map['_id'] ?? '',
     );
   }

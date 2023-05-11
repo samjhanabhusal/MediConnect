@@ -10,12 +10,12 @@ const productRouter = require("./routes/product");
 const userRouter = require("./routes/user");
 const profileRouter = require("./routes/profile");
 const doctorRouter = require("./routes/doctor");
-const hospitalRoutes = require("./routes/hospital");
-const messageRoutes = require("./routes/messages");
+
 // INIT
 // INIT
 const dotenv = require("dotenv");
 const hospitalRouter = require("./routes/hospital");
+const messageRouter = require("./routes/messages");
 // const cors = require("cors");
 
 dotenv.config({
@@ -35,7 +35,7 @@ var username = encodeURIComponent("Samjhana");
 
 var password = encodeURIComponent("password05#")
 const DB = `mongodb+srv://${username}:${password}@cluster0.hmea1x6.mongodb.net/?retryWrites=true&w=majority`
-
+var clients = {};
 // middleware
 app.use(express.json());
 app.use(authRouter);
@@ -46,7 +46,7 @@ app.use(profileRouter);
 app.use(doctorRouter);
 app.use(hospitalRouter);
 // app.use("/api/auth", authRoutes);
-app.use("/api/messages", messageRoutes);
+app.use(messageRouter);
 
 
 // Connections
@@ -65,17 +65,17 @@ mongoose
   io.on("connection", (socket) => {
     console.log("connecetd");
     console.log(socket.id, "has joined");
-    // socket.on("signin", (id) => {
-    //   console.log(id);
-    //   clients[id] = socket;
-    //   console.log(clients);
+    socket.on("signin", (id) => {
+      console.log(id);
+      clients[id] = socket;
+      console.log(clients);
     });
-    // socket.on("message", (msg) => {
-    //   console.log(msg);
-    //   let targetId = msg.targetId;
-    //   if (clients[targetId]) clients[targetId].emit("message", msg);
-    // });
-  // });
+    socket.on("message", (msg) => {
+      console.log(msg);
+      let targetId = msg.targetId;
+      if (clients[targetId]) clients[targetId].emit("message", msg);
+    });
+  });
 app.listen(3000, "0.0.0.0", () => {
   console.log(`connected at port ${PORT}`);
 });

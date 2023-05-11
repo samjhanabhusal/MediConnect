@@ -12,9 +12,13 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 // doctorRouter.post("/doctor/register",async (req, res)=>{
 
-  // const name = 'John Doe'; // Input name
-  // const nmcNo = '1234'; // Input NMC No
-  // const degree = 'MBBS'; // Input degree
+//  GET request to the deregistration page of NMC 
+//  loads the HTML response into a Cheerio object. 
+// It then uses Cheerio's selector syntax to target the td element that contains the NMC numbers, 
+// and extracts the text content of each td element. 
+// Finally, it returns an array of NMC numbers.
+//  the NMC numbers are stored in the second column (td:nth-child(3)) 
+
   async function searchDoctorOnNmc(name, nmc_no, qualification) {
     const searchUrl = `https://www.nmc.org.np/searchPractitioner?name=${name}&nmc=${nmc_no}&degree=${qualification}`;
   
@@ -49,9 +53,9 @@ const cheerio = require('cheerio');
   
     return nmcNumbers;
   }
-//   getNmcNumbers().then((nmcNumbers) => {
-//   console.log(nmcNumbers);
-// });
+  getNmcNumbers().then((nmcNumbers) => {
+  console.log(nmcNumbers);
+});
   
   doctorRouter.post("/doctor/register", async (req, res) => {
     try {
@@ -281,6 +285,24 @@ doctorRouter.post("/api/check-npc", async (req, res) => {
     res.status(500).json({ error: e.message });
   }
 });
+
+
+
+doctorRouter.get("/api/get-doctors",async(req, res)=>{
+  try {
+    const doctors = await Doctor.find({})
+    res.json(doctors);
+    
+  } catch (e) {
+    res.status(500).json({error:e.message});
+    
+  }
+});
+
+
+
+
+
 // get doctor data
 doctorRouter.get("/doctor/findbyId", auth, async (req, res) => {
   const doctor = await Doctor.findById(req.doctor);

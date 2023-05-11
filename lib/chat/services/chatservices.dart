@@ -14,6 +14,13 @@ import 'package:http/http.dart' as http;
 import '../../providers/user_provider.dart';
 
 class ChatServices{
+void sendMessage(){
+  
+}
+
+
+
+
  Future<List<Doctor>> fetchAlldoctor(BuildContext context) async {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
     List<Doctor> doctorList = [];

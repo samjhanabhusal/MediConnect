@@ -1,3 +1,6 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:convert';
+
 import 'package:luveen/models/Doctor.dart';
 
 class MessageModel {
@@ -5,10 +8,31 @@ class MessageModel {
   String message;
   String time;
   MessageModel({
-    required this.message, required this.type, required this.time});
+    required this.message, 
+    required this.type,
+     required this.time
+     });
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'type': type,
+      'message': message,
+      'time': time,
+    };
+  }
+
+  factory MessageModel.fromMap(Map<String, dynamic> map) {
+    return MessageModel(
+      type: map['type'] as String,
+      message: map['message'] as String,
+      time: map['time'] as String,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory MessageModel.fromJson(String source) => MessageModel.fromMap(json.decode(source) as Map<String, dynamic>);
 }
-
-
 
 
 // Chatgpt

@@ -84,6 +84,24 @@ userRouter.post("/api/save-user-contactno", auth, async (req, res) => {
     res.status(500).json({ error: e.message });
   }
 });
+// userRouter.get("/api/get-doctobyrole", auth, async (req, res) => {
+//   try {
+//     // const { contactno } = req.body;
+//     let user = await User.find(req.user);
+//     if(user.role == doctor)
+//     user = await user.save();
+
+
+//     res.json(user);
+//   } catch (e) {
+//     res.status(500).json({ error: e.message });
+//   }
+// });
+
+
+
+
+
 // order product
 userRouter.post("/api/order", auth, async (req, res) => {
   try {

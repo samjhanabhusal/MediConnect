@@ -92,7 +92,7 @@ const doctorSchema = new mongoose.Schema({
     required: true
   },
   nmc_no:{
-    type: Number,
+    type: String,
     required: true
     
   },
