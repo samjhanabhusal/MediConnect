@@ -8,7 +8,7 @@ const hospitalSchema = new mongoose.Schema({
     required: true
   },
   email: {
-    required: true,
+    // required: true,
     type: String,
     trim: true,
     validate: {
@@ -22,9 +22,20 @@ const hospitalSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    required: true
+    // required: true
   },
-
+  confirmpassword: {
+    type: String,
+    // required: true
+  },
+  phone: {
+    type: String,
+    // required: true
+  },
+  check:{
+    type:Boolean,
+    default: false
+  },
   // location: {
   //   type: String,
   //   required: true,

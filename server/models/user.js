@@ -28,6 +28,12 @@ const userSchema = mongoose.Schema({
     required: true,
     type: String,
   },
+
+  is_verified:{
+    type:Number,
+    default: 0,
+  },
+
   address: {
     type: String,
     default: "",

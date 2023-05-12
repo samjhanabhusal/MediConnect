@@ -72,6 +72,8 @@ const messageSchema = new mongoose.Schema({
   type: String,
   message: String,
   time: String,
+  sourceId: String,
+  targetId: String,
 });
 
 const Message = mongoose.model("Message", messageSchema);

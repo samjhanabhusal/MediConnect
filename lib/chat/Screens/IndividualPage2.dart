@@ -1114,6 +1114,9 @@ import 'dart:convert';
 
 import 'package:luveen/chat/CustomUi/OwnMessageCard.dart';
 import 'package:luveen/chat/CustomUi/ReplyCard.dart';
+import 'package:luveen/constants/error_handling.dart';
+import 'package:luveen/constants/global_variables.dart';
+import 'package:luveen/constants/utils.dart';
 import 'package:luveen/models/MessageModel.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
@@ -1179,8 +1182,16 @@ class _IndividualPageState extends State<IndividualPage> {
 
       socket!.on("message", (msg) {
         print(msg);
+        print(msg);
+        print(msg);
+        print(msg);
+        print(msg);
+        print(msg);
+        print(msg);
+        print(msg);
+        print(msg);
 
-        setMessage("destination", msg["message"]);
+        setMessage("destination", msg["message"], '', user.id);
 
         _scrollController.animateTo(_scrollController.position.maxScrollExtent,
             duration: Duration(milliseconds: 300), curve: Curves.easeOut);
@@ -1191,33 +1202,62 @@ class _IndividualPageState extends State<IndividualPage> {
   }
 
   void sendMessage(String message, String sourceId, String targetId) async {
-    setMessage("source", message);
+    setMessage("source", message,  sourceId, targetId);
+    
     print(sourceId);
+        final userProvider = Provider.of<UserProvider>(context, listen: false);
+
     print(targetId);
 
     socket!.emit("message",
         {"message": message, "sourceId": sourceId, "targetId": targetId});
-
-    // Send message to server
-    final response = await http.post(
-      Uri.parse('http://192.168.32.74:3000/messages'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: jsonEncode(messageModel.toJson()),
+  MessageModel messageModel = MessageModel(
+      type: 'source',
+      message: message,
+      time: DateTime.now().toString().substring(10, 16),
+      sourceId: sourceId,
+      targetId: targetId,
     );
-    if (response.statusCode == 201) {
-      print('Message saved successfully');
-    } else {
-      print('Failed to save message');
-    }
+    // Send message to server
+ http.Response res = await http.post(Uri.parse('$uri/messages'),headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+        'x-auth-token': userProvider.user.token,
+      },
+      //  body: jsonEncode(messageModel.toJson()));
+      body: messageModel.toJson(),
+ );
+      httpErrorHandle(response: res, context: context, 
+      onSuccess: (){
+      showSnackBar(
+            context,
+            'Message Stored',
+          );
+      });
+
+
+
+    // final response = await http.post(
+    //   Uri.parse('http://192.168.32.74:3000/messages'),
+    //   headers: <String, String>{
+    //     'Content-Type': 'application/json; charset=UTF-8',
+    //   },
+    //   body: jsonEncode(messageModel.toJson()),
+    // );
+    // if (response.statusCode == 201) {
+    //   print('Message saved successfully');
+    // } else {
+    //   print('Failed to save message');
+    // }
   }
 
-  void setMessage(String type, String message) {
+  void setMessage(String type, String message, String sourceId, String targetId) {
+  // void setMessage(String type, String message,) {
     MessageModel messageModel = MessageModel(
         type: type,
         message: message,
-        time: DateTime.now().toString().substring(10, 16));
+        time: DateTime.now().toString().substring(10, 16), 
+        sourceId: sourceId, 
+        targetId: targetId);
 
     setState(() {
       messages.add(messageModel);
@@ -1226,6 +1266,8 @@ class _IndividualPageState extends State<IndividualPage> {
 
   @override
   Widget build(BuildContext context) {
+          final user = context.watch<UserProvider>().user;
+
     return Stack(
       children: [
         Image.asset(

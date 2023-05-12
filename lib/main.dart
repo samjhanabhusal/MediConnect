@@ -189,6 +189,7 @@ import 'package:luveen/FindBeds/firstscreen.dart';
 import 'package:luveen/features/Hospital/services/hospital_services.dart';
 import 'package:luveen/features/doctor/Services/doctor_service.dart';
 import 'package:luveen/features/home/screens/homeScreen2.dart';
+import 'package:luveen/providers/message_provider.dart';
 
 import 'features/Hospital/Admin/Screens/HospitalScreen.dart';
 import 'features/doctor/Screens/screens.dart';
@@ -211,6 +212,9 @@ void main() {
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(
   create: (context) => UserProvider(),
+),
+    ChangeNotifierProvider(
+  create: (context) => MessageProvider(),
 ),
 ChangeNotifierProvider(
   create: (context) => HospitalProvider(),

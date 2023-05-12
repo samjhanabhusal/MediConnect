@@ -8,6 +8,7 @@ import 'package:luveen/features/auth/screens/Hospitalregister.dart';
 import 'package:luveen/features/auth/screens/forgetpassword.dart';
 import 'package:luveen/features/auth/services/auth_service.dart';
 import 'package:flutter/material.dart';
+import 'package:luveen/features/Hospital/Admin/Screens/LandingPage.dart';
 // import 'package:luveen/store/actions/authActions.dart';
 import 'package:redux/redux.dart';
 // import 'package:redux/redux.dart';
@@ -230,7 +231,8 @@ class _AuthScreenState extends State<AuthScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => HospitalRegister()),
+                                  // builder: (context) => HospitalRegister()),
+                                  builder: (context) => HospitalCheck()),
                             );
                           },
                           child: const Text('Register as a Hospital'),

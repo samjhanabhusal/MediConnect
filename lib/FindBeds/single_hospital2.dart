@@ -80,11 +80,11 @@ Widget build(BuildContext context) {
                       Container(
                         height: 80,
                         width: 80,
-                        decoration: BoxDecoration(
+                      decoration: new BoxDecoration(
                           border: Border.all(width: 3, color: Colors.green),
-                          image: DecorationImage(
-                            image: AssetImage(""),
-                            fit: BoxFit.fill,
+                            image: new DecorationImage(
+                            image: NetworkImage(beds![index].hospital_picture[0]),
+                            // fit: BoxFit.cover,
                           ),
                         ),
                       ),

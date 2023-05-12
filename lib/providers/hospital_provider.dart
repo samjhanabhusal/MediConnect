@@ -7,6 +7,8 @@ class HospitalProvider extends ChangeNotifier {
     id: '',
     name: '',
     password: '',
+    confirmpassword: '',
+    phone: '',
     // bed: [], 
     email: '',
     

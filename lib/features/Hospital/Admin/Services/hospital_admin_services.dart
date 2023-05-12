@@ -47,8 +47,7 @@ class HospitalAdminServices {
 
 
     try {
-      final cloudinary = CloudinaryPublic('dh78aetr0', 'ewgdpg4v');
-      List<String> imageUrls = [];
+final cloudinary = CloudinaryPublic('denfgaxvg', 'uszbstnu');      List<String> imageUrls = [];
 
       for (int i = 0; i < hospital_picture.length; i++) {
         CloudinaryResponse res = await cloudinary.uploadFile(

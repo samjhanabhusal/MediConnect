@@ -1,10 +1,12 @@
 import 'dart:convert';
 
+import 'package:get/get.dart';
 import 'package:luveen/common/widgets/bottom_bar.dart';
 import 'package:luveen/constants/error_handling.dart';
 import 'package:luveen/constants/global_variables.dart';
 import 'package:luveen/constants/utils.dart';
 import 'package:luveen/features/account/screens/EnterDetails.dart';
+import 'package:luveen/features/auth/screens/Hospitalregister2.dart';
 import 'package:luveen/features/auth/screens/auth_screen.dart';
 import 'package:luveen/models/bed.dart';
 import 'package:luveen/models/Doctor.dart';
@@ -82,20 +84,7 @@ class AuthService {
     required String nmc_no,
   }) async {
     try {
-      // User user = User(
-      //   id: '',
-      //   name: name,
-      //   password: password,
-      //   email: email,
-      //   address: '',
-      //   contactno: '',
-      //   role: '',
-      //   token: '',
-      //   cart: [],
-      //   prescription: [],
-      //   profiles: [],
-      //   doctors: [],
-      // );
+    
       Doctor doctor = Doctor(
         id:'',
           contactno: contactno,
@@ -136,12 +125,86 @@ class AuthService {
     }
   }
 
+void checkHospital({
+    required BuildContext context,
+    // required String email,
+    // required String password,
+    required bool check,
+    required String name,
+    // required VoidCallback onSuccess,
+    // required VoidCallback onUnverified
+
+  }) async {
+    try {
+      
+      Hospital hospital = Hospital(
+        id:'',
+        email: '',
+        name: name,
+        password: '',
+        confirmpassword: '',
+        phone: '',
+        // bed:[],
+
+      );
+
+      http.Response res = await http.post(
+        Uri.parse('$uri/api/verify-hospitals'),
+        body: hospital.toJson(),
+        //  body: ({"name" : "$name" }),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+      // ),
+);
+        // httpErrorHandle(
+      
+         
+               
+    // String hospitalName = res.body.replaceAll('"', ''); 
+    // if (hospitalName.toLowerCase() == name.toLowerCase()) {
+      if(res.statusCode == 200){
+              showDialog(
+                context: context,
+                builder: (ctx) => AlertDialog(
+                  title: const Text("Verified!"),
+                  content: const Text(" To move forward with the registration"),
+                  actions: <Widget>[
+                    TextButton(
+         onPressed: () => Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) =>HospitalRegister(
+              name: name,), )),
+        child: const Text('Click Here', style: TextStyle( decoration: TextDecoration. underline,),textAlign: TextAlign.center),
+      ),
+                  ],
+                ),
+              );}
+              else {
+                showDialog(
+                context: context,
+                builder: (ctx) => AlertDialog(
+                  title: const Text("Unverified!"),
+                  content: const Text("No Hospital is registered under that name"),
+                  
+                ),
+              );
+                
+              }
+  } catch (e) {
+            
+      showSnackBar(context, e.toString());
+
+      // }
+    }
+  }
 
   void signUpHospital({
     required BuildContext context,
     required String email,
     required String password,
+    required String confirmpassword,
     required String name,
+    required String phone,
     
   }) async {
     try {
@@ -164,6 +227,8 @@ class AuthService {
         email: email,
         name: name,
         password: password,
+        confirmpassword: confirmpassword,
+        phone: phone,
         // bed:[],
         
       );

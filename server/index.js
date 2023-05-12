@@ -3,6 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require('cors');
 const http = require("http");
+const dotenv=require("dotenv");
 const adminRouter = require("./routes/admin");
 // IMPORTS FROM OTHER FILES
 const authRouter = require("./routes/auth");
@@ -13,7 +14,6 @@ const doctorRouter = require("./routes/doctor");
 
 // INIT
 // INIT
-const dotenv = require("dotenv");
 const hospitalRouter = require("./routes/hospital");
 const messageRouter = require("./routes/messages");
 // const cors = require("cors");
@@ -21,6 +21,7 @@ const messageRouter = require("./routes/messages");
 dotenv.config({
   path: './.env'
 })
+
 const PORT = process.env.PORT || 3000;
 const app = express();
 // var server = http.createServer(app);

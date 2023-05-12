@@ -22,10 +22,25 @@ const Message = require("../models/messages");
 const messageRouter = express.Router();
 //add
 messageRouter.post("/messages", async (req, res) => {
-  const { type, message, time } = req.body;
-  const newMessage = new Message({ type, message, time });
-  await newMessage.save();
-  res.status(201).json(newMessage);
+
+ try {
+  const { type, message, time, sourceId, targetId } = req.body;
+console.log("dlkjflskdjfs");
+  let newMessage = new Message({ 
+    type, message, time, sourceId, targetId,
+   });
+   console.log("dlkjflskdjfs");
+
+   newMessage = await newMessage.save();
+   console.log("dlkjflskdjfs");
+
+   res.json(newMessage);
+   console.log("dlkjflskdjfs");
+  console.log(newMessage);
+ } catch (e) {
+  res.status(500).json({ error: e.message });
+ }
+
 });
 messageRouter.post("/", async (req, res) => {
   const newMessage = new Message(req.body);

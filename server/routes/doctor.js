@@ -53,9 +53,9 @@ const cheerio = require('cheerio');
   
     return nmcNumbers;
   }
-  getNmcNumbers().then((nmcNumbers) => {
-  console.log(nmcNumbers);
-});
+//   getNmcNumbers().then((nmcNumbers) => {
+//   console.log(nmcNumbers);
+// });
   
   doctorRouter.post("/doctor/register", async (req, res) => {
     try {

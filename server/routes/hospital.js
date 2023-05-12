@@ -59,14 +59,67 @@ async function getHospitals(){
 		hospitals.push(hospital);
 	  }
 	});
-  
 	return hospitals;
   }
-  
+//   getHospitals().then((hospitals) => {
+// 	console.log(hospitals);
+//   });
+
+
+async function getHospitalName() {
+  const url = 'https://en.wikipedia.org/wiki/List_of_hospitals_in_Nepal';
+
+  try {
+    const response = await axios.get(url);
+    if (response.status === 200) {
+      const html = response.data;
+      const $ = cheerio.load(html);
+      const hospitalNames = [];
+
+      // Use the appropriate selector to target the hospital name elements
+      $('table.wikitable tbody tr td:nth-child(1) a')
+        .each((_, element) => {
+          const hospitalName = $(element).text().trim();
+          hospitalNames.push(hospitalName);
+        });
+      console.log(hospitalNames);
+      return hospitalNames;
+    }
+  } catch (error) {
+    console.error('Error retrieving data:', error);
+  }
+}
+
+hospitalRouter.post("/api/verify-hospitals", async (req, res) => {
+  try {
+    const { name } = req.body;
+    const existingHospital = await Hospital.findOne({ name });
+    if (existingHospital) {
+      return res.status(400).json({ msg: 'Hospital already exists' });
+    }
+
+    const hospitals = await getHospitalName();
+
+    const hospitalExists = hospitals.some(
+      (hospital) => name.toLowerCase() === hospital.toLowerCase()
+    );
+
+    if (!hospitalExists) {
+      return res.status(400).json({ msg: 'Hospital not found' });
+    }
+	res.json(name);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+ 
+
+
+
 
 hospitalRouter.post("/hospital/register", async (req, res) => {
 	try {
-		const { name,email,password} = req.body;
+		const { name,email,password,phone,confirmpassword} = req.body;
 		const existingHospital = await Hospital.findOne({email});
 		if (existingHospital) {
 			return res
@@ -79,13 +132,13 @@ hospitalRouter.post("/hospital/register", async (req, res) => {
             .json({ msg: "User with same email already exists!" });
         }
  // Check if the hospital name provided by the user matches any of the scraped hospital names
- const hospitals = await getHospitals();
- console.log(hospitals);
- console.log(hospitals.length);
- const hospitalExists = hospitals.some((hospital) => name.toLowerCase() === hospital.name.toLowerCase());
- if (!hospitalExists) {
-   return res.status(400).json({ msg: 'Hospital not found' });
- }
+//  const hospitals = await getHospitals();
+//  console.log(hospitals);
+//  console.log(hospitals.length);
+//  const hospitalExists = hospitals.some((hospital) => name.toLowerCase() === hospital.name.toLowerCase());
+//  if (!hospitalExists) {
+//    return res.status(400).json({ msg: 'Hospital not found' });
+//  }
 
 		const hashedPassword = await bcryptjs.hash(password, 8);
 		let hospital = new Hospital({
@@ -93,6 +146,8 @@ hospitalRouter.post("/hospital/register", async (req, res) => {
 			name,
 			email,
 			password,
+			confirmpassword,
+			phone
 			
 
 		})

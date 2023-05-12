@@ -5,11 +5,13 @@ import 'package:luveen/models/bed.dart';
 import 'package:luveen/models/Doctor.dart';
 
 class Hospital {
-  final String id;
+  final String  id;
   final String name;
-  final String email;
+  final String  email;
   // final String location;
-  final String password;
+  final String   password;
+  final String   confirmpassword;
+  final String   phone;
   // final Bed ? bedd;
   // final List<dynamic> bed;
  
@@ -18,8 +20,10 @@ class Hospital {
   Hospital({
     required this.id,
     required this.name,
-    required this.email,
-    required this.password,
+     required this.email,
+     required this.password,
+     required this.confirmpassword,
+     required this.phone,
     // required this.location,
     // required this.bed,
     //  this.bedd,
@@ -31,8 +35,8 @@ class Hospital {
       'name': name,
       'email': email,
       'password': password,
-      // 'bed': bed,
-      // 'bedd': bedd,
+      'confirmpassword': confirmpassword,
+      'phone': phone,
     };
   }
 
@@ -42,6 +46,8 @@ class Hospital {
       name: map['name'] ?? '',
       email: map['email'] ?? '',
       password: map['password'] ?? '',
+      confirmpassword: map['confirmpassword'] ?? '',
+      phone: map['phone'] ?? '',
       // bed: List<Map<String, dynamic>>.from(
       //   map['bed']?.map(
       //     (x) => Map<String, dynamic>.from(x),
@@ -59,6 +65,8 @@ class Hospital {
     String? name,
     String? email,
     String? password,
+    String? confirmpassword,
+    String? phone,
     Bed ? bedd,
     List<dynamic>? bed,
   }) {
@@ -67,6 +75,8 @@ class Hospital {
       name: name ?? this.name,
       email: email ?? this.email,
       password: password ?? this.password,
+      confirmpassword: confirmpassword ?? this.confirmpassword,
+      phone: phone ?? this.phone,
       // bed: bed ?? this.bed,
       // bedd: bedd ?? this.bedd,
     );
