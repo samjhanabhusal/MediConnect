@@ -594,17 +594,6 @@
 // }
 // }
 
-
-
-
-
-
-
-
-
-
-
-
 // import 'package:camera/camera.dart';
 // import 'package:chatapp/CustomUI/CameraUI.dart';
 // import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
@@ -735,7 +724,7 @@
 //                     ),
 //                     CircleAvatar(
 //                       child: SvgPicture.asset(
-                      
+
 //                             "assets/images/person.svg",
 //                         color: Colors.white,
 //                         height: 36,
@@ -1084,32 +1073,6 @@
 //   // }
 // }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // import 'package:camera/camera.dart';
 // import 'package:chatapp/CustomUI/CameraUI.dart';
 // import 'package:chatapp/CustomUI/OwnMessgaeCrad.dart';
@@ -1133,10 +1096,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'dart:convert';
-class IndividualPage extends StatefulWidget {
 
-   static const String routeName = '/individualPage';
-  const IndividualPage({
+class IndividualPage extends StatefulWidget {
+  static const String routeName = '/individualPage';
+  IndividualPage({
     Key? key,
     required this.doctors,
   }) : super(key: key);
@@ -1148,11 +1111,10 @@ class IndividualPage extends StatefulWidget {
 }
 
 class _IndividualPageState extends State<IndividualPage> {
-      // final user = context.watch<UserProvider>().user;
-        final user =UserProvider().user;
+  // final user = context.watch<UserProvider>().user;
+  final user = UserProvider().user;
 
-        // String sourceChat = user.id;
-
+  // String sourceChat = user.id;
 
   bool show = false;
   FocusNode focusNode = FocusNode();
@@ -1160,8 +1122,8 @@ class _IndividualPageState extends State<IndividualPage> {
   List<MessageModel> messages = [];
   TextEditingController _controller = TextEditingController();
   ScrollController _scrollController = ScrollController();
-  IO.Socket ? socket;
-  
+  IO.Socket? socket;
+
   get messageModel => null;
   @override
   void initState() {
@@ -1180,13 +1142,16 @@ class _IndividualPageState extends State<IndividualPage> {
 
   void connect() {
     // MessageModel messageModel = MessageModel(sourceId: widget.sourceChat.id.toString(),targetId: );
-    socket = IO.io("http://192.168.32.74:5000", <String, dynamic>{
+    socket = IO.io("http://172.17.1.165:5000", <String, dynamic>{
+      // "transports": ["websocket"],
       "transports": ["websocket"],
       "autoConnect": false,
     });
     socket!.connect();
     // socket!.emit("signin", widget!.sourchat.id);
     socket!.emit("signin", user.id);
+    socket!.onConnectError(
+        (_) => print('Errorfkjlajflkjadsflkjalfdkjaljfldjfljdsfljsdlfjs'));
     // socket.on("connection",)
     socket!.onConnect((data) {
       print("Connected");
@@ -1200,8 +1165,42 @@ class _IndividualPageState extends State<IndividualPage> {
     print(socket!.connected);
   }
 
-   void sendMessage(String message, String sourceId, String targetId) async {
+  void sendMessage(String message, String sourceId, String targetId) async {
     setMessage("source", message);
+    print(sourceId);
+    print("kdfjlsf");
+    print("kdfjlsf");
+    print("kdfjlsf");
+    print("kdfjlsf");
+    print("kdfjlsf");
+    print("kdfjlsf");
+    print("kdfjlsf");
+    print("kdfjlsf");
+    print("kdfjlsf");
+    print("kdfjlsf");
+    print("kdfjlsf");
+    print("kdfjlsf");
+    print("kdfjlsf");
+    print(sourceId);
+    print(sourceId);
+    print(sourceId);
+    print(sourceId);
+    print(sourceId);
+    print(sourceId);
+    print(sourceId);
+    print(sourceId);
+    print(sourceId);
+    print(sourceId);
+    print(sourceId);
+    print(sourceId);
+    print(sourceId);
+    print(sourceId);
+    print(sourceId);
+    print(sourceId);
+    print(sourceId);
+    print(sourceId);
+    print(sourceId);
+    print(sourceId);
 
     socket!.emit("message",
         {"message": message, "sourceId": sourceId, "targetId": targetId});
@@ -1231,8 +1230,10 @@ class _IndividualPageState extends State<IndividualPage> {
       messages.add(messageModel);
     });
   }
+
   @override
   Widget build(BuildContext context) {
+    final user = context.watch<UserProvider>().user;
     return Stack(
       children: [
         Image.asset(
@@ -1262,8 +1263,8 @@ class _IndividualPageState extends State<IndividualPage> {
                     CircleAvatar(
                       child: SvgPicture.asset(
                         // widget.chatModel.isGroup
-                            // ? "assets/groups.svg"
-                             "assets/images/person.svg",
+                        // ? "assets/groups.svg"
+                        "assets/images/person.svg",
                         color: Colors.white,
                         height: 36,
                         width: 36,
@@ -1479,9 +1480,7 @@ class _IndividualPageState extends State<IndividualPage> {
                                             duration:
                                                 Duration(milliseconds: 300),
                                             curve: Curves.easeOut);
-                                        sendMessage(
-                                            _controller.text,
-                                            user.id,
+                                        sendMessage(_controller.text, user.id,
                                             widget.doctors.id);
                                         _controller.clear();
                                         setState(() {
@@ -1608,5 +1607,5 @@ class _IndividualPageState extends State<IndividualPage> {
   //           _controller.text = _controller.text + emoji.emoji;
   //         });
   //       });
-  }
+}
 // }

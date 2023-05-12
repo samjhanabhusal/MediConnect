@@ -7,11 +7,7 @@ class MessageModel {
   String type;
   String message;
   String time;
-  MessageModel({
-    required this.message, 
-    required this.type,
-     required this.time
-     });
+  MessageModel({required this.message, required this.type, required this.time});
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -31,9 +27,9 @@ class MessageModel {
 
   String toJson() => json.encode(toMap());
 
-  factory MessageModel.fromJson(String source) => MessageModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory MessageModel.fromJson(String source) =>
+      MessageModel.fromMap(json.decode(source) as Map<String, dynamic>);
 }
-
 
 // Chatgpt
 class Message {

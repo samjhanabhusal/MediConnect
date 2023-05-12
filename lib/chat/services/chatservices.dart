@@ -1,6 +1,3 @@
-
-
-
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
@@ -13,15 +10,10 @@ import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 import '../../providers/user_provider.dart';
 
-class ChatServices{
-void sendMessage(){
-  
-}
+class ChatServices {
+  void sendMessage() {}
 
-
-
-
- Future<List<Doctor>> fetchAlldoctor(BuildContext context) async {
+  Future<List<Doctor>> fetchAlldoctor(BuildContext context) async {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
     List<Doctor> doctorList = [];
     try {
@@ -51,7 +43,8 @@ void sendMessage(){
     }
     return doctorList;
   }
-void EntertoChat({
+
+  void EntertoChat({
     required BuildContext context,
     required Doctor doctor,
   }) async {
@@ -66,7 +59,7 @@ void EntertoChat({
         },
         body: jsonEncode({
           // 'id': doctor.id!,
-          'id': doctor.id,
+          'id': user.id,
         }),
       );
 
@@ -74,8 +67,8 @@ void EntertoChat({
         response: res,
         context: context,
         onSuccess: () {
-          User user =
-              userProvider.user.copyWith(doctors: jsonDecode(res.body)['doctors']);
+          User user = userProvider.user
+              .copyWith(doctors: jsonDecode(res.body)['doctors']);
           userProvider.setUserFromModel(user);
         },
       );
@@ -84,7 +77,7 @@ void EntertoChat({
     }
   }
 // fetch all user
- 
+
   Future<List<User>> fetchAllUsers(BuildContext context) async {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
     List<User> userList = [];
@@ -115,15 +108,6 @@ void EntertoChat({
     }
     return userList;
   }
-
-
-
-
-
-
-
-
-
 
   void deleteDoctor({
     required BuildContext context,
@@ -156,38 +140,39 @@ void EntertoChat({
     }
   }
 }
-  void EntertoChat({
-    required BuildContext context,
-    required Doctor doctors,
-  }) async {
-    final userProvider = Provider.of<UserProvider>(context, listen: false);
 
-    try {
-      http.Response res = await http.post(
-        Uri.parse('$uri/api/enter-to-chat'),
-        headers: {
-          'Content-Type': 'application/json; charset=UTF-8',
-          'x-auth-token': userProvider.user.token,
-        },
-        body: jsonEncode({
-          // 'id': doctors.id!,
-          'id': doctors.id,
-        }),
-      );
+void EntertoChat({
+  required BuildContext context,
+  required Doctor doctors,
+}) async {
+  final userProvider = Provider.of<UserProvider>(context, listen: false);
 
-      httpErrorHandle(
-        response: res,
-        context: context,
-        onSuccess: () {
-          User user =
-              userProvider.user.copyWith(doctors: jsonDecode(res.body)['doctors']);
-          userProvider.setUserFromModel(user);
-        },
-      );
-    } catch (e) {
-      showSnackBar(context, e.toString());
-    }
+  try {
+    http.Response res = await http.post(
+      Uri.parse('$uri/api/enter-to-chat'),
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+        'x-auth-token': userProvider.user.token,
+      },
+      body: jsonEncode({
+        // 'id': doctors.id!,
+        'id': doctors.id,
+      }),
+    );
+
+    httpErrorHandle(
+      response: res,
+      context: context,
+      onSuccess: () {
+        User user = userProvider.user
+            .copyWith(doctors: jsonDecode(res.body)['doctors']);
+        userProvider.setUserFromModel(user);
+      },
+    );
+  } catch (e) {
+    showSnackBar(context, e.toString());
   }
+}
 
 
 

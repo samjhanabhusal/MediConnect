@@ -594,17 +594,6 @@
 // }
 // }
 
-
-
-
-
-
-
-
-
-
-
-
 // import 'package:camera/camera.dart';
 // import 'package:chatapp/CustomUI/CameraUI.dart';
 // import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
@@ -735,7 +724,7 @@
 //                     ),
 //                     CircleAvatar(
 //                       child: SvgPicture.asset(
-                      
+
 //                             "assets/images/person.svg",
 //                         color: Colors.white,
 //                         height: 36,
@@ -1084,32 +1073,6 @@
 //   // }
 // }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import 'dart:convert';
 
 import 'package:luveen/chat/CustomUi/OwnMessageCard.dart';
@@ -1147,7 +1110,7 @@ class _IndividualPageState extends State<IndividualPage> {
   TextEditingController _controller = TextEditingController();
   ScrollController _scrollController = ScrollController();
   IO.Socket? socket;
-  
+
   get messageModel => null;
 
   @override
@@ -1166,7 +1129,7 @@ class _IndividualPageState extends State<IndividualPage> {
   }
 
   void connect() {
-    socket = IO.io("http://192.168.32.74:5000", <String, dynamic>{
+    socket = IO.io("http://172.17.1.165:5000", <String, dynamic>{
       "transports": ["websocket"],
       "autoConnect": false,
     });
@@ -1226,6 +1189,8 @@ class _IndividualPageState extends State<IndividualPage> {
 
   @override
   Widget build(BuildContext context) {
+    final user = context.watch<UserProvider>().user;
+
     return Stack(
       children: [
         Image.asset(
@@ -1255,8 +1220,8 @@ class _IndividualPageState extends State<IndividualPage> {
                     CircleAvatar(
                       child: SvgPicture.asset(
                         // widget.chatModel.isGroup
-                            // ? "assets/groups.svg"
-                             "assets/images/person.svg",
+                        // ? "assets/groups.svg"
+                        "assets/images/person.svg",
                         color: Colors.white,
                         height: 36,
                         width: 36,
@@ -1472,9 +1437,7 @@ class _IndividualPageState extends State<IndividualPage> {
                                             duration:
                                                 Duration(milliseconds: 300),
                                             curve: Curves.easeOut);
-                                        sendMessage(
-                                            _controller.text,
-                                            user.id,
+                                        sendMessage(_controller.text, user.id,
                                             widget.users.id);
                                         _controller.clear();
                                         setState(() {
@@ -1601,5 +1564,5 @@ class _IndividualPageState extends State<IndividualPage> {
   //           _controller.text = _controller.text + emoji.emoji;
   //         });
   //       });
-  }
+}
 // }

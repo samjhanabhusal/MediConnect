@@ -14,8 +14,8 @@ class UserProvider extends ChangeNotifier {
     token: '',
     cart: [],
     prescription: [],
-    profiles:[],
-    doctors:[],
+    profiles: [],
+    doctors: [],
     // doctor: Doctor(name: '', email: '', password: '', contactno: '', address: '', qualification: '', specialization: '', experience: '', nmc_no: 0) ,
   );
 
