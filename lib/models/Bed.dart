@@ -6,7 +6,7 @@ import 'package:luveen/models/rating.dart';
 
 class Bed {
     final String hospitalId;
-  final String ? id;
+  final String  id;
   final List<String> hospital_picture;
   final String beds_available;
   final String hospital_location;
@@ -23,7 +23,7 @@ class Bed {
 
  
   Bed({
-    this.id,
+    required this.id,
     required this.hospitalId,
     required this.hospital_picture,
     required this.beds_available,
@@ -38,6 +38,8 @@ class Bed {
     required this.ventilators_total,
     required this.ventilators_available,
   });
+
+  get phone => null;
 
   // Map<String, dynamic> toMap() {
   Map<String, dynamic> toMap() {

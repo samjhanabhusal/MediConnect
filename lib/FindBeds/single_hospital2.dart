@@ -42,7 +42,9 @@ class _Single_hospitalState extends State<Single_hospital> {
 }
 @override
 Widget build(BuildContext context) {
-  return Column(
+  //  final doctorData = doctors;
+
+     return beds == null ? const Loader(): Column(
     children: [
       Container(
         height: 720,

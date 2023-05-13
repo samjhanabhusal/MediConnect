@@ -1,143 +1,155 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:luveen/constants/utils.dart';
+import 'package:luveen/features/Hospital/Admin/Services/hospital_admin_services.dart';
 // import 'package:luveen/features/Hospital/Admin/Screens/MainPage.dart';
 import 'package:luveen/features/auth/screens/auth_screen.dart';
+import 'package:luveen/providers/category_provider.dart';
 import 'package:provider/provider.dart';
 
-void main() => runApp(MultiProvider(
-  providers: [
-    ChangeNotifierProvider(
-      create: (context) => MyAppState(),
-
-    ),
-  ],child: const MyApp(),
-));
-
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key?key}):super(key:key);
-
-  static const String _title = 'Flutter Code Sample';
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-  debugShowCheckedModeBanner: false,
-    builder: (context, child) {
-      return Directionality(textDirection: TextDirection.ltr, child: child!);
-    },
-    title: 'GNav',
-    theme: ThemeData(
-       primarySwatch: Colors.green,
-    ),
-
-    home: AuthScreen(), 
-    );
-}
-}
-
-
-class MyAppState extends ChangeNotifier {
-
-  //.................................
-  //
-  // here are the variables that must be available to more than one page and which are gonna
-  // change while the app's running
-  //
-  //...........................................................................  
-  List<String> bhkOptions = [];
-  String city = 'Rome';
-
-
-  bhkOptionsAdd(String s){
-    bhkOptions.add(s);
-    notifyListeners();
-  }
-
-  bhkOptionsRemove(String s){
-    bhkOptions.remove(s);
-    notifyListeners();
-  }
-
-}
 
 
 //from this simple start page you have access to other different pages
-class StartPage extends StatelessWidget{
-  const StartPage({Key?key}):super(key:key);
+// class StartPage extends StatelessWidget{
+//   const StartPage({Key?key}):super(key:key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text("AppBar")),
-      body: Row(
-        children: [
-          ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => const SelectOptionsPage(),
-                ));
-              },
-              child: Text("Options")
-          ),
-          ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => const ClientPreferencesPage(),
-                ));
-              },
-              child: Text("Client Preferences"))
-        ],
-      ),
-    );
-  }
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(title: const Text("AppBar")),
+//       body: Row(
+//         children: [
+//           ElevatedButton(
+//               onPressed: () {
+//                 Navigator.of(context).push(MaterialPageRoute(
+//                   builder: (context) => const SelectOptionsPage(),
+//                 ));
+//               },
+//               child: Text("Options")
+//           ),
+//           ElevatedButton(
+//               onPressed: () {
+//                 Navigator.of(context).push(MaterialPageRoute(
+//                   builder: (context) => const ClientPreferencesPage(),
+//                 ));
+//               },
+//               child: Text("Client Preferences"))
+//         ],
+//       ),
+//     );
+//   }
 
-}
+// }
 
 
-//on this page you gonna set the checkboxes
-class SelectOptionsPage extends StatelessWidget {
-  const SelectOptionsPage({Key?key}):super(key:key);
+// //on this page you gonna set the checkboxes
+// class SelectOptionsPage extends StatelessWidget {
+//   const SelectOptionsPage({Key?key}):super(key:key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Select Options')),
-      body: const CheckBoxes()
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(title: const Text('Select Options')),
+//       body: const CheckBoxes()
+//     );
+//   }
+// }
 
 //this pages uses the values which have been set in the screen with the checkboxes
-class ClientPreferencesPage extends StatelessWidget {
-  const ClientPreferencesPage();
+// class ClientPreferencesPage extends StatelessWidget {
+//   const ClientPreferencesPage();
 
-  @override
-  Widget build(BuildContext context) {
-    final myAppState = Provider.of<MyAppState>(context);
-    String prefers = myAppState.bhkOptions.join(", ");
+//   @override
+//   Widget build(BuildContext context) {
+//     final myAppState = Provider.of<CategoryProvider>(context);
+//     String prefers = myAppState.bhkOptions.join(", ");
 
-    return Scaffold(
-        appBar: AppBar(title: const Text("Client page")),
-        body: Center(
-            child: Text("Client prefers $prefers real estate in ${myAppState.city}")));
-  }
-}
+//     return Scaffold(
+//         appBar: AppBar(title: const Text("Client page")),
+//         body: Center(
+//             child: Text("Client prefers $prefers real estate in ${myAppState.city}")));
+//   }
+// }
 
 
 //this widget is used in SelectOptionsPage
-class CheckBoxes extends StatelessWidget {
+class CheckBoxes extends StatefulWidget {
   const CheckBoxes({Key? key}) : super(key: key);
 
   @override
+  State<CheckBoxes> createState() => _CheckBoxesState();
+}
+
+class _CheckBoxesState extends State<CheckBoxes> {
+  @override
   Widget build(BuildContext context) {
-    final appState = Provider.of<MyAppState>(context);
+     final TextEditingController beds_availableController = TextEditingController();
+    final TextEditingController hospital_locationController= TextEditingController();
+    final TextEditingController locationController= TextEditingController();
+    final TextEditingController general_ward_availableController= TextEditingController();
+    final TextEditingController general_ward_totalController= TextEditingController();
+    final TextEditingController VIP_ward_availableController =TextEditingController();
+    final TextEditingController VIP_ward_totalController= TextEditingController();
+    final TextEditingController ICU_availableController= TextEditingController();
+    final TextEditingController ICU_totalController= TextEditingController();
+    final TextEditingController ventilators_totalController= TextEditingController();
+    final TextEditingController ventilators_availableController= TextEditingController();
 
 
-    List<Widget> bhkOptions = <Widget>[
+    final HospitalAdminServices hospitaladminServices = HospitalAdminServices();
+
+
+     List<File> hospital_picture = [];
+  final _addBedFormKey = GlobalKey<FormState>();
+
+  @override
+  void dispose() {
+    super.dispose();
+    beds_availableController.dispose();
+    hospital_locationController.dispose();
+    locationController.dispose();
+    general_ward_availableController.dispose();
+    general_ward_totalController.dispose();
+    VIP_ward_availableController.dispose();
+    VIP_ward_totalController.dispose();
+    ICU_availableController.dispose();
+    ICU_totalController.dispose();
+    ventilators_availableController.dispose();
+    ventilators_totalController.dispose();
+   
+  }
+void AddBed() {
+    if (_addBedFormKey.currentState!.validate() && hospital_picture.isNotEmpty) {
+      // hospitaladminServices.AddBed(context: context, hospital_picture: hospital_picture, beds_available: beds_available, hospital_location: hospital_location, location: location, general_ward_total: general_ward_total, general_ward_available: general_ward_available, VIP_ward_total: VIP_ward_total, VIP_ward_available: VIP_ward_available, ICU_total: ICU_total, ICU_available: ICU_available, ventilators_total: ventilators_total, ventilators_available: ventilators_available, name: name, description: description, price: price, quantity: quantity, category: category, images: images)
+      hospitaladminServices.AddBed(
+        context: context,
+        hospital_picture: hospital_picture,
+    beds_available:beds_availableController.text,
+    hospital_location: hospital_locationController.text,
+    location: locationController.text,
+    general_ward_total:general_ward_totalController.text,
+    general_ward_available:general_ward_availableController.text,
+    VIP_ward_total:VIP_ward_totalController.text,
+    VIP_ward_available:VIP_ward_availableController.text,
+    ICU_total:ICU_totalController.text,
+    ICU_available:ICU_availableController.text,
+    ventilators_total:ventilators_totalController.text,
+    ventilators_available:ventilators_availableController.text,
+
+      );
+    }
+  }
+
+    final appState = Provider.of<CategoryProvider>(context);
+
+
+    List<Widget> bedCategoryOptions = <Widget>[
       MyCustomCheckbox(
         text: const Text('General Ward'),
-        value: appState.bhkOptions.contains('1 BHK'),
-        onChanged: (bool? value) {
+        // controller =
+        // value: general_ward_totalController.text(),
+value: appState.bhkOptions.contains('2 BHK'),        onChanged: (bool? value) {
             if (value!) {
               //myAppState.selectedBhkOptions
               appState.bhkOptionsAdd('1 BHK');
@@ -170,6 +182,7 @@ class CheckBoxes extends StatelessWidget {
       ),
       MyCustomCheckbox(
         text: const Text('Ventilator'),
+        // value: appState.bhkOptions.contains('4 BHK'),
         value: appState.bhkOptions.contains('4 BHK'),
         onChanged: (bool? value) {
             if (value!) {
@@ -181,16 +194,50 @@ class CheckBoxes extends StatelessWidget {
       ),
 
     ];
+     List<Widget> bedTotalNumber = <Widget>[
+     TextFormField(
+                  controller: general_ward_totalController,
+                    decoration: const InputDecoration(
+                      icon: Icon(Icons.arrow_right),
+                      labelText: 'Total number of beds of this category',
+                    )
+                  ),
+                  TextFormField(
+                  controller: general_ward_totalController,
+                    decoration: const InputDecoration(
+                      icon: Icon(Icons.arrow_right),
+                      labelText: 'Total number of beds of this category',
+                    )
+                  ),
+                  TextFormField(
+                  controller: general_ward_totalController,
+                    decoration: const InputDecoration(
+                      icon: Icon(Icons.arrow_right),
+                      labelText: 'Total number of beds of this category',
+                    )
+                  ),
+                  TextFormField(
+                  controller: general_ward_totalController,
+                    decoration: const InputDecoration(
+                      icon: Icon(Icons.arrow_right),
+                      labelText: 'Total number of beds of this category',
+                    )
+                  ),
+                  
+      
+     
+      
+    ];
 
     return Column(
-      children: bhkOptions,
+      children: bedCategoryOptions,
     );
   }
 }
 
 
 //this widget is used in CheckBoxes
-class MyCustomCheckbox extends StatelessWidget {
+class MyCustomCheckbox extends StatefulWidget {
   const MyCustomCheckbox({
    Key?key ,
     required this.text,
@@ -205,31 +252,100 @@ class MyCustomCheckbox extends StatelessWidget {
   final ValueChanged<bool> onChanged;
 
   @override
+  State<MyCustomCheckbox> createState() => _MyCustomCheckboxState();
+}
+
+class _MyCustomCheckboxState extends State<MyCustomCheckbox> {
+  @override
   Widget build(BuildContext context) {
+
+     final TextEditingController beds_availableController = TextEditingController();
+    final TextEditingController hospital_locationController= TextEditingController();
+    final TextEditingController locationController= TextEditingController();
+    final TextEditingController general_ward_availableController= TextEditingController();
+    final TextEditingController general_ward_totalController= TextEditingController();
+    final TextEditingController VIP_ward_availableController =TextEditingController();
+    final TextEditingController VIP_ward_totalController= TextEditingController();
+    final TextEditingController ICU_availableController= TextEditingController();
+    final TextEditingController ICU_totalController= TextEditingController();
+    final TextEditingController ventilators_totalController= TextEditingController();
+    final TextEditingController ventilators_availableController= TextEditingController();
+
+
+    final HospitalAdminServices hospitaladminServices = HospitalAdminServices();
+
+
+     List<File> hospital_picture = [];
+  final _addBedFormKey = GlobalKey<FormState>();
+
+  @override
+  void dispose() {
+    super.dispose();
+    beds_availableController.dispose();
+    hospital_locationController.dispose();
+    locationController.dispose();
+    general_ward_availableController.dispose();
+    general_ward_totalController.dispose();
+    VIP_ward_availableController.dispose();
+    VIP_ward_totalController.dispose();
+    ICU_availableController.dispose();
+    ICU_totalController.dispose();
+    ventilators_availableController.dispose();
+    ventilators_totalController.dispose();
+   
+  }
+void AddBed() {
+    if (_addBedFormKey.currentState!.validate() && hospital_picture.isNotEmpty) {
+      // hospitaladminServices.AddBed(context: context, hospital_picture: hospital_picture, beds_available: beds_available, hospital_location: hospital_location, location: location, general_ward_total: general_ward_total, general_ward_available: general_ward_available, VIP_ward_total: VIP_ward_total, VIP_ward_available: VIP_ward_available, ICU_total: ICU_total, ICU_available: ICU_available, ventilators_total: ventilators_total, ventilators_available: ventilators_available, name: name, description: description, price: price, quantity: quantity, category: category, images: images)
+      hospitaladminServices.AddBed(
+        context: context,
+        hospital_picture: hospital_picture,
+    beds_available:beds_availableController.text,
+    hospital_location: hospital_locationController.text,
+    location: locationController.text,
+    general_ward_total:general_ward_totalController.text,
+    general_ward_available:general_ward_availableController.text,
+    VIP_ward_total:VIP_ward_totalController.text,
+    VIP_ward_available:VIP_ward_availableController.text,
+    ICU_total:ICU_totalController.text,
+    ICU_available:ICU_availableController.text,
+    ventilators_total:ventilators_totalController.text,
+    ventilators_available:ventilators_availableController.text,
+
+      );
+    }
+  }
+   void selectImages() async {
+    var res = await pickImages();
+    setState(() {
+      hospital_picture = res;
+    });
+  }
     return InkWell(
       onTap: () {
-        onChanged(!value);
+        widget.onChanged(!widget.value);
       },
       child: Padding(
-        padding: padding,
+        padding: widget.padding,
         child: Column(
           children: [
             Row(
               children: <Widget>[
-                Expanded(child: text),
+                Expanded(child: widget.text),
                 Checkbox(
-                  value: value,
+                  value: widget.value,
                   onChanged: (bool? newValue) {
-                    onChanged(newValue!);
+                    widget.onChanged(newValue!);
                   },
                 ),
               ],
             ),
-            value
+            widget.value
                 //.........................................
                 //HERE IS THE TextFormField WIDGET
                 //.........................................
                 ? TextFormField(
+                  controller: general_ward_totalController,
                     decoration: const InputDecoration(
                       icon: Icon(Icons.arrow_right),
                       labelText: 'Total number of beds of this category',

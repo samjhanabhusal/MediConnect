@@ -44,7 +44,7 @@ class _ChatList2State extends State<ChatList2>
 
         final user = UserProvider().user;
 
- late String sourceChat;
+//  late String sourceChat;
   late TabController _controller;
 // late List<ChatModel> chatmodels; // Declare the list without initializing it
 
@@ -83,7 +83,7 @@ class _ChatList2State extends State<ChatList2>
   }
   @override
   Widget build(BuildContext context) {
-                    final doctorData = doctors;
+                    // final doctorData = doctors;
                               final doctor = context.watch<UserProvider>().doctor;
 
 

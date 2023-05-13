@@ -15,6 +15,19 @@ final user =UserProvider().user;
 
 String sourceChat = user.id;
 
+
+
+
+
+  bool showGeneralWard = false;
+  bool showVipWard = false;
+  bool showIcu = false;
+  bool showVentilator = false;
+
+
+
+
+
 class GlobalVariables {
   // COLORS
   static const appBarGradient = LinearGradient(
@@ -44,6 +57,29 @@ class GlobalVariables {
     {
       'title': 'Medicines',
       'image': 'assets/images/medie.png',
+    },
+    {
+      'title': 'Babies',
+      'image': 'assets/images/beb.png',
+    },
+    {
+      'title': 'Women',
+      'image': 'assets/images/women.png',
+    },
+    {
+      'title': 'Men',
+      'image': 'assets/images/men.png',
+    },
+    {
+      'title': 'Old',
+      'image': 'assets/images/old.png',
+    },
+  ];
+
+  static const List<Map<String, String>> BedCategories = [
+    {
+      'title': 'Ventilator',
+      // 'image': 'assets/images/medie.png',
     },
     {
       'title': 'Babies',

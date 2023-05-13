@@ -31,11 +31,11 @@ var io = require("socket.io")(server);
 
 // const{Server} = require("socket.io");
 // const io = new Server(server);
-// const DB = "mongodb+srv://luveen:luveenpassword@cluster0.vop3wa1.mongodb.net/?retryWrites=true&w=majority";
-var username = encodeURIComponent("Samjhana");
+const DB = "mongodb+srv://luveen:luveenpassword@cluster0.vop3wa1.mongodb.net/?retryWrites=true&w=majority";
+// var username = encodeURIComponent("Samjhana");
 
-var password = encodeURIComponent("password05#")
-const DB = `mongodb+srv://${username}:${password}@cluster0.hmea1x6.mongodb.net/?retryWrites=true&w=majority`
+// var password = encodeURIComponent("password05#")
+// const DB = `mongodb+srv://${username}:${password}@cluster0.hmea1x6.mongodb.net/?retryWrites=true&w=majority`
 var clients = {};
 // middleware
 app.use(express.json());

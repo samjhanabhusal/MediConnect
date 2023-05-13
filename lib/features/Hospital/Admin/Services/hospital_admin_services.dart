@@ -47,7 +47,9 @@ class HospitalAdminServices {
 
 
     try {
-final cloudinary = CloudinaryPublic('denfgaxvg', 'uszbstnu');      List<String> imageUrls = [];
+// final cloudinary = CloudinaryPublic('denfgaxvg', 'uszbstnu');      List<String> imageUrls = [];
+      final cloudinary = CloudinaryPublic('dh78aetr0', 'ewgdpg4v');
+      List<String> imageUrls = [];
 
       for (int i = 0; i < hospital_picture.length; i++) {
         CloudinaryResponse res = await cloudinary.uploadFile(
@@ -58,6 +60,7 @@ final cloudinary = CloudinaryPublic('denfgaxvg', 'uszbstnu');      List<String> 
 
       Bed bed = Bed(
           hospitalId:'',
+          id:'',
       
           hospital_picture: imageUrls,
           beds_available: beds_available,
@@ -96,8 +99,87 @@ final cloudinary = CloudinaryPublic('denfgaxvg', 'uszbstnu');      List<String> 
     }
   }
 
+void editbeddetail({
+    required BuildContext context,
+    required VoidCallback onSuccess,
+    required List< File>hospital_picture,
+    required String beds_available,
+    required String hospital_location,
+    required String location,
+    required String general_ward_total,
+    required String general_ward_available,
+    required String VIP_ward_total,
+    required String VIP_ward_available,
+    required String ICU_total,
+    required String ICU_available,
+    required String ventilators_total,
+    required String ventilators_available,
+  }) async {
+    final user =UserProvider().user;
+    final hospital_id = HospitalProvider().hospital.id;
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
 
-  // get all the products
+    try {
+      final cloudinary = CloudinaryPublic('denfgaxvg', 'uszbstnu');      List<String> imageUrls = [];
+
+      for (int i = 0; i < hospital_picture.length; i++) {
+        CloudinaryResponse res = await cloudinary.uploadFile(
+          CloudinaryFile.fromFile(hospital_picture[i].path, folder: 'Hospital'),
+        );
+        imageUrls.add(res.secureUrl);
+      }
+     Bed bed = Bed(
+          hospitalId:'',
+          id:'',
+      
+          hospital_picture: imageUrls,
+          beds_available: beds_available,
+          hospital_location: hospital_location,
+          location: location,
+          general_ward_total: general_ward_total,
+          general_ward_available: general_ward_available,
+          VIP_ward_total: VIP_ward_total,
+          VIP_ward_available: VIP_ward_available,
+          ICU_total: ICU_total,
+          ICU_available: ICU_available,
+          ventilators_total: ventilators_total,
+          ventilators_available: ventilators_available, );
+
+        // http.post(
+       http.Response res = await http.put(
+
+        Uri.parse('$uri/hospital/update/bed'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'x-auth-token': userProvider.user.token,
+        },
+         body: bed.toJson(),
+        // body: jsonEncode
+      );
+
+      httpErrorHandle(
+        response: res,
+        context: context,
+        onSuccess: () {
+                    showSnackBar(context, 'Beds Edited Successfully!');
+
+         
+        },
+      );
+    } catch (e) {
+      showSnackBar(context, e.toString());
+    }
+  }
+
+
+
+
+
+
+
+
+
+  // get all the beds
   Future<List<Product>> fetchAllBeds(BuildContext context) async {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
     List<Product> BedList = [];
@@ -159,4 +241,11 @@ final cloudinary = CloudinaryPublic('denfgaxvg', 'uszbstnu');      List<String> 
       showSnackBar(context, e.toString());
     }
   }
+
+
+
+
+
+
+  
 }

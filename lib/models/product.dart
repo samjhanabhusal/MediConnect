@@ -22,6 +22,8 @@ class Product {
     this.rating,
   });
 
+  get email => null;
+
   Map<String, dynamic> toMap() {
     return {
       'name': name,

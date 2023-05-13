@@ -186,9 +186,14 @@
 
 
 import 'package:luveen/FindBeds/firstscreen.dart';
+import 'package:luveen/features/Hospital/Admin/Screens/RegistrationDetails2.dart';
 import 'package:luveen/features/Hospital/services/hospital_services.dart';
+import 'package:luveen/features/cart/screens/cart_screen.dart';
+import 'package:luveen/features/cart/widgets/cart_product.dart';
 import 'package:luveen/features/doctor/Services/doctor_service.dart';
 import 'package:luveen/features/home/screens/homeScreen2.dart';
+import 'package:luveen/features/cart/screens/cart_screen.dart';
+import 'package:luveen/providers/category_provider.dart';
 import 'package:luveen/providers/message_provider.dart';
 
 import 'features/Hospital/Admin/Screens/HospitalScreen.dart';
@@ -215,6 +220,9 @@ void main() {
 ),
     ChangeNotifierProvider(
   create: (context) => MessageProvider(),
+),
+    ChangeNotifierProvider(
+  create: (context) => HospitalProvider(),
 ),
 ChangeNotifierProvider(
   create: (context) => HospitalProvider(),
@@ -292,7 +300,7 @@ class MySplashScreen extends StatelessWidget {
         case 'doctor':
           return DoctorScreen();
         case 'hospital':
-             return HospitalScreen();
+             return HospitalRegistrationDetails();
         case 'admin':
           return AdminScreen();
       }
@@ -314,8 +322,6 @@ class MySplashScreen extends StatelessWidget {
     );
   }
 }
-
-
 
 
 

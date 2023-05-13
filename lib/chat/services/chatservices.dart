@@ -117,6 +117,40 @@ void EntertoChat({
   }
 
 
+// / fetch all user
+  // get all the products
+  Future<List<User>> fetchAllDoctorFromRole(BuildContext context) async {
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    List<User> userList = [];
+    try {
+      http.Response res =
+          await http.get(Uri.parse('$uri/api/get-doctorbyrole'), headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+        'x-auth-token': userProvider.user.token,
+      });
+
+      httpErrorHandle(
+        response: res,
+        context: context,
+        onSuccess: () {
+          for (int i = 0; i < jsonDecode(res.body).length; i++) {
+            userList.add(
+              User.fromJson(
+                jsonEncode(
+                  jsonDecode(res.body)[i],
+                ),
+              ),
+            );
+          }
+        },
+      );
+    } catch (e) {
+      showSnackBar(context, e.toString());
+    }
+    return userList;
+  }
+
+
 
 
 
@@ -187,10 +221,41 @@ void EntertoChat({
     } catch (e) {
       showSnackBar(context, e.toString());
     }
+  void EntertoChatforUser({
+    required BuildContext context,
+    required User users,
+  }) async {
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+
+    try {
+      http.Response res = await http.post(
+        Uri.parse('$uri/api/enter-to-chat/user'),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'x-auth-token': userProvider.user.token,
+        },
+        body: jsonEncode({
+          // 'id': doctors.id!,
+          'id': user.id,
+        }),
+      );
+
+      httpErrorHandle(
+        response: res,
+        context: context,
+        onSuccess: () {
+          User user =
+              userProvider.user.copyWith(doctors: jsonDecode(res.body)['user']);
+          userProvider.setUserFromModel(user);
+        },
+      );
+    } catch (e) {
+      showSnackBar(context, e.toString());
+    }
   }
 
 
 
 
 
-// }
+}

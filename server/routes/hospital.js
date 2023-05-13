@@ -2,16 +2,21 @@ const express = require('express');
 const Hospital = require('../models/hospital');
 const {Bed} = require('../models/bed');
 const hospitalRouter = express.Router();
+const nodemailer = require("nodemailer");
 const hospital = require('../middlewares/hospital');
 const auth = require('../middlewares/auth');
 const User = require('../models/user');
 const bcryptjs = require("bcryptjs");
 // const verify = require('../config/verifyToken');
+// uuid to generate random string
+// uuid has submodel v4
+const { v4: uuidv4 } = require("uuid");
 
 
 
 const axios = require('axios');
 const cheerio = require('cheerio');
+
 
 // async function getHospitals() {
 //   try {
@@ -33,6 +38,56 @@ const cheerio = require('cheerio');
 // getHospitals().then((hospitals) => {
 //   console.log(hospitals);
 // });
+
+const sendVerifyMail = (name, email, user_id) => {
+	// const sendResetPasswordMail = (name, email)=>{
+	const currentUrl = "http://localhost:5000/";
+	const uniqueString = uuidv4() + user_id;
+	try {
+	  const transporter = nodemailer.createTransport({
+		host: "smtp.gmail.com",
+		port: 587,
+		secure: false,
+		requireTLS: true,
+		auth: {
+		  user: process.env.EMAIL_USER,
+		  pass: process.env.EMAIL_PASSWORD,
+		},
+	  });
+  
+	  const mailOptions = {
+		from: process.env.EMAIL_USER,
+  
+		to: email,
+		subject: "For Verification Mail",
+  
+		  // html:
+		  //   "<p> Hi " +
+		  //   name +
+		  //   ', please click here to and <a href = "http://3000/api/verify/mail' +
+		  //   user_id +
+		  //   '">Verify</a>your mail.</P>',
+		html: `<p>Verify your email to complete signup and singin to your account.</p><p>This link 
+		<b>expires in 6 days</b>.</p><p>Press <a href = ${
+		  currentUrl + "user/verify/" + user_id
+		}>here.</p>`,
+	  };
+  
+	  
+  
+	  transporter.sendMail(mailOptions, function (error, info) {
+		if (error) {
+		  console.log(error);
+		} else {
+		  console.log("mail has been send:-", info.response);
+		}
+	  });
+	} catch (e) {
+	  res.status(400).json({ error: e.message });
+	}
+  };
+
+
 
 async function getHospitals(){
 	const url = 'https://nepalipedia.com/hospitals/list-of-hospitals-in-kathmandu-nepal/';
@@ -59,6 +114,8 @@ async function getHospitals(){
 		hospitals.push(hospital);
 	  }
 	});
+	console.log(hospitals);
+
 	return hospitals;
   }
 //   getHospitals().then((hospitals) => {
@@ -91,28 +148,28 @@ async function getHospitalName() {
 }
 
 hospitalRouter.post("/api/verify-hospitals", async (req, res) => {
-  try {
-    const { name } = req.body;
-    const existingHospital = await Hospital.findOne({ name });
-    if (existingHospital) {
-      return res.status(400).json({ msg: 'Hospital already exists' });
-    }
-
-    const hospitals = await getHospitalName();
-
-    const hospitalExists = hospitals.some(
-      (hospital) => name.toLowerCase() === hospital.toLowerCase()
-    );
-
-    if (!hospitalExists) {
-      return res.status(400).json({ msg: 'Hospital not found' });
-    }
-	res.json(name);
-  } catch (e) {
-    res.status(500).json({ error: e.message });
-  }
-});
- 
+	try {
+	  const { name } = req.body;
+	//   const existingHospital = await Hospital.findOne({ name });
+	//   if (existingHospital) {
+	// 	return res.status(400).json({ msg: 'Hospital already exists' });
+	//   }
+  
+	  const hospitals = await getHospitalName();
+  
+	  const hospitalExists = hospitals.some(
+		(hospital) => name.toLowerCase() === hospital.toLowerCase()
+	  );
+  
+	  if (!hospitalExists) {
+		return res.status(400).json({ msg: 'Hospital not found' });
+	  }
+	  res.json(name);
+	} catch (e) {
+	  res.status(500).json({ error: e.message });
+	}
+  });
+   
 
 
 
@@ -124,6 +181,7 @@ hospitalRouter.post("/hospital/register", async (req, res) => {
 		if (existingHospital) {
 			return res
 				.status(400)
+				
 				.json({ msg: 'Hospital exists' });
 		}const existingUser = await User.findOne({ email });
         if (existingUser) {
@@ -139,7 +197,8 @@ hospitalRouter.post("/hospital/register", async (req, res) => {
 //  if (!hospitalExists) {
 //    return res.status(400).json({ msg: 'Hospital not found' });
 //  }
-
+        const isMatch = password === confirmpassword;
+		if (!isMatch) { res.status(400).json({ msg: "Password and confirm Password should be same" });}
 		const hashedPassword = await bcryptjs.hash(password, 8);
 		let hospital = new Hospital({
 			// hospital_name,
@@ -152,15 +211,21 @@ hospitalRouter.post("/hospital/register", async (req, res) => {
 
 		})
 		hospital = await hospital.save();
-		res.json(hospital);
+		// res.json(hospital);
         let user = new User({
 			_id : hospital.id,
 			email,
 			password: hashedPassword,
 			name,
 			role: "hospital",
+			// is_verified: 1
 		  });
 		  user = await user.save();
+		  if (user) {
+			sendVerifyMail(req.body.name, req.body.email, user._id);
+		  }
+		//   console.log("lkjlfksdj");
+		  res.json(hospital);
 		  
 		  // res.json(user);
 	} catch (e) {
@@ -168,7 +233,6 @@ hospitalRouter.post("/hospital/register", async (req, res) => {
 
 	}
 })
-
 //Get all hospitals
 hospitalRouter.get("/api/get-hospitals",async(req, res)=>{
 	try {
@@ -338,18 +402,16 @@ hospitalRouter.get("/api/hospital/me", auth, async (req, res) => {
 		$set: {
 		  // hospital_picture:req.body.hospital_picture
 		  hospital_picture: req.body.hospital_picture ? req.body.hospital_picture : bed.hospital_picture,
-		  beds_available: req.body.beds_available ? req.body.beds_available : bed.hospital_picture,
-		  hospital_location: req.body.hospital_location
-			? req.body.hospital_location
-			: bed.hospital_location,
+		  beds_available: req.body.beds_available ? req.body.beds_available : bed.beds_available,
+		  hospital_location: req.body.hospital_location? req.body.hospital_location: bed.hospital_location,
 		  general_ward_total: req.body.general_ward_total ? req.body.general_ward_total : bed.general_ward_total,
 		  general_ward_available: req.body.general_ward_available ? req.body.general_ward_available : bed.general_ward_available,
 		  VIP_ward_total: req.body.VIP_ward_total ? req.body.VIP_ward_total : bed.VIP_ward_total, //about:""
 		  VIP_ward_available: req.body.VIP_ward_available ? req.body.VIP_ward_total : bed.VIP_ward_total, //about:""
-		  ICU_total: req.body.ICU_total ? req.body.VIP_ward_total : bed.VIP_ward_total, //about:""
-		  ICU_available: req.body.ICU_available ? req.body.VIP_ward_total : bed.VIP_ward_total, //about:""
-		  ventilators_total: req.body.ventilators_total ? req.body.VIP_ward_total : bed.VIP_ward_total, //about:""
-		  ventilators_available: req.body.ventilators_available ? req.body.VIP_ward_total : bed.VIP_ward_total, //about:""
+		  ICU_total: req.body.ICU_total ?  req.body.ICU_total : bed.ICU_total, //about:""
+		  ICU_available: req.body.ICU_available ? req.body.ICU_available : bed.ICU_available, //about:""
+		  ventilators_total: req.body.ventilators_total ? req.body.ventilators_total : bed.ventilators_total, //about:""
+		  ventilators_available: req.body.ventilators_available ? req.body.ventilators_available : bed.ventilators_available, //about:""
 		},
 	  },
 	  { new: true },
@@ -367,7 +429,7 @@ hospitalRouter.get("/hospital", auth, async (req, res) => {
 	const hospital = await Hospital.findById(req.hospital);
 	if(hospital){res.json({ ...hospital._doc, token: req.token });}
 	else {
-		res.status(404).json({ message: "Doctor not found" });}
+		res.status(404).json({ message: "Hospital not found" });}
   });
 
   module.exports = hospitalRouter;

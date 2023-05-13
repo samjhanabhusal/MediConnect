@@ -2,10 +2,10 @@
 const axios = require ("axios");
 const Cheerio =  require("cheerio");
 const express = require("express");
-
+const nodemailer = require("nodemailer");
 const User = require("../models/user");
 // const Doctor = require('../models/doctor');
-
+const { v4: uuidv4 } = require("uuid");
 const bcryptjs = require("bcryptjs");
 const authRouter = express.Router();
 const jwt = require("jsonwebtoken");
@@ -13,7 +13,53 @@ const auth = require("../middlewares/auth");
 const admin = require("../middlewares/admin");
 const { Product } = require("../models/product");
 const {Doctor} = require('../models/doctor');
+const sendVerifyMail = (name, email, user_id) => {
+  // const sendResetPasswordMail = (name, email)=>{
+  const currentUrl = "http://localhost:5000/";
+  const uniqueString = uuidv4() + user_id;
+  try {
+    const transporter = nodemailer.createTransport({
+      host: "smtp.gmail.com",
+      port: 587,
+      secure: false,
+      requireTLS: true,
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASSWORD,
+      },
+    });
 
+    const mailOptions = {
+      from: process.env.EMAIL_USER,
+
+      to: email,
+      subject: "For Verification Mail",
+
+        // html:
+        //   "<p> Hi " +
+        //   name +
+        //   ', please click here to and <a href = "http://3000/api/verify/mail' +
+        //   user_id +
+        //   '">Verify</a>your mail.</P>',
+      html: `<p>Verify your email to complete signup and singin to your account.</p><p>This link 
+      <b>expires in 6 days</b>.</p><p>Press <a href = ${
+        currentUrl + "user/verify/" + user_id
+      }>here.</p>`,
+    };
+
+    
+
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log("mail has been send:-", info.response);
+      }
+    });
+  } catch (e) {
+    res.status(400).json({ error: e.message });
+  }
+};
 // SIGN UP
 authRouter.post("/api/signup", async (req, res) => {
   try {
@@ -35,12 +81,26 @@ authRouter.post("/api/signup", async (req, res) => {
     });
     user = await user.save();
     res.json(user);
+    if (user) {
+      sendVerifyMail(req.body.name, req.body.email, user._id);
+    }
   } catch (e) {
     res.status(500).json({ error: e.message });
   }
 });
 
+authRouter.get("/user/verify/:userId", async (req, res) => {
+  try {
+    const verifyupdat = await User.updateOne(
+      { _id: req.params.userId},
+      { $set: { is_verified: 1 } }
+    );
+    res.json({msg:"Email has been verified.Now you can sign in"})
 
+  } catch (e) {
+    res.status(400).send({ msg: e.message });
+  }
+});
 
 // Sign In Route
 // Exercise
@@ -54,31 +114,9 @@ authRouter.post("/api/signin", async (req, res) => {
         .status(400)
         .json({ msg: "User with this email does not exist!" });
     }
-    // if (user.role === 'doctor' && !user.npc_no) {
-    //   // return res.status(400).json({ msg: "Doctor credentials not found." });
-    //   const doctorName = user.name;
-    //   const url = 'https://www.nmc.org.np/deregistration';
-    //   const response = await axios.get(url);
-    //   const html = response.data;
-    //   const $ = cheerio.load(html);
-    //   const json = $('script[type="application/json"]').html();
-    //   const data = JSON.parse(json);
-    //   const deregisteredDoctors = data.deregisteredDoctors;
-    //   let nmc_no = '';
-    //   for (let i = 0; i < deregisteredDoctors.length; i++) {
-    //     const doctor = deregisteredDoctors[i];
-    //     if (doctor.name === doctorName) {
-    //       nmc_no = doctor.nmc_no;
-    //       break;
-    //     }
-    //   }
-    //   if (!nmc_no) {
-    //     return res.status(400).json({ msg: "Doctor credentials not found." });
-    //   }
-      // user.nmc_no = nmc_no;
-      // await user.save();
-    // }
-    // }
+    if (user.is_verified === 0) {
+      return res.status(400).json({ msg: "Email has been sent. First verify it." });
+    }
 
     const isMatch = await bcryptjs.compare(password, user.password);
     if (!isMatch) {

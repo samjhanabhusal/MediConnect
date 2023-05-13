@@ -171,30 +171,7 @@ Future <Bed> fetchOnlyaBedsByHospitalId({
     // return bed;
   }
 
- Future<List<Hospital>>verifyHospitalName(String hospitalName) async {
-  // final apiUrl = 'https://your-api-url/api/verify-hospitals';
-
-  try {
-    final response = await http.get(Uri.parse('$uri/api/verify-hospitals'));
-
-    if (response.statusCode == 200) {
-      final hospitals = json.decode(response.body);
-      final hospitalExists = hospitals.any((hospital) =>
-          hospitalName.toLowerCase() == hospital['name'].toLowerCase());
-      return hospitalExists;
-    } else if (response.statusCode == 400) {
-      throw Exception('Hospital not found');
-    } else {
-      throw Exception('Failed to verify hospital name: ${response.statusCode}');
-    }
-  } catch (e) {
-    throw Exception('Failed to verify hospital name: $e');
-  }
-}
-
-
-
-
+ 
 
   Future<List<Hospital>> fetchMyHospital({
     required BuildContext context,

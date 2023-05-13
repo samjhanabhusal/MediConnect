@@ -4,6 +4,7 @@ import 'package:luveen/FindBeds/firstscreen.dart';
 import 'package:luveen/chat/Screens/IndividualPage.dart';
 import 'package:luveen/common/widgets/bottom_bar.dart';
 import 'package:luveen/features/Hospital/Admin/Screens/HospitalScreen.dart';
+import 'package:luveen/features/Hospital/Admin/Screens/RegistrationDetails2.dart';
 import 'package:luveen/features/address/screens/address_screen.dart';
 import 'package:luveen/features/admin/screens/add_product_screen.dart';
 import 'package:luveen/features/auth/screens/auth_screen.dart';
@@ -38,10 +39,10 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
         settings: routeSettings,
         builder: (_) => const DoctorScreen(),
       );
-    case HospitalScreen.routeName:
+    case HospitalRegistrationDetails.routeName:
       return MaterialPageRoute(
         settings: routeSettings,
-        builder: (_) => const HospitalScreen(),
+        builder: (_) =>  HospitalRegistrationDetails(),
       );
     case Dashboard0.routeName:
       return MaterialPageRoute(

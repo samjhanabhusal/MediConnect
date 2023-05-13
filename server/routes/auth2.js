@@ -92,20 +92,7 @@ authRouter.post("/api/signup", async (req, res) => {
   }
 });
 
-authRouter.get("/user/verify/:userId",async(req,res)=>{
-let {userId} = req.params;
-UserVerification.find({userId})
-.then((result)=>{
-    User.updateOne({_id: userId},{is_verified: 1});
-  // if(expiresAt < Date.now()){
-  //   UserVerification.deleteOne({userId})
-  // }
-  res.json({msg:"Done"})})
-.catch((error)=>{
-  console.log(error);
-})
 
-});
  authRouter.get("/user/verify/:userId", async (req, res) => {
   try {
     const verifyupdat = await User.updateOne(
@@ -189,9 +176,9 @@ authRouter.post("/api/signin", async (req, res) => {
           .json({ msg: "User with this email does not exist!" });
       }
   
-      // if (user.is_verified === 0) {
-      //   return res.status(400).json({ msg: "Email has been sent. First verify it." });
-      // }
+      if (user.is_verified === 0) {
+        return res.status(400).json({ msg: "Email has been sent. First verify it." });
+      }
   
       const isMatch = await bcryptjs.compare(password, user.password);
       if (!isMatch) {

@@ -1248,6 +1248,10 @@ class _IndividualPageState extends State<IndividualPage> {
 
     setState(() {
       messages.add(messageModel);
+      print(messageModel);
+      print(messageModel);
+      print(messageModel);
+      print(messageModel);
     });
   }
   @override

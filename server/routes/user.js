@@ -84,19 +84,14 @@ userRouter.post("/api/save-user-contactno", auth, async (req, res) => {
     res.status(500).json({ error: e.message });
   }
 });
-// userRouter.get("/api/get-doctobyrole", auth, async (req, res) => {
-//   try {
-//     // const { contactno } = req.body;
-//     let user = await User.find(req.user);
-//     if(user.role == doctor)
-//     user = await user.save();
-
-
-//     res.json(user);
-//   } catch (e) {
-//     res.status(500).json({ error: e.message });
-//   }
-// });
+userRouter.get("/api/get-doctorbyrole", async (req, res) => {
+  try {
+    const doctors = await User.find({ role: "doctor" });
+    res.json(doctors);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
 
 
 
@@ -210,6 +205,16 @@ userRouter.post("/api/delete-prescription", auth, async (req, res) => {
   }
 });
 
+userRouter.post("/api/enter-to-chat/user",  auth, async (req, res) => {
+  try {
+    // const { id } = req.body;
+    // const user = await User.findById(id);
+    let user = await User.findById(req.body);
+    res.json(user);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
 
 
 

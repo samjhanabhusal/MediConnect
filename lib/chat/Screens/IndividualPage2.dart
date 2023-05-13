@@ -1267,6 +1267,14 @@ class _IndividualPageState extends State<IndividualPage> {
   @override
   Widget build(BuildContext context) {
           final user = context.watch<UserProvider>().user;
+          print(user.id);
+          print(user.id);
+          print(user.id);
+          print(user.id);
+          print(user.id);
+          print(user.id);
+          print(user.id);
+          print(user.id);
 
     return Stack(
       children: [

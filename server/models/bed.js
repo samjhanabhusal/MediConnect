@@ -58,52 +58,52 @@ const bedSchema = mongoose.Schema({
   // },
   hospital_picture: [{
     type: String,
-    required: true
+    // required: true
   },],
 
   beds_available: {
     type: String,
-    required: true
+    // required: true
   },
   hospital_location: {
     type: String,
-    required: true
+    // required: true
   },
   location: {
     type: String,
-    required: true
+    // required: true
   },
   general_ward_total: {
     type: String,
-    required: true
+    // required: true
   },
   general_ward_available: {
     type: String,
-    required: true
+    // required: true
   },
   VIP_ward_total: {
     type: String,
-    required: true
+    // required: true
   },
   VIP_ward_available: {
     type: String,
-    required: true
+    // required: true
   },
   ICU_total: {
     type: String,
-    required: true
+    // required: true
   },
   ICU_available: {
     type: String,
-    required: true
+    // required: true
   },
   ventilators_total: {
     type: String,
-    required: true
+    // required: true
   },
   ventilators_available: {
     type: String,
-    required: true
+    // required: true
   }
 });
 

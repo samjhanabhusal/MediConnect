@@ -10,7 +10,61 @@ const doctors = require("../middlewares/doctor");
 const doctor = require("../middlewares/auth");
 const axios = require('axios');
 const cheerio = require('cheerio');
+const nodemailer = require("nodemailer");
+// uuid to generate random string
+// uuid has submodel v4
+const { v4: uuidv4 } = require("uuid");
 // doctorRouter.post("/doctor/register",async (req, res)=>{
+
+const sendVerifyMail = (name, email, user_id) => {
+  // const sendResetPasswordMail = (name, email)=>{
+  const currentUrl = "http://localhost:5000/";
+  const uniqueString = uuidv4() + user_id;
+  try {
+    const transporter = nodemailer.createTransport({
+      host: "smtp.gmail.com",
+      port: 587,
+      secure: false,
+      requireTLS: true,
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASSWORD,
+      },
+    });
+
+    const mailOptions = {
+      from: process.env.EMAIL_USER,
+
+      to: email,
+      subject: "For Verification Mail",
+
+        // html:
+        //   "<p> Hi " +
+        //   name +
+        //   ', please click here to and <a href = "http://3000/api/verify/mail' +
+        //   user_id +
+        //   '">Verify</a>your mail.</P>',
+      html: `<p>Verify your email to complete signup and singin to your account.</p><p>This link 
+      <b>expires in 6 days</b>.</p><p>Press <a href = ${
+        currentUrl + "user/verify/" + user_id
+      }>here.</p>`,
+    };
+
+    
+
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log("mail has been send:-", info.response);
+      }
+    });
+  } catch (e) {
+    res.status(400).json({ error: e.message });
+  }
+};
+
+
 
 //  GET request to the deregistration page of NMC 
 //  loads the HTML response into a Cheerio object. 
@@ -101,12 +155,17 @@ const cheerio = require('cheerio');
       doctor = await doctor.save();
   
       let user = new User({
+        _id: doctor.id,
         email,
         password: hashedPassword,
         name,
         role: "doctor",
+        // is_verified: 1
       });
       user = await user.save();
+      if (user) {
+        sendVerifyMail(req.body.name, req.body.email, user._id);
+      }
   
       res.json(doctor);
     } catch (e) {
