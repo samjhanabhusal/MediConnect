@@ -31,7 +31,7 @@ class _ProductieState extends State<Productie> {
   }
 
   fetchAllProducts() async {
-    products = await homeServices.fetchAllProducts(context);
+    products = await homeServices.fetchAndFilterProducts(context);
     setState(() {});
   }
 

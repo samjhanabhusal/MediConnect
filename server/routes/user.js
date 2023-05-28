@@ -1,6 +1,7 @@
 const express = require("express");
 const userRouter = express.Router();
 const auth = require("../middlewares/auth");
+const doctor = require("../middlewares/doctor");
 const Order = require("../models/order");
 const {Prescription} = require("../models/prescription");
 // const Prescription = require("../models/prescription");
@@ -84,10 +85,18 @@ userRouter.post("/api/save-user-contactno", auth, async (req, res) => {
     res.status(500).json({ error: e.message });
   }
 });
-userRouter.get("/api/get-doctorbyrole", async (req, res) => {
+userRouter.get("/api/get-doctorsbyrole", async (req, res) => {
   try {
     const doctors = await User.find({ role: "doctor" });
     res.json(doctors);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+userRouter.get("/api/get-usersbyrole",async (req, res) => {
+  try {
+    const users = await User.find({ role: "user" });
+    res.json(users);
   } catch (e) {
     res.status(500).json({ error: e.message });
   }

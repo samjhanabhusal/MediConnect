@@ -50,6 +50,7 @@ class HospitalService {
     } catch (e) {
       showSnackBar(context, e.toString());
     }
+    print(hospitalList);
     return hospitalList;
   }
 

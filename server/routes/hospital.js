@@ -118,9 +118,9 @@ async function getHospitals(){
 
 	return hospitals;
   }
-//   getHospitals().then((hospitals) => {
-// 	console.log(hospitals);
-//   });
+  getHospitals().then((hospitals) => {
+	console.log(hospitals);
+  });
 
 
 async function getHospitalName() {
@@ -211,7 +211,7 @@ hospitalRouter.post("/hospital/register", async (req, res) => {
 
 		})
 		hospital = await hospital.save();
-		// res.json(hospital);
+		res.json(hospital);
         let user = new User({
 			_id : hospital.id,
 			email,
@@ -225,7 +225,7 @@ hospitalRouter.post("/hospital/register", async (req, res) => {
 			sendVerifyMail(req.body.name, req.body.email, user._id);
 		  }
 		//   console.log("lkjlfksdj");
-		  res.json(hospital);
+		//   res.json(hospital);
 		  
 		  // res.json(user);
 	} catch (e) {
@@ -290,7 +290,44 @@ hospitalRouter.post("/hospital/add-beds",hospital, auth, async (req, res) => {
 		const { hospital_picture, beds_available,hospital_location, location, general_ward_total,general_ward_available,
 			VIP_ward_total,VIP_ward_available,ICU_total,ICU_available,ventilators_total,ventilators_available
 		    } = req.body;
-		
+			let validbeds;
+			function validbed() {
+				if (
+				  general_ward_total >= general_ward_available ||
+				  ICU_total >= ICU_available ||
+				  VIP_ward_total >= VIP_ward_available ||
+				  ventilators_total >= ventilators_available
+				) {
+				  validbeds = 1;
+				  console.log("valid no of bed");
+				  
+				} else {
+				  validbeds = 0;
+				  console.log("Invalid no of bed");
+				//   return res.status(400).json({ message: "Total beds are less than available beds" });
+				}
+				return validbeds;
+			  }
+			// 	if (
+			// 	  general_ward_total >= general_ward_available &&
+			// 	  ICU_total >= ICU_available &&
+			// 	  VIP_ward_total >= VIP_ward_available &&
+			// 	  ventilators_total >= ventilators_available
+			// 	) {
+			// 	  validbeds = 1;
+			// 	  console.log("valid no of bed");
+				  
+			// 	} else {
+			// 	  validbeds = 0;
+			// 	  console.log("Invalid no of bed");
+			// 	//   return res.status(400).json({ message: "Total beds are less than available beds" });
+			// 	}
+			// 	return validbeds;
+			//   }
+			  
+		    let checkValidBed = validbed();
+			if(checkValidBed === 1)
+ {		
 			// let user = await User.findById(req.user);
 			// // let bed = awaid Bed.find({hospitalId : user.id})
 			// const existingBed = await Bed.findOne({hospitalId});
@@ -318,7 +355,12 @@ hospitalRouter.post("/hospital/add-beds",hospital, auth, async (req, res) => {
 		});
 		bed = await bed.save();
     res.json(bed);
-	} catch (e) {
+	}
+	else {
+				  return res.status(400).json({ message: "Total beds are less than available beds" });
+
+	}
+}catch (e) {
 	  res.status(500).json({ error: e.message });
 	}
   });

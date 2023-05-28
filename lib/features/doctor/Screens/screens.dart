@@ -31,11 +31,11 @@ with SingleTickerProviderStateMixin{
     super.initState();
         _controller = TabController(length: 2, vsync: this, initialIndex: 1);
 
-    fetchAlldoctor();
+    fetchAlluser();
   }
 
-  fetchAlldoctor() async {
-    users = await chatServices.fetchAllUsers(context);
+  fetchAlluser() async {
+    users = await chatServices.fetchAllUsersByRole(context);
     setState(() {});
   }
 
@@ -80,8 +80,7 @@ with SingleTickerProviderStateMixin{
   }
   @override
   Widget build(BuildContext context) {
-                    final doctorData = users;
-
+                    
      return users == null ? const Loader():Scaffold(
       appBar: new AppBar(
         //  decoration: const BoxDecoration(
@@ -90,7 +89,7 @@ with SingleTickerProviderStateMixin{
       Color.fromARGB(255, 19, 133, 4),
       // Color.fromARGB(255, 74, 241, 68),
       
-        title: Text("Chat with doctor"),     // actions: [
+        title: Text("Chat with User"),     // actions: [
       
         ),
       // ),

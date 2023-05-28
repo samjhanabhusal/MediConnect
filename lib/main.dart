@@ -193,8 +193,10 @@ import 'package:luveen/features/cart/widgets/cart_product.dart';
 import 'package:luveen/features/doctor/Services/doctor_service.dart';
 import 'package:luveen/features/home/screens/homeScreen2.dart';
 import 'package:luveen/features/cart/screens/cart_screen.dart';
+import 'package:luveen/models/product.dart';
 import 'package:luveen/providers/category_provider.dart';
 import 'package:luveen/providers/message_provider.dart';
+import 'package:luveen/features/home/services/home_services.dart';
 
 import 'features/Hospital/Admin/Screens/HospitalScreen.dart';
 import 'features/doctor/Screens/screens.dart';
@@ -241,13 +243,20 @@ class _MyAppState extends State<MyApp> {
   final AuthService authService = AuthService();
   final HospitalService hospitalService = HospitalService();
   final DoctorService doctorService = DoctorService();
-
+  
+   List<Product>? products;
+  final HomeServices homeServices = HomeServices();
   @override
   void initState() {
     super.initState();
     authService.getUserData(context);
     hospitalService.getHospitalData(context);
     doctorService.getDoctorData(context);
+    fetchAndFilterProducts();
+  }
+  fetchAndFilterProducts() async {
+    products = await homeServices.fetchAndFilterProducts(context);
+    setState(() {});
   }
 
   @override
@@ -292,6 +301,7 @@ class MySplashScreen extends StatelessWidget {
     final userProvider = Provider.of<UserProvider>(context);
     final token = userProvider.user.token;
     final role = userProvider.user.role;
+    // return DoctorScreen();
     
     if (token.isNotEmpty) {
       switch (role) { 

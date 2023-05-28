@@ -75,10 +75,26 @@ productRouter.get("/api/deal-of-day", auth, async (req, res) => {
     res.status(500).json({ error: e.message });
   }
 });
+
+// User will get the filter product but admin should get all he himself should delete product if out of stock
 productRouter.get("/auth/get-products",  async (req, res) => {
   try {
     const products = await Product.find({});
-    res.json(products);
+    const filteredProducts = products.filter(product => product.quantity > 0);
+    
+    res.json(filteredProducts);
+    // res.json(products);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+productRouter.get("/api/get-availableproduct",  async (req, res) => {
+  try {
+    const products = await Product.find({});
+    const filteredProducts = products.filter(product => product.quantity > 0);
+    
+    res.json(filteredProducts);
+    // res.json(products);
   } catch (e) {
     res.status(500).json({ error: e.message });
   }

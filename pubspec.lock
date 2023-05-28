@@ -25,14 +25,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.2.2"
-  ansicolor:
-    dependency: transitive
-    description:
-      name: ansicolor
-      sha256: "78bc93b397e4c1eb2d8b47b4bee7c68831b68326dae2c43573ac10e4e192052a"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.1.1"
   archive:
     dependency: transitive
     description:
@@ -65,14 +57,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.3.0"
-  axios:
-    dependency: "direct main"
-    description:
-      name: axios
-      sha256: "50e138ff1c86ec3d98c3047d345d2626440392ae0d7b23c91d1a8b88a7f489c5"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.1+1"
   badges:
     dependency: "direct main"
     description:
@@ -565,14 +549,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.2"
-  http_server:
-    dependency: transitive
-    description:
-      name: http_server
-      sha256: "42a9a2824ef3f806429c5fce18475df15b0b0af15b57b8cd62eef51d7bc803ce"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.9.8+3"
   image:
     dependency: transitive
     description:
@@ -725,14 +701,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.8.0"
-  mime:
-    dependency: transitive
-    description:
-      name: mime
-      sha256: "5041f313f4e30fbd70dee7c0403785a4ee270f75830f590e5983960fddf743e4"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.9.7"
   nested:
     dependency: transitive
     description:

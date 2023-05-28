@@ -36,6 +36,7 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
 
   // !!! ONLY FOR ADMIN!!!
   void changeOrderStatus(int status) {
+    // if (status < steps.length) {
     adminServices.changeOrderStatus(
       context: context,
       status: status + 1,
@@ -46,7 +47,10 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
         });
       },
     );
-  }
+  // } else {
+  //   // Handle an invalid currentStep value
+  // }
+}
 
   @override
   Widget build(BuildContext context) {

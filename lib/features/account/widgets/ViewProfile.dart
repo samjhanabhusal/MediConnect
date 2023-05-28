@@ -92,7 +92,7 @@ class _ViewProfileState extends State<ViewProfile> {
                     height: 150.0,
                     decoration: BoxDecoration(
                         image: DecorationImage(
-                          image: AssetImage('assets/KU logo.png'),
+                          image: AssetImage('assets/images/person.svg'),
                           fit: BoxFit.fill,
                         ),
                         color: Colors.white,

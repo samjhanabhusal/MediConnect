@@ -71,7 +71,7 @@ dependencies:
   avoid_keyboard: ^0.3.0
   # http: ^0.13.5
   flutter_redux: ^0.10.0
-  axios: ^1.0.1+1
+  # axios: ^1.0.1+1
   localstorage: ^4.0.1+2
   # intl: ^0.18.0
   uuid: ^3.0.7

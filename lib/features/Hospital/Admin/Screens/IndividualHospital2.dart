@@ -57,15 +57,18 @@ class _IndividualHospitalState extends State<IndividualHospital> {
     final String generalWardTotal = widget.general_ward_total ?? '';
     final String vipWardTotal = widget.VIP_ward_total ?? '';
     final String icuTotal = widget.ICU_total ?? '';
+    final String ventilatorTotal = widget.ventilators_total ?? '';
 
     final int parsedGeneralWardTotal =
+        int.tryParse(generalWardTotal.trim()) ?? 0;
+    final int parsedVentilatorTotal =
         int.tryParse(generalWardTotal.trim()) ?? 0;
     final int parsedVipWardTotal = int.tryParse(vipWardTotal.trim()) ?? 0;
     final int parsedIcuTotal =
         icuTotal.isNotEmpty ? int.tryParse(icuTotal.trim()) ?? 0 : 0;
 
     final int bedsAvailable =
-        parsedGeneralWardTotal + parsedVipWardTotal + parsedIcuTotal;
+        parsedGeneralWardTotal + parsedVipWardTotal + parsedIcuTotal + parsedVentilatorTotal;
     beds_available = bedsAvailable.toString();
   }
 
@@ -180,7 +183,7 @@ void decreaseQuantity(TextEditingController controller) {
   controller.text = decrementedValue.toString();
 }
 
-
+// String generalWardAvailableValue = showGeneralWard ? general_ward_availableController.text : '0';
   
   @override
   Widget build(BuildContext context) {
@@ -191,7 +194,8 @@ void decreaseQuantity(TextEditingController controller) {
         appBar: new AppBar(
           backgroundColor: Colors.green,
           title: Align(
-            alignment: Alignment.bottomRight,
+            // alignment: Alignment.bottomRight,
+            alignment: Alignment.center,
             child: Text(
               "Hospital Profile",
               style: TextStyle(
@@ -205,18 +209,23 @@ void decreaseQuantity(TextEditingController controller) {
           ],
         ),
         body: new ListView(children: <Widget>[
+          
           new Container(
             height: 250,
             child: GridTile(
               child: Container(
                 color: Colors.grey.shade100,
-                // child: Image.asset(widget.hospital_picture),
+                // child: Image.network(widget.hospital_picture[0]),
+                                child: Image.asset("assets/images/Dhulikhel.jpg")
+
               ),
             ),
           ),
+      
           Center(
             child: Text(
               "${widget.name}",
+              // "Bir Hospital",
               style: TextStyle(
                   fontWeight: FontWeight.w500,
                   color: Colors.green,
@@ -246,9 +255,9 @@ void decreaseQuantity(TextEditingController controller) {
                         ),
                         Spacer(),
                         Text(
-                          // "9801357010",
+                          "Bir Hospital",
                           // profileinfo![0].phoneno,
-                          "${widget.name}",
+                          // "${widget.name}",
 
                           style: TextStyle(
                               fontWeight: FontWeight.w400,
@@ -367,8 +376,9 @@ void decreaseQuantity(TextEditingController controller) {
                               child: TextField(
                                 // textAlign: ,
                                 controller: showGeneralWard ? general_ward_availableController : TextEditingController(text: '0'),
-                                 textAlign: general_ward_availableController.text.isNotEmpty ? TextAlign.center : TextAlign.start,
-                                 keyboardType: TextInputType.number,
+                                // controller: showGeneralWard ? general_ward_availableController : general_ward_availableController.text : '0',
+                                //  textAlign: general_ward_availableController.text.isNotEmpty ? TextAlign.center : TextAlign.start,
+                                //  keyboardType: TextInputType.number,
                               ),
                             ),
                           ),
@@ -696,7 +706,8 @@ void decreaseQuantity(TextEditingController controller) {
           ),
           Row(
             children: [
-              TextButton(
+              Expanded(child:
+              ElevatedButton(
                 // onPressed: () => Navigator.of(context).push(MaterialPageRoute(
                 //   builder: (context) => const EditHospitalDetails(),
                 // )),
@@ -705,23 +716,29 @@ void decreaseQuantity(TextEditingController controller) {
                 },
                 child: const Text('Edit Profile',
                     style: TextStyle(
-                      decoration: TextDecoration.underline,
+                      // decoration: TextDecoration,
+                      fontSize: 17,
+                      fontWeight: FontWeight.w500
                     ),
                     textAlign: TextAlign.center),
-              ),
-              TextButton(
+              ),),
+              Expanded(
+                child: ElevatedButton(
                 onPressed: () {
                   AddBed();
                 },
                 child: const Text('Save',
                     style: TextStyle(
-                      decoration: TextDecoration.underline,
+                      // decoration: TextDecoration,
+                      fontSize: 17,
+                      fontWeight: FontWeight.w500
                     ),
                     textAlign: TextAlign.center),
-              ),
+              ),)
             ],
           ),
         ]),
+        // sizedBox(height: 25),
         floatingActionButton: FloatingActionButton(
             child: const Icon(Icons.logout),
             onPressed: () => AccountServices().logOut(context),

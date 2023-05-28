@@ -115,7 +115,7 @@ class _PostsScreenState extends State<PostsScreen> {
                                   leading: Text(
                                     productData.name,
                                     style: TextStyle(
-                                      fontSize: 15,
+                                      fontSize: 10,
                                       fontWeight: FontWeight.bold,
                                       color: Colors.black,
                                     ),
@@ -127,7 +127,7 @@ class _PostsScreenState extends State<PostsScreen> {
                                     style: TextStyle(
                                         color: Colors.green,
                                         fontSize: 16,
-                                        fontWeight: FontWeight.w500),
+                                        fontWeight: FontWeight.w300),
                                   ),
                                 ),
                               ),

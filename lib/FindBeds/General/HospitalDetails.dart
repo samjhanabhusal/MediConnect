@@ -1,13 +1,15 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:luveen/models/Hospital.dart';
 import 'package:luveen/models/bed.dart';
 class HospitalDetails extends StatefulWidget {
- final String hospital_name;
+//  final String hospital_name;
+ final Hospital hospital;
  final Bed bed;
   HospitalDetails({
     Key? key,
-    required this.hospital_name,
+    required this.hospital,
     required this.bed,
   }) : super(key: key);
 
@@ -66,7 +68,8 @@ class _HospitalDetailsState extends State<HospitalDetails> {
             ),
           ),
           Center(
-            child: Text( widget.hospital_name, style: TextStyle(
+            child: Text( widget.hospital.name, style: TextStyle(
+            // child: Text( widget.hospital.name[0], style: TextStyle(
                                 fontWeight: FontWeight.w500,
                                 color: Colors.green,
                                 fontSize: 24),),
@@ -94,7 +97,9 @@ class _HospitalDetailsState extends State<HospitalDetails> {
                         Text(
                           // "9801357010",
                           // profileinfo![0].phoneno,
-                          widget.hospital_name,
+                          // widget.hospital_name,
+                          // widget.hospital.name[0],
+                          widget.hospital.name,
 
                           style: TextStyle(
                               fontWeight: FontWeight.w400,
@@ -195,7 +200,7 @@ class _HospitalDetailsState extends State<HospitalDetails> {
                         Text(
                           // "9801357010",
                           // profileinfo![0].phoneno,
-                          "${widget.bed.beds_available}/${widget.bed.VIP_ward_total}",
+                          "${widget.bed.VIP_ward_available}/${widget.bed.VIP_ward_total}",
 
                           style: TextStyle(
                               fontWeight: FontWeight.w400,

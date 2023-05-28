@@ -14,8 +14,90 @@ import 'package:luveen/models/Hospital.dart';
 
 class _ICUBedsState extends State<ICUBeds> {
    List<Hospital> ? hospitals;
-  // List<Bed>? beds;
+  List<Bed>? beds;
   final HospitalService hospitalService = HospitalService();
+var hospital_list = [
+    {
+      "name": "Grande International Hospital",
+      "picture": "assets/images/Grande.jpeg",
+      "beds_available": 36,
+      "location": "                                                               Kathmandu",
+      "location1": "Kathmandu",
+      "general_ward_total": 100,
+      "general_ward_available": 40,
+      "VIP_ward_total": 100,
+      "VIP_ward_available": 45,
+      "ICU_total": 50,
+      "ICU_available": 22,
+      "ventilators_total": 50,
+      "ventilators_available": 12,
+    },
+    {      
+      "name": "Dhulikhel Hospital",
+      "picture": "assets/images/Dhulikhel.jpg",
+      "beds_available": 22,
+      "location": "                                                                 Dhulikhel",
+      "location1": "Dhulikhel",
+      "general_ward_total": 100,
+      "general_ward_available": 11,
+      "VIP_ward_total": 80,
+      "VIP_ward_available": 30,
+      "ICU_total": 45,
+      "ICU_available": 32,
+      "ventilators_total": 45,
+      "ventilators_available": 23,
+    },
+    {
+      "name": "Norvic International Hospital",
+      "picture": "assets/images/Norvic.jpg",
+      "beds_available": 55,
+      "location": "                                                                Thapathali",
+      "location1": "Thapathali",
+      "general_ward_total": 100,
+      "general_ward_available": 2,
+      "VIP_ward_total": 100,
+      "VIP_ward_available": 16,
+      "ICU_total": 80,
+      "ICU_available": 45,
+      "ventilators_total": 50,
+      "ventilators_available": 20,
+    },
+    {
+      "name": "Greencity Hospital Pvt.Ltd",
+      "picture": "assets/images/greencity.jpg",
+      "beds_available": 22,
+      "location": "                                                                       Tokha",
+      "location1": "Tokha",
+      "general_ward_total": 150,
+      "general_ward_available": 111,
+      "VIP_ward_total": 150,
+      "VIP_ward_available": 66,
+      "ICU_total": 100,
+      "ICU_available": 87,
+      "ventilators_total": 100,
+      "ventilators_available": 54,
+    },
+    {
+      "name": "CMC Teaching Hospital",
+      "picture": "assets/images/cmc.jpg",
+      "beds_available": 12,
+      "location": "                                                                     Chitwan",
+      "location1": "Chitwan",
+      "general_ward_total": 200,
+      "general_ward_available": 70,
+      "VIP_ward_total": 100,
+      "VIP_ward_available": 10,
+      "ICU_total": 100,
+      "ICU_available": 30,
+      "ventilators_total": 100,
+      "ventilators_available": 40,
+    },
+     
+    
+    
+  ];
+  // List<Hospitals>? hospitals;
+  // final AccountServices accountServices = AccountServices();
   
   @override
   void initState() {
@@ -72,7 +154,24 @@ class _ICUBedsState extends State<ICUBeds> {
                     return 
                      Single_hospital(
                       hospital: hospitalData
-      //              
+      //               // SingleH(
+      //                 // hospital : hospitalData,
+      //                 // bed : bedData
+      //               Single_hospital(
+      //       // hospital_name: hospital_list[index]['name'],
+      //       hospital_name: hospitalData.name,
+      //       hospital_picture: hospital_list[index]['picture'],
+      //       beds_available: hospital_list[index]['beds_available'],
+      //       hospital_location: hospital_list[index]['location'],
+      //       location1: hospital_list[index]['location1'],
+      //       general_ward_total: hospital_list[index]['general_ward_total'],
+      // general_ward_available: hospital_list[index]['general_ward_available'],
+      // VIP_ward_total: hospital_list[index]['VIP_ward_total'],
+      // VIP_ward_available: hospital_list[index][' VIP_ward_available'],
+      // ICU_total: hospital_list[index]['ICU_total'],
+      // ICU_available: hospital_list[index]['ICU_available'],
+      // ventilators_total: hospital_list[index]['ventilators_total'],
+      // ventilators_available: hospital_list[index]['ventilators_available'],
             
           );
                     
