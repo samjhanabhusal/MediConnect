@@ -44,7 +44,6 @@ class AddressServices {
     }
   }
 
-  // get all the products
   void placeOrder({
     required BuildContext context,
     required String address,

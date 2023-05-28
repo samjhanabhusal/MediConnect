@@ -96,7 +96,7 @@ void EntertoChat({
         },
         body: jsonEncode({
           // 'id': doctor.id!,
-          'id': doctor.id,
+          'id': user.id,
         }),
       );
 

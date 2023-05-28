@@ -22,12 +22,21 @@ userRouter.post("/api/add-to-cart", auth, async (req, res) => {
         if (user.cart[i].product._id.equals(product._id)) {
           isProductFound = true;
         }
+
       }
 
       if (isProductFound) {
         let producttt = user.cart.find((productt) =>
           productt.product._id.equals(product._id)
         );
+        
+        if(product.quantity <= 0){
+          return res
+          .status(400)
+          .json({ msg: `${product.name} is out of stock!` });
+            
+          }
+        
         producttt.quantity += 1;
       } else {
         user.cart.push({ product, quantity: 1 });
@@ -116,6 +125,12 @@ userRouter.post("/api/order", auth, async (req, res) => {
       let product = await Product.findById(cart[i].product._id);
       if (product.quantity >= cart[i].quantity) {
         product.quantity -= cart[i].quantity;
+        // if (product.quantity === 0) {
+        //   // Product is out of stock
+        //   return res
+        //     .status(400)
+        //     .json({ msg: `${product.name} is out of stock!` });
+        // }
         products.push({ product, quantity: cart[i].quantity });
         await product.save();
       } else {
@@ -128,6 +143,10 @@ userRouter.post("/api/order", auth, async (req, res) => {
     let user = await User.findById(req.user);
     user.cart = [];
     user = await user.save();
+    // Calculate the expiration date
+    const expirationDate = new Date().getTime;
+    // expirationDate.setDate(expirationDate.getDate() + 30);
+    expirationDate.setDate(expirationDate.getMinutes() + 1);
 
     let order = new Order({
       products,
@@ -135,6 +154,8 @@ userRouter.post("/api/order", auth, async (req, res) => {
       address,
       userId: req.user,
       orderedAt: new Date().getTime(),
+      // expiresAt: expirationDate,
+      expiresAt: new Date().getSeconds()+10,
     });
     order = await order.save();
     res.json(order);
@@ -209,6 +230,15 @@ userRouter.post("/api/delete-prescription", auth, async (req, res) => {
     const { id } = req.body;
     let prescription = await Prescription.findByIdAndDelete(id);
     res.json(prescription);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+userRouter.post("/api/delete-order", auth, async (req, res) => {
+  try {
+    const { id } = req.body;
+    let order = await Order.findByIdAndDelete(id);
+    res.json(order);
   } catch (e) {
     res.status(500).json({ error: e.message });
   }
